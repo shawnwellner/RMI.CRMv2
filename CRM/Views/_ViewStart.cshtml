@@ -1,0 +1,5 @@
+﻿@{
+    var view = ViewContext.ViewData["MasterView"];
+    if (view == null || string.IsNullOrEmpty(view.ToString())) { view = "DefaultView"; }
+    Layout = "~/Views/Shared/"+ view + ".cshtml";
+}

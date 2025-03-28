@@ -1,0 +1,2763 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="CRMModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CustomerStrollHealth">
+          <Key>
+            <PropertyRef Name="CustomerId" />
+          </Key>
+          <Property Name="CustomerId" Type="int" Nullable="false" />
+          <Property Name="Status" Type="nvarchar" MaxLength="100" />
+          <Property Name="exCreatedTime" Type="datetime" />
+          <Property Name="exUpdatedTime" Type="datetime" />
+          <Property Name="CreatedTime" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="InputAttributes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="InputTypeRelId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Value" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="Enabled" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Insurance">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Validated" Type="bit" Nullable="false" />
+          <Property Name="Enabled" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="InsuranceException">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClientId" Type="int" Nullable="false" />
+          <Property Name="ClientVerticalRelId" Type="int" />
+          <Property Name="OfficeLocationId" Type="int" />
+          <Property Name="InsuranceId" Type="int" Nullable="false" />
+          <Property Name="Allow" Type="bit" Nullable="false" />
+          <Property Name="Enabled" Type="bit" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'CRMv2.dbo.v_CallCenterUsers' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="v_CallCenterUsers">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="FirstName" />
+            <PropertyRef Name="LastName" />
+            <PropertyRef Name="Phone" />
+            <PropertyRef Name="UserTypeId" />
+            <PropertyRef Name="UserType" />
+            <PropertyRef Name="UserRoleId" />
+            <PropertyRef Name="UserRole" />
+            <PropertyRef Name="AddressId" />
+            <PropertyRef Name="ZipCode" />
+            <PropertyRef Name="CreatedTime" />
+            <PropertyRef Name="UpdatedTime" />
+            <PropertyRef Name="Enabled" />
+            <PropertyRef Name="CallCenterUserId" />
+            <PropertyRef Name="UserName" />
+            <PropertyRef Name="Password" />
+            
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="200" />
+          <Property Name="UserTypeId" Type="int" Nullable="false" />
+          <Property Name="UserType" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserRoleId" Type="int" Nullable="false" />
+          <Property Name="UserRole" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ParentId" Type="int" />
+          <Property Name="AddressId" Type="int" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="150" />
+          <Property Name="Address2" Type="nvarchar" MaxLength="100" />
+          <Property Name="City" Type="nvarchar" MaxLength="250" />
+          <Property Name="StateAbbr" Type="nchar" MaxLength="2" />
+          <Property Name="ZipCode" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Latitude" Type="decimal" Precision="18" Scale="6" />
+          <Property Name="Longitude" Type="decimal" Precision="18" Scale="6" />
+          <Property Name="CreatedTime" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedTime" Type="datetime" Nullable="false" />
+          <Property Name="Enabled" Type="bit" Nullable="false" />
+          <Property Name="CallCenterUserId" Type="int" Nullable="false" />
+          <Property Name="Five9AgentId" Type="int" />
+          <Property Name="UserName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ForceLogin" Type="bit" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'CRMv2.dbo.v_ClientLogins' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="v_ClientLogins">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="FirstName" />
+            <PropertyRef Name="LastName" />
+            <PropertyRef Name="Phone" />
+            <PropertyRef Name="UserTypeId" />
+            <PropertyRef Name="UserType" />
+            <PropertyRef Name="UserRoleId" />
+            <PropertyRef Name="UserRole" />
+            <PropertyRef Name="ParentClientId" />
+            <PropertyRef Name="ClientId" />
+            <PropertyRef Name="CompanyName" />
+            <PropertyRef Name="UserName" />
+            <PropertyRef Name="Password" />
+            <PropertyRef Name="ClientEnabled" />
+            <PropertyRef Name="Enabled" />
+            <PropertyRef Name="ForceLogin" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="200" />
+          <Property Name="UserTypeId" Type="int" Nullable="false" />
+          <Property Name="UserType" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserRoleId" Type="int" Nullable="false" />
+          <Property Name="UserRole" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ParentClientId" Type="int" Nullable="false" />
+          <Property Name="ClientId" Type="int" Nullable="false" />
+          <Property Name="CompanyName" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ClientEnabled" Type="bit" Nullable="false" />
+          <Property Name="Enabled" Type="bit" Nullable="false" />
+          <Property Name="ForceLogin" Type="bit" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'CRMv2.dbo.v_Clients' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="v_Clients">
+          <Key>
+            <PropertyRef Name="ClientId" />
+            <PropertyRef Name="CompanyName" />
+            <PropertyRef Name="Description" />
+            <PropertyRef Name="Code" />
+            <PropertyRef Name="ForwardPhone" />
+            <PropertyRef Name="ForwardPhone2" />
+            <PropertyRef Name="Website" />
+            <PropertyRef Name="OmmitFromList" />
+            <PropertyRef Name="AllowEmailTransfer" />
+            <PropertyRef Name="ConciergeModel" />
+            <PropertyRef Name="ByPass" />
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="FirstName" />
+            <PropertyRef Name="LastName" />
+            <PropertyRef Name="Phone" />
+            <PropertyRef Name="UserTypeId" />
+            <PropertyRef Name="UserType" />
+            <PropertyRef Name="UserRoleId" />
+            <PropertyRef Name="UserRole" />
+            <PropertyRef Name="AddressId" />
+            <PropertyRef Name="ZipCode" />
+            <PropertyRef Name="CreatedTime" />
+            <PropertyRef Name="UpdatedTime" />
+            <PropertyRef Name="Enabled" />
+            <PropertyRef Name="UserName" />
+            <PropertyRef Name="Password" />
+            <PropertyRef Name="ForceLogin" />
+          </Key>
+          <Property Name="ClientId" Type="int" Nullable="false" />
+          <Property Name="CompanyName" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="4000" Nullable="false" />
+          <Property Name="Code" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="ForwardPhone" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="ForwardPhone2" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Website" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Notes" Type="nvarchar" MaxLength="2000" />
+          <Property Name="JavaScript" Type="varchar" MaxLength="5000" />
+          <Property Name="OmmitFromList" Type="bit" Nullable="false" />
+          <Property Name="AllowEmailTransfer" Type="bit" Nullable="false" />
+          <Property Name="ConciergeModel" Type="bit" Nullable="false" />
+          <Property Name="AgentNotification" Type="varchar" MaxLength="250" />
+          <Property Name="ByPass" Type="bit" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="200" />
+          <Property Name="UserTypeId" Type="int" Nullable="false" />
+          <Property Name="UserType" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserRoleId" Type="int" Nullable="false" />
+          <Property Name="UserRole" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ParentId" Type="int" />
+          <Property Name="AddressId" Type="int" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="150" />
+          <Property Name="Address2" Type="nvarchar" MaxLength="100" />
+          <Property Name="City" Type="nvarchar" MaxLength="250" />
+          <Property Name="StateAbbr" Type="nchar" MaxLength="2" />
+          <Property Name="ZipCode" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Latitude" Type="decimal" Precision="18" Scale="6" />
+          <Property Name="Longitude" Type="decimal" Precision="18" Scale="6" />
+          <Property Name="CreatedTime" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedTime" Type="datetime" Nullable="false" />
+          <Property Name="Enabled" Type="bit" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ForceLogin" Type="bit" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'CRMv2.dbo.v_Dispositions' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="v_Dispositions">
+          <Key>
+            <PropertyRef Name="VerticalIdFlags" />
+            <PropertyRef Name="DispositionId" />
+            <PropertyRef Name="Disposition" />
+            <PropertyRef Name="DispositionTypeId" />
+            <PropertyRef Name="DispositionType" />
+            
+          </Key>
+          <Property Name="VerticalIdFlags" Type="int" Nullable="false" />
+          <Property Name="DispositionId" Type="int" Nullable="false" />
+          <Property Name="Disposition" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="QuestionId" Type="int" />
+          <Property Name="DispositionTypeId" Type="int" Nullable="false" />
+          <Property Name="DispositionType" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="NotQualifiedDefault" Type="bit" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'CRMv2.dbo.v_OfficeLocations' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="v_OfficeLocations">
+          <Key>
+            <PropertyRef Name="VCLRelId" />
+            <PropertyRef Name="VerticalId" />
+            <PropertyRef Name="ClientId" />
+            <PropertyRef Name="ClientVerticalRelId" />
+            <PropertyRef Name="BillingUserId" />
+            <PropertyRef Name="OfficeLocationId" />
+            <PropertyRef Name="OfficeName" />
+            <PropertyRef Name="AddressId" />
+            <PropertyRef Name="OfficeZipCode" />
+            <PropertyRef Name="OmmitFromList" />
+            <PropertyRef Name="OfficeEnabled" />
+            <PropertyRef Name="ClientEnabled" />
+          </Key>
+          <Property Name="VCLRelId" Type="int" Nullable="false" />
+          <Property Name="VerticalId" Type="int" Nullable="false" />
+          <Property Name="ClientId" Type="int" Nullable="false" />
+          <Property Name="ClientVerticalRelId" Type="int" Nullable="false" />
+          <Property Name="BillingUserId" Type="int" Nullable="false" />
+          <Property Name="OfficeLocationId" Type="int" Nullable="false" />
+          <Property Name="OfficeName" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="AddressId" Type="int" Nullable="false" />
+          <Property Name="OfficeAddress" Type="nvarchar" MaxLength="150" />
+          <Property Name="OfficeAddress2" Type="nvarchar" MaxLength="100" />
+          <Property Name="OfficeCity" Type="nvarchar" MaxLength="250" />
+          <Property Name="OfficeState" Type="nchar" MaxLength="2" />
+          <Property Name="OfficeZipCode" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="OfficeLatitude" Type="decimal" Precision="18" Scale="6" />
+          <Property Name="OfficeLongitude" Type="decimal" Precision="18" Scale="6" />
+          <Property Name="OmmitFromList" Type="bit" Nullable="false" />
+          <Property Name="AgentNotification" Type="nvarchar" MaxLength="200" />
+          <Property Name="ClientEnabled" Type="bit" Nullable="false" />
+          <Property Name="OfficeEnabled" Type="bit" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'CRMv2.dbo.v_QuesInputQualifyingRules' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="v_QuesInputQualifyingRules">
+          <Key>
+            <PropertyRef Name="QuestionId" />
+            <PropertyRef Name="ClientRelId" />
+            <PropertyRef Name="VCLRelId" />
+            <PropertyRef Name="VerticalId" />
+            <PropertyRef Name="ClientInputTypeRelId" />
+            <PropertyRef Name="InputTypeRelId" />
+            <PropertyRef Name="InputTypeId" />
+            <PropertyRef Name="OptionSortOrder" />
+            <PropertyRef Name="RuleVCLRelId" />
+            <PropertyRef Name="RuleVerticalId" />
+          </Key>
+          <Property Name="QuestionId" Type="int" Nullable="false" />
+          <Property Name="ClientRelId" Type="int" Nullable="false" />
+          <Property Name="VCLRelId" Type="int" Nullable="false" />
+          <Property Name="VerticalId" Type="int" Nullable="false" />
+          <Property Name="ClientId" Type="int" />
+          <Property Name="ClientVerticalRelId" Type="int" />
+          <Property Name="OfficeLocationId" Type="int" />
+          <Property Name="ClientInputTypeRelId" Type="int" Nullable="false" />
+          <Property Name="InputTypeRelId" Type="int" Nullable="false" />
+          <Property Name="InputTypeId" Type="int" Nullable="false" />
+          <Property Name="InputType" Type="varchar" MaxLength="50" />
+          <Property Name="OptionId" Type="int" />
+          <Property Name="OptionValue" Type="nvarchar" MaxLength="150" />
+          <Property Name="OptionSortOrder" Type="int" Nullable="false" />
+          <Property Name="ParentClientInputTypeRelId" Type="int" />
+          <Property Name="InputRuleRelId" Type="int" />
+          <Property Name="RuleVCLRelId" Type="int" Nullable="false" />
+          <Property Name="RuleVerticalId" Type="int" Nullable="false" />
+          <Property Name="RuleClientId" Type="int" />
+          <Property Name="RuleClientVerticalRelId" Type="int" />
+          <Property Name="RuleOfficeLocationId" Type="int" />
+          <Property Name="QualifyingRuleId" Type="int" />
+          <Property Name="QualifyingTypeId" Type="int" />
+          <Property Name="QualifyingType" Type="varchar" MaxLength="50" />
+          <Property Name="QualifyingRule" Type="varchar" MaxLength="500" />
+          <Property Name="UnitTypeId" Type="int" />
+          <Property Name="Units" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'CRMv2.dbo.v_QuesInputRuleFilters' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="v_QuesInputRuleFilters">
+          <Key>
+            <PropertyRef Name="InputRuleRelId" />
+            <PropertyRef Name="FilterTypeId" />
+            <PropertyRef Name="FilterValue" />
+          </Key>
+          <Property Name="InputRuleRelId" Type="int" Nullable="false" />
+          <Property Name="FilterTypeId" Type="int" Nullable="false" />
+          <Property Name="FilterValue" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'CRMv2.dbo.v_QuesQualifyingRules' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="v_QuesQualifyingRules">
+          <Key>
+            <PropertyRef Name="QuestionId" />
+            <PropertyRef Name="VCLRelId" />
+            
+            <PropertyRef Name="ClientInputTypeRelId" />
+            <PropertyRef Name="InputTypeRelId" />
+            <PropertyRef Name="InputTypeId" />
+          </Key>
+          <Property Name="QuestionId" Type="int" Nullable="false" />
+          <Property Name="VCLRelId" Type="int" Nullable="false" />
+          <Property Name="VerticalId" Type="int" Nullable="false" />
+          <Property Name="ClientId" Type="int" />
+          <Property Name="ClientVerticalRelId" Type="int" />
+          <Property Name="OfficeLocationId" Type="int" />
+          <Property Name="ClientInputTypeRelId" Type="int" Nullable="false" />
+          <Property Name="InputTypeRelId" Type="int" Nullable="false" />
+          <Property Name="InputTypeId" Type="int" Nullable="false" />
+          <Property Name="ParentClientInputTypeRelId" Type="int" />
+          <Property Name="InputRuleRelId" Type="int" />
+          <Property Name="QualifyingRuleId" Type="int" />
+          <Property Name="QualifyingTypeId" Type="int" />
+          <Property Name="QualifyingType" Type="varchar" MaxLength="50" />
+          <Property Name="QualifyingRule" Type="varchar" MaxLength="500" />
+          <Property Name="UnitTypeId" Type="int" />
+          <Property Name="Units" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'CRMv2.dbo.v_QuesRulesAndFilters' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="v_QuesRulesAndFilters">
+          <Key>
+            <PropertyRef Name="QuestionId" />
+            <PropertyRef Name="VCLRelId" />
+            
+            <PropertyRef Name="ClientInputTypeRelId" />
+            <PropertyRef Name="InputTypeRelId" />
+            <PropertyRef Name="InputTypeId" />
+          </Key>
+          <Property Name="QuestionId" Type="int" Nullable="false" />
+          <Property Name="VCLRelId" Type="int" Nullable="false" />
+          <Property Name="VerticalId" Type="int" Nullable="false" />
+          <Property Name="ClientId" Type="int" />
+          <Property Name="ClientVerticalRelId" Type="int" />
+          <Property Name="OfficeLocationId" Type="int" />
+          <Property Name="ClientInputTypeRelId" Type="int" Nullable="false" />
+          <Property Name="InputTypeRelId" Type="int" Nullable="false" />
+          <Property Name="InputTypeId" Type="int" Nullable="false" />
+          <Property Name="ParentClientInputTypeRelId" Type="int" />
+          <Property Name="InputRuleRelId" Type="int" />
+          <Property Name="QualifyingRuleId" Type="int" />
+          <Property Name="QualifyingTypeId" Type="int" />
+          <Property Name="QualifyingType" Type="varchar" MaxLength="50" />
+          <Property Name="QualifyingRule" Type="varchar" MaxLength="500" />
+          <Property Name="UnitTypeId" Type="int" />
+          <Property Name="Units" Type="varchar" MaxLength="50" />
+          <Property Name="FilterTypeId" Type="int" />
+          <Property Name="FilterValue" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'CRMv2.dbo.v_QuestionInputs' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="v_QuestionInputs">
+          <Key>
+            <PropertyRef Name="ClientRelId" />
+            <PropertyRef Name="VCLRelId" />
+            <PropertyRef Name="VerticalId" />
+            <PropertyRef Name="ClientInputTypeRelId" />
+            <PropertyRef Name="InputTypeRelId" />
+            <PropertyRef Name="InputTypeId" />
+            <PropertyRef Name="OptionSortOrder" />
+          </Key>
+          <Property Name="ClientRelId" Type="int" Nullable="false" />
+          <Property Name="VCLRelId" Type="int" Nullable="false" />
+          <Property Name="VerticalId" Type="int" Nullable="false" />
+          <Property Name="ClientId" Type="int" />
+          <Property Name="ClientVerticalRelId" Type="int" />
+          <Property Name="OfficeLocationId" Type="int" />
+          <Property Name="ClientInputTypeRelId" Type="int" Nullable="false" />
+          <Property Name="InputTypeRelId" Type="int" Nullable="false" />
+          <Property Name="InputTypeId" Type="int" Nullable="false" />
+          <Property Name="InputType" Type="varchar" MaxLength="50" />
+          <Property Name="OptionId" Type="int" />
+          <Property Name="OptionValue" Type="nvarchar" MaxLength="150" />
+          <Property Name="OptionSortOrder" Type="int" Nullable="false" />
+          <Property Name="ParentClientInputTypeRelId" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'CRMv2.dbo.v_Questions' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="v_Questions">
+          <Key>
+            <PropertyRef Name="VCLRelId" />
+            <PropertyRef Name="VerticalId" />
+            <PropertyRef Name="ClientRelId" />
+            
+            <PropertyRef Name="SortOrder" />
+            <PropertyRef Name="Question" />
+            
+          </Key>
+          <Property Name="VCLRelId" Type="int" Nullable="false" />
+          <Property Name="VerticalId" Type="int" Nullable="false" />
+          <Property Name="ClientId" Type="int" />
+          <Property Name="ClientVerticalRelId" Type="int" />
+          <Property Name="OfficeLocationId" Type="int" />
+          <Property Name="ClientRelId" Type="int" Nullable="false" />
+          <Property Name="QuestionId" Type="int" Nullable="false" />
+          <Property Name="SortOrder" Type="int" Nullable="false" />
+          <Property Name="Question" Type="nvarchar" MaxLength="750" Nullable="false" />
+          <Property Name="Required" Type="bit" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'CRMv2.dbo.v_TargetTypeFilters' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="v_TargetTypeFilters">
+          <Key>
+            <PropertyRef Name="TargetTypeId" />
+            <PropertyRef Name="VerticalId" />
+            <PropertyRef Name="TargetTypeRelId" />
+            <PropertyRef Name="FilterRelId" />
+            <PropertyRef Name="FilterId" />
+            <PropertyRef Name="FilterTypeId" />
+            <PropertyRef Name="FilterValue" />
+            <PropertyRef Name="FilterType" />
+            <PropertyRef Name="ClientId" />
+            <PropertyRef Name="ClientVerticalRelId" />
+            <PropertyRef Name="TargetTypeFlag" />
+          </Key>
+          <Property Name="TargetTypeId" Type="int" Nullable="false" />
+          <Property Name="VerticalId" Type="int" Nullable="false" />
+          <Property Name="ClientId" Type="int" Nullable="false" />
+          <Property Name="ClientVerticalRelId" Type="int" Nullable="false" />
+          <Property Name="OfficeLocationId" Type="int" />
+          <Property Name="MaxRadius" Type="int" />
+          <Property Name="SortPriority" Type="int" />
+          <Property Name="TargetTypeRelId" Type="int" Nullable="false" />
+          <Property Name="FilterRelId" Type="int" Nullable="false" />
+          <Property Name="FilterId" Type="int" Nullable="false" />
+          <Property Name="FilterTypeId" Type="int" Nullable="false" />
+          <Property Name="FilterValue" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FilterType" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="TargetTypeFlag" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'CRMv2.dbo.v_UserLogins' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="v_UserLogins">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="ParentId" />
+            <PropertyRef Name="FirstName" />
+            <PropertyRef Name="LastName" />
+            <PropertyRef Name="Phone" />
+            <PropertyRef Name="UserName" />
+            <PropertyRef Name="Password" />
+            <PropertyRef Name="UserTypeId" />
+            <PropertyRef Name="UserType" />
+            <PropertyRef Name="UserRoleId" />
+            <PropertyRef Name="UserRole" />
+            <PropertyRef Name="Enabled" />
+            <PropertyRef Name="ForceLogin" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="ParentId" Type="int" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="200" />
+          <Property Name="UserName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserTypeId" Type="int" Nullable="false" />
+          <Property Name="UserType" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserRoleId" Type="int" Nullable="false" />
+          <Property Name="UserRole" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Enabled" Type="bit" Nullable="false" />
+          <Property Name="ForceLogin" Type="bit" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'CRMv2.dbo.v_Verticals' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="v_Verticals">
+          <Key>
+            <PropertyRef Name="VerticalId" />
+            <PropertyRef Name="VerticalName" />
+            <PropertyRef Name="CreatedTime" />
+            <PropertyRef Name="VerticalTypeId" />
+            <PropertyRef Name="VerticalTypeName" />
+            <PropertyRef Name="SortOrder" />
+          </Key>
+          <Property Name="VerticalId" Type="int" Nullable="false" />
+          <Property Name="VerticalName" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="CreatedTime" Type="datetime" Nullable="false" />
+          <Property Name="VerticalTypeId" Type="int" Nullable="false" />
+          <Property Name="VerticalTypeName" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="SortOrder" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'CRMv2.dbo.v_VerticalUsers' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="v_VerticalUsers">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="VerticalId" />
+            <PropertyRef Name="VerticalName" />
+            <PropertyRef Name="VerticalTypeId" />
+            <PropertyRef Name="VerticalTypeName" />
+            <PropertyRef Name="UserVerticalRelId" />
+            <PropertyRef Name="SortOrder" />
+            <PropertyRef Name="UserVerticalEnabled" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="VerticalId" Type="int" Nullable="false" />
+          <Property Name="VerticalName" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="VerticalTypeId" Type="int" Nullable="false" />
+          <Property Name="VerticalTypeName" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="UserVerticalRelId" Type="int" Nullable="false" />
+          <Property Name="SortOrder" Type="int" Nullable="false" />
+          <Property Name="UserVerticalEnabled" Type="bit" Nullable="false" />
+        </EntityType>
+        <Function Name="sp_CallCenterSearch" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserId" Type="int" Mode="In" />
+          <Parameter Name="LastName" Type="nvarchar" Mode="In" />
+          <Parameter Name="Phone" Type="nvarchar" Mode="In" />
+          <Parameter Name="Email" Type="nvarchar" Mode="In" />
+          <Parameter Name="PageNum" Type="int" Mode="In" />
+          <Parameter Name="MaxRows" Type="int" Mode="In" />
+          <Parameter Name="ShowAll" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="sp_ClientSearch" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ClientId" Type="int" Mode="In" />
+          <Parameter Name="CompanyName" Type="nvarchar" Mode="In" />
+          <Parameter Name="Email" Type="nvarchar" Mode="In" />
+          <Parameter Name="Phone" Type="nvarchar" Mode="In" />
+          <Parameter Name="PageNum" Type="int" Mode="In" />
+          <Parameter Name="MaxRows" Type="int" Mode="In" />
+          <Parameter Name="ShowAll" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="sp_CredentialsExist" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserName" Type="nvarchar" Mode="In" />
+          <Parameter Name="Password" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_CustomerSearch" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserId" Type="int" Mode="In" />
+          <Parameter Name="LoginUserId" Type="int" Mode="In" />
+          <Parameter Name="Email" Type="nvarchar" Mode="In" />
+          <Parameter Name="Phone" Type="nvarchar" Mode="In" />
+          <Parameter Name="LastName" Type="nvarchar" Mode="In" />
+          <Parameter Name="VerticalId" Type="int" Mode="In" />
+          <Parameter Name="Transfered" Type="bit" Mode="In" />
+          <Parameter Name="PageNum" Type="int" Mode="In" />
+          <Parameter Name="MaxRows" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_GetDuplicates" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserId" Type="int" Mode="In" />
+          <Parameter Name="Phone" Type="nvarchar" Mode="In" />
+          <Parameter Name="Email" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_GetListOfProviders" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="VerticalId" Type="int" Mode="In" />
+          <Parameter Name="UserId" Type="int" Mode="In" />
+          <Parameter Name="State" Type="nvarchar" Mode="In" />
+          <Parameter Name="ZipCode" Type="nvarchar" Mode="In" />
+          <Parameter Name="InsuranceId" Type="int" Mode="In" />
+          <Parameter Name="VCLRelId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_TransferCustomer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="VerticalId" Type="int" Mode="In" />
+          <Parameter Name="CustomerId" Type="int" Mode="In" />
+          <Parameter Name="Transfered" Type="bit" Mode="In" />
+          <Parameter Name="PatientCoordName" Type="nvarchar" Mode="In" />
+          <Parameter Name="DispositionId" Type="int" Mode="In" />
+          <Parameter Name="VCLRelId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_UpdateCallCenterUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserId" Type="int" Mode="In" />
+          <Parameter Name="UserTypeId" Type="int" Mode="In" />
+          <Parameter Name="FirstName" Type="varchar" Mode="In" />
+          <Parameter Name="LastName" Type="varchar" Mode="In" />
+          <Parameter Name="Phone" Type="varchar" Mode="In" />
+          <Parameter Name="Email" Type="varchar" Mode="In" />
+          <Parameter Name="UserName" Type="nvarchar" Mode="In" />
+          <Parameter Name="Password" Type="nvarchar" Mode="In" />
+          <Parameter Name="Five9AgentId" Type="int" Mode="In" />
+          <Parameter Name="VerticalIds" Type="nvarchar" Mode="In" />
+          <Parameter Name="Enabled" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="sp_UpdateClient" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ClientId" Type="int" Mode="In" />
+          <Parameter Name="FirstName" Type="nvarchar" Mode="In" />
+          <Parameter Name="LastName" Type="nvarchar" Mode="In" />
+          <Parameter Name="Email" Type="nvarchar" Mode="In" />
+          <Parameter Name="Phone" Type="nvarchar" Mode="In" />
+          <Parameter Name="Address" Type="nvarchar" Mode="In" />
+          <Parameter Name="Address2" Type="nvarchar" Mode="In" />
+          <Parameter Name="City" Type="nvarchar" Mode="In" />
+          <Parameter Name="StateAbbr" Type="nvarchar" Mode="In" />
+          <Parameter Name="ZipCode" Type="nvarchar" Mode="In" />
+          <Parameter Name="Latitude" Type="decimal" Mode="In" />
+          <Parameter Name="Longitude" Type="decimal" Mode="In" />
+          <Parameter Name="CompanyName" Type="nvarchar" Mode="In" />
+          <Parameter Name="ForwardPhone" Type="nvarchar" Mode="In" />
+          <Parameter Name="ForwardPhone2" Type="nvarchar" Mode="In" />
+          <Parameter Name="Website" Type="nvarchar" Mode="In" />
+          <Parameter Name="Description" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Code" Type="nvarchar" Mode="In" />
+          <Parameter Name="UserName" Type="nvarchar" Mode="In" />
+          <Parameter Name="Password" Type="nvarchar" Mode="In" />
+          <Parameter Name="Notes" Type="nvarchar" Mode="In" />
+          <Parameter Name="AllowEmailTransfer" Type="bit" Mode="In" />
+          <Parameter Name="ConciergeModel" Type="bit" Mode="In" />
+          <Parameter Name="AgentNotification" Type="nvarchar" Mode="In" />
+          <Parameter Name="VerticalIds" Type="nvarchar" Mode="In" />
+          <Parameter Name="Enabled" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="sp_UpdateClientLoginUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ClientId" Type="int" Mode="In" />
+          <Parameter Name="UserId" Type="int" Mode="In" />
+          <Parameter Name="FirstName" Type="varchar" Mode="In" />
+          <Parameter Name="LastName" Type="varchar" Mode="In" />
+          <Parameter Name="UserName" Type="varchar" Mode="In" />
+          <Parameter Name="Password" Type="varchar" Mode="In" />
+          <Parameter Name="Email" Type="varchar" Mode="In" />
+          <Parameter Name="Phone" Type="varchar" Mode="In" />
+          <Parameter Name="Enabled" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="sp_UpdateCustomer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CustomerId" Type="int" Mode="In" />
+          <Parameter Name="VerticalId" Type="int" Mode="In" />
+          <Parameter Name="FirstName" Type="varchar" Mode="In" />
+          <Parameter Name="LastName" Type="varchar" Mode="In" />
+          <Parameter Name="Email" Type="varchar" Mode="In" />
+          <Parameter Name="Phone" Type="varchar" Mode="In" />
+          <Parameter Name="City" Type="varchar" Mode="In" />
+          <Parameter Name="StateAbbr" Type="varchar" Mode="In" />
+          <Parameter Name="ZipCode" Type="varchar" Mode="In" />
+          <Parameter Name="Latitude" Type="decimal" Mode="In" />
+          <Parameter Name="Longitude" Type="decimal" Mode="In" />
+          <Parameter Name="OfficeLocationId" Type="int" Mode="In" />
+          <Parameter Name="DispositionId" Type="int" Mode="In" />
+          <Parameter Name="Distance" Type="decimal" Mode="In" />
+          <Parameter Name="LeadSource" Type="nvarchar" Mode="In" />
+          <Parameter Name="FireHostLeadId" Type="int" Mode="In" />
+          <Parameter Name="Five9AgentId" Type="int" Mode="In" />
+          <Parameter Name="Notes" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sp_UpdateCustomerAnswer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserId" Type="int" Mode="In" />
+          <Parameter Name="ClientInputTypeRelId" Type="int" Mode="In" />
+          <Parameter Name="Answer" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_UpdateFoceLogin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_UpdateTaxonomy" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserId" Type="int" Mode="In" />
+          <Parameter Name="TaxTypeId" Type="int" Mode="In" />
+          <Parameter Name="TaxType" Type="nvarchar" Mode="In" />
+          <Parameter Name="Value" Type="nvarchar(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_ValidateCredentials" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="VerticalId" Type="int" Mode="In" />
+          <Parameter Name="UserName" Type="nvarchar" Mode="In" />
+          <Parameter Name="Password" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_VerticalQuestions" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="VerticalId" Type="int" Mode="In" />
+          <Parameter Name="ClientVerticalRelId" Type="int" Mode="In" />
+          <Parameter Name="OfficeLocationId" Type="int" Mode="In" />
+          <Parameter Name="CustomerId" Type="int" Mode="In" />
+          <Parameter Name="ShowAll" Type="bit" Mode="In" />
+        </Function>
+        <EntityContainer Name="CRMModelStoreContainer">
+          <EntitySet Name="CustomerStrollHealth" EntityType="Self.CustomerStrollHealth" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InputAttributes" EntityType="Self.InputAttributes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Insurance" EntityType="Self.Insurance" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InsuranceException" EntityType="Self.InsuranceException" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="v_CallCenterUsers" EntityType="Self.v_CallCenterUsers" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [v_CallCenterUsers].[UserId] AS [UserId], 
+    [v_CallCenterUsers].[FirstName] AS [FirstName], 
+    [v_CallCenterUsers].[LastName] AS [LastName], 
+    [v_CallCenterUsers].[Phone] AS [Phone], 
+    [v_CallCenterUsers].[Email] AS [Email], 
+    [v_CallCenterUsers].[UserTypeId] AS [UserTypeId], 
+    [v_CallCenterUsers].[UserType] AS [UserType], 
+    [v_CallCenterUsers].[UserRoleId] AS [UserRoleId], 
+    [v_CallCenterUsers].[UserRole] AS [UserRole], 
+    [v_CallCenterUsers].[ParentId] AS [ParentId], 
+    [v_CallCenterUsers].[AddressId] AS [AddressId], 
+    [v_CallCenterUsers].[Address] AS [Address], 
+    [v_CallCenterUsers].[Address2] AS [Address2], 
+    [v_CallCenterUsers].[City] AS [City], 
+    [v_CallCenterUsers].[StateAbbr] AS [StateAbbr], 
+    [v_CallCenterUsers].[ZipCode] AS [ZipCode], 
+    [v_CallCenterUsers].[Latitude] AS [Latitude], 
+    [v_CallCenterUsers].[Longitude] AS [Longitude], 
+    [v_CallCenterUsers].[CreatedTime] AS [CreatedTime], 
+    [v_CallCenterUsers].[UpdatedTime] AS [UpdatedTime], 
+    [v_CallCenterUsers].[Enabled] AS [Enabled], 
+    [v_CallCenterUsers].[CallCenterUserId] AS [CallCenterUserId], 
+    [v_CallCenterUsers].[Five9AgentId] AS [Five9AgentId], 
+    [v_CallCenterUsers].[UserName] AS [UserName], 
+    [v_CallCenterUsers].[Password] AS [Password], 
+    [v_CallCenterUsers].[ForceLogin] AS [ForceLogin]
+    FROM [dbo].[v_CallCenterUsers] AS [v_CallCenterUsers]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="v_ClientLogins" EntityType="Self.v_ClientLogins" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [v_ClientLogins].[UserId] AS [UserId], 
+    [v_ClientLogins].[FirstName] AS [FirstName], 
+    [v_ClientLogins].[LastName] AS [LastName], 
+    [v_ClientLogins].[Phone] AS [Phone], 
+    [v_ClientLogins].[Email] AS [Email], 
+    [v_ClientLogins].[UserTypeId] AS [UserTypeId], 
+    [v_ClientLogins].[UserType] AS [UserType], 
+    [v_ClientLogins].[UserRoleId] AS [UserRoleId], 
+    [v_ClientLogins].[UserRole] AS [UserRole], 
+    [v_ClientLogins].[ParentClientId] AS [ParentClientId], 
+    [v_ClientLogins].[ClientId] AS [ClientId], 
+    [v_ClientLogins].[CompanyName] AS [CompanyName], 
+    [v_ClientLogins].[UserName] AS [UserName], 
+    [v_ClientLogins].[Password] AS [Password], 
+    [v_ClientLogins].[ClientEnabled] AS [ClientEnabled], 
+    [v_ClientLogins].[Enabled] AS [Enabled], 
+    [v_ClientLogins].[ForceLogin] AS [ForceLogin]
+    FROM [dbo].[v_ClientLogins] AS [v_ClientLogins]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="v_Clients" EntityType="Self.v_Clients" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [v_Clients].[ClientId] AS [ClientId], 
+    [v_Clients].[CompanyName] AS [CompanyName], 
+    [v_Clients].[Description] AS [Description], 
+    [v_Clients].[Code] AS [Code], 
+    [v_Clients].[ForwardPhone] AS [ForwardPhone], 
+    [v_Clients].[ForwardPhone2] AS [ForwardPhone2], 
+    [v_Clients].[Website] AS [Website], 
+    [v_Clients].[Notes] AS [Notes], 
+    [v_Clients].[JavaScript] AS [JavaScript], 
+    [v_Clients].[OmmitFromList] AS [OmmitFromList], 
+    [v_Clients].[AllowEmailTransfer] AS [AllowEmailTransfer], 
+    [v_Clients].[ConciergeModel] AS [ConciergeModel], 
+    [v_Clients].[AgentNotification] AS [AgentNotification], 
+    [v_Clients].[ByPass] AS [ByPass], 
+    [v_Clients].[UserId] AS [UserId], 
+    [v_Clients].[FirstName] AS [FirstName], 
+    [v_Clients].[LastName] AS [LastName], 
+    [v_Clients].[Phone] AS [Phone], 
+    [v_Clients].[Email] AS [Email], 
+    [v_Clients].[UserTypeId] AS [UserTypeId], 
+    [v_Clients].[UserType] AS [UserType], 
+    [v_Clients].[UserRoleId] AS [UserRoleId], 
+    [v_Clients].[UserRole] AS [UserRole], 
+    [v_Clients].[ParentId] AS [ParentId], 
+    [v_Clients].[AddressId] AS [AddressId], 
+    [v_Clients].[Address] AS [Address], 
+    [v_Clients].[Address2] AS [Address2], 
+    [v_Clients].[City] AS [City], 
+    [v_Clients].[StateAbbr] AS [StateAbbr], 
+    [v_Clients].[ZipCode] AS [ZipCode], 
+    [v_Clients].[Latitude] AS [Latitude], 
+    [v_Clients].[Longitude] AS [Longitude], 
+    [v_Clients].[CreatedTime] AS [CreatedTime], 
+    [v_Clients].[UpdatedTime] AS [UpdatedTime], 
+    [v_Clients].[Enabled] AS [Enabled], 
+    [v_Clients].[UserName] AS [UserName], 
+    [v_Clients].[Password] AS [Password], 
+    [v_Clients].[ForceLogin] AS [ForceLogin]
+    FROM [dbo].[v_Clients] AS [v_Clients]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="v_Dispositions" EntityType="Self.v_Dispositions" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [v_Dispositions].[VerticalIdFlags] AS [VerticalIdFlags], 
+    [v_Dispositions].[DispositionId] AS [DispositionId], 
+    [v_Dispositions].[Disposition] AS [Disposition], 
+    [v_Dispositions].[QuestionId] AS [QuestionId], 
+    [v_Dispositions].[DispositionTypeId] AS [DispositionTypeId], 
+    [v_Dispositions].[DispositionType] AS [DispositionType], 
+    [v_Dispositions].[NotQualifiedDefault] AS [NotQualifiedDefault]
+    FROM [dbo].[v_Dispositions] AS [v_Dispositions]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="v_OfficeLocations" EntityType="Self.v_OfficeLocations" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [v_OfficeLocations].[VCLRelId] AS [VCLRelId], 
+    [v_OfficeLocations].[VerticalId] AS [VerticalId], 
+    [v_OfficeLocations].[ClientId] AS [ClientId], 
+    [v_OfficeLocations].[ClientVerticalRelId] AS [ClientVerticalRelId], 
+    [v_OfficeLocations].[BillingUserId] AS [BillingUserId], 
+    [v_OfficeLocations].[OfficeLocationId] AS [OfficeLocationId], 
+    [v_OfficeLocations].[OfficeName] AS [OfficeName], 
+    [v_OfficeLocations].[AddressId] AS [AddressId], 
+    [v_OfficeLocations].[OfficeAddress] AS [OfficeAddress], 
+    [v_OfficeLocations].[OfficeAddress2] AS [OfficeAddress2], 
+    [v_OfficeLocations].[OfficeCity] AS [OfficeCity], 
+    [v_OfficeLocations].[OfficeState] AS [OfficeState], 
+    [v_OfficeLocations].[OfficeZipCode] AS [OfficeZipCode], 
+    [v_OfficeLocations].[OfficeLatitude] AS [OfficeLatitude], 
+    [v_OfficeLocations].[OfficeLongitude] AS [OfficeLongitude], 
+    [v_OfficeLocations].[OmmitFromList] AS [OmmitFromList], 
+    [v_OfficeLocations].[AgentNotification] AS [AgentNotification], 
+    [v_OfficeLocations].[ClientEnabled] AS [ClientEnabled], 
+    [v_OfficeLocations].[OfficeEnabled] AS [OfficeEnabled]
+    FROM [dbo].[v_OfficeLocations] AS [v_OfficeLocations]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="v_QuesInputQualifyingRules" EntityType="Self.v_QuesInputQualifyingRules" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [v_QuesInputQualifyingRules].[QuestionId] AS [QuestionId], 
+    [v_QuesInputQualifyingRules].[ClientRelId] AS [ClientRelId], 
+    [v_QuesInputQualifyingRules].[VCLRelId] AS [VCLRelId], 
+    [v_QuesInputQualifyingRules].[VerticalId] AS [VerticalId], 
+    [v_QuesInputQualifyingRules].[ClientId] AS [ClientId], 
+    [v_QuesInputQualifyingRules].[ClientVerticalRelId] AS [ClientVerticalRelId], 
+    [v_QuesInputQualifyingRules].[OfficeLocationId] AS [OfficeLocationId], 
+    [v_QuesInputQualifyingRules].[ClientInputTypeRelId] AS [ClientInputTypeRelId], 
+    [v_QuesInputQualifyingRules].[InputTypeRelId] AS [InputTypeRelId], 
+    [v_QuesInputQualifyingRules].[InputTypeId] AS [InputTypeId], 
+    [v_QuesInputQualifyingRules].[InputType] AS [InputType], 
+    [v_QuesInputQualifyingRules].[OptionId] AS [OptionId], 
+    [v_QuesInputQualifyingRules].[OptionValue] AS [OptionValue], 
+    [v_QuesInputQualifyingRules].[OptionSortOrder] AS [OptionSortOrder], 
+    [v_QuesInputQualifyingRules].[ParentClientInputTypeRelId] AS [ParentClientInputTypeRelId], 
+    [v_QuesInputQualifyingRules].[InputRuleRelId] AS [InputRuleRelId], 
+    [v_QuesInputQualifyingRules].[RuleVCLRelId] AS [RuleVCLRelId], 
+    [v_QuesInputQualifyingRules].[RuleVerticalId] AS [RuleVerticalId], 
+    [v_QuesInputQualifyingRules].[RuleClientId] AS [RuleClientId], 
+    [v_QuesInputQualifyingRules].[RuleClientVerticalRelId] AS [RuleClientVerticalRelId], 
+    [v_QuesInputQualifyingRules].[RuleOfficeLocationId] AS [RuleOfficeLocationId], 
+    [v_QuesInputQualifyingRules].[QualifyingRuleId] AS [QualifyingRuleId], 
+    [v_QuesInputQualifyingRules].[QualifyingTypeId] AS [QualifyingTypeId], 
+    [v_QuesInputQualifyingRules].[QualifyingType] AS [QualifyingType], 
+    [v_QuesInputQualifyingRules].[QualifyingRule] AS [QualifyingRule], 
+    [v_QuesInputQualifyingRules].[UnitTypeId] AS [UnitTypeId], 
+    [v_QuesInputQualifyingRules].[Units] AS [Units]
+    FROM [dbo].[v_QuesInputQualifyingRules] AS [v_QuesInputQualifyingRules]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="v_QuesInputRuleFilters" EntityType="Self.v_QuesInputRuleFilters" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [v_QuesInputRuleFilters].[InputRuleRelId] AS [InputRuleRelId], 
+    [v_QuesInputRuleFilters].[FilterTypeId] AS [FilterTypeId], 
+    [v_QuesInputRuleFilters].[FilterValue] AS [FilterValue]
+    FROM [dbo].[v_QuesInputRuleFilters] AS [v_QuesInputRuleFilters]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="v_QuesQualifyingRules" EntityType="Self.v_QuesQualifyingRules" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [v_QuesQualifyingRules].[QuestionId] AS [QuestionId], 
+    [v_QuesQualifyingRules].[VCLRelId] AS [VCLRelId], 
+    [v_QuesQualifyingRules].[VerticalId] AS [VerticalId], 
+    [v_QuesQualifyingRules].[ClientId] AS [ClientId], 
+    [v_QuesQualifyingRules].[ClientVerticalRelId] AS [ClientVerticalRelId], 
+    [v_QuesQualifyingRules].[OfficeLocationId] AS [OfficeLocationId], 
+    [v_QuesQualifyingRules].[ClientInputTypeRelId] AS [ClientInputTypeRelId], 
+    [v_QuesQualifyingRules].[InputTypeRelId] AS [InputTypeRelId], 
+    [v_QuesQualifyingRules].[InputTypeId] AS [InputTypeId], 
+    [v_QuesQualifyingRules].[ParentClientInputTypeRelId] AS [ParentClientInputTypeRelId], 
+    [v_QuesQualifyingRules].[InputRuleRelId] AS [InputRuleRelId], 
+    [v_QuesQualifyingRules].[QualifyingRuleId] AS [QualifyingRuleId], 
+    [v_QuesQualifyingRules].[QualifyingTypeId] AS [QualifyingTypeId], 
+    [v_QuesQualifyingRules].[QualifyingType] AS [QualifyingType], 
+    [v_QuesQualifyingRules].[QualifyingRule] AS [QualifyingRule], 
+    [v_QuesQualifyingRules].[UnitTypeId] AS [UnitTypeId], 
+    [v_QuesQualifyingRules].[Units] AS [Units]
+    FROM [dbo].[v_QuesQualifyingRules] AS [v_QuesQualifyingRules]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="v_QuesRulesAndFilters" EntityType="Self.v_QuesRulesAndFilters" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [v_QuesRulesAndFilters].[QuestionId] AS [QuestionId], 
+    [v_QuesRulesAndFilters].[VCLRelId] AS [VCLRelId], 
+    [v_QuesRulesAndFilters].[VerticalId] AS [VerticalId], 
+    [v_QuesRulesAndFilters].[ClientId] AS [ClientId], 
+    [v_QuesRulesAndFilters].[ClientVerticalRelId] AS [ClientVerticalRelId], 
+    [v_QuesRulesAndFilters].[OfficeLocationId] AS [OfficeLocationId], 
+    [v_QuesRulesAndFilters].[ClientInputTypeRelId] AS [ClientInputTypeRelId], 
+    [v_QuesRulesAndFilters].[InputTypeRelId] AS [InputTypeRelId], 
+    [v_QuesRulesAndFilters].[InputTypeId] AS [InputTypeId], 
+    [v_QuesRulesAndFilters].[ParentClientInputTypeRelId] AS [ParentClientInputTypeRelId], 
+    [v_QuesRulesAndFilters].[InputRuleRelId] AS [InputRuleRelId], 
+    [v_QuesRulesAndFilters].[QualifyingRuleId] AS [QualifyingRuleId], 
+    [v_QuesRulesAndFilters].[QualifyingTypeId] AS [QualifyingTypeId], 
+    [v_QuesRulesAndFilters].[QualifyingType] AS [QualifyingType], 
+    [v_QuesRulesAndFilters].[QualifyingRule] AS [QualifyingRule], 
+    [v_QuesRulesAndFilters].[UnitTypeId] AS [UnitTypeId], 
+    [v_QuesRulesAndFilters].[Units] AS [Units], 
+    [v_QuesRulesAndFilters].[FilterTypeId] AS [FilterTypeId], 
+    [v_QuesRulesAndFilters].[FilterValue] AS [FilterValue]
+    FROM [dbo].[v_QuesRulesAndFilters] AS [v_QuesRulesAndFilters]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="v_QuestionInputs" EntityType="Self.v_QuestionInputs" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [v_QuestionInputs].[ClientRelId] AS [ClientRelId], 
+    [v_QuestionInputs].[VCLRelId] AS [VCLRelId], 
+    [v_QuestionInputs].[VerticalId] AS [VerticalId], 
+    [v_QuestionInputs].[ClientId] AS [ClientId], 
+    [v_QuestionInputs].[ClientVerticalRelId] AS [ClientVerticalRelId], 
+    [v_QuestionInputs].[OfficeLocationId] AS [OfficeLocationId], 
+    [v_QuestionInputs].[ClientInputTypeRelId] AS [ClientInputTypeRelId], 
+    [v_QuestionInputs].[InputTypeRelId] AS [InputTypeRelId], 
+    [v_QuestionInputs].[InputTypeId] AS [InputTypeId], 
+    [v_QuestionInputs].[InputType] AS [InputType], 
+    [v_QuestionInputs].[OptionId] AS [OptionId], 
+    [v_QuestionInputs].[OptionValue] AS [OptionValue], 
+    [v_QuestionInputs].[OptionSortOrder] AS [OptionSortOrder], 
+    [v_QuestionInputs].[ParentClientInputTypeRelId] AS [ParentClientInputTypeRelId]
+    FROM [dbo].[v_QuestionInputs] AS [v_QuestionInputs]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="v_Questions" EntityType="Self.v_Questions" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [v_Questions].[VCLRelId] AS [VCLRelId], 
+    [v_Questions].[VerticalId] AS [VerticalId], 
+    [v_Questions].[ClientId] AS [ClientId], 
+    [v_Questions].[ClientVerticalRelId] AS [ClientVerticalRelId], 
+    [v_Questions].[OfficeLocationId] AS [OfficeLocationId], 
+    [v_Questions].[ClientRelId] AS [ClientRelId], 
+    [v_Questions].[QuestionId] AS [QuestionId], 
+    [v_Questions].[SortOrder] AS [SortOrder], 
+    [v_Questions].[Question] AS [Question], 
+    [v_Questions].[Required] AS [Required]
+    FROM [dbo].[v_Questions] AS [v_Questions]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="v_TargetTypeFilters" EntityType="Self.v_TargetTypeFilters" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [v_TargetTypeFilters].[TargetTypeId] AS [TargetTypeId], 
+    [v_TargetTypeFilters].[VerticalId] AS [VerticalId], 
+    [v_TargetTypeFilters].[ClientId] AS [ClientId], 
+    [v_TargetTypeFilters].[ClientVerticalRelId] AS [ClientVerticalRelId], 
+    [v_TargetTypeFilters].[OfficeLocationId] AS [OfficeLocationId], 
+    [v_TargetTypeFilters].[MaxRadius] AS [MaxRadius], 
+    [v_TargetTypeFilters].[SortPriority] AS [SortPriority], 
+    [v_TargetTypeFilters].[TargetTypeRelId] AS [TargetTypeRelId], 
+    [v_TargetTypeFilters].[FilterRelId] AS [FilterRelId], 
+    [v_TargetTypeFilters].[FilterId] AS [FilterId], 
+    [v_TargetTypeFilters].[FilterTypeId] AS [FilterTypeId], 
+    [v_TargetTypeFilters].[FilterValue] AS [FilterValue], 
+    [v_TargetTypeFilters].[FilterType] AS [FilterType], 
+    [v_TargetTypeFilters].[TargetTypeFlag] AS [TargetTypeFlag]
+    FROM [dbo].[v_TargetTypeFilters] AS [v_TargetTypeFilters]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="v_UserLogins" EntityType="Self.v_UserLogins" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [v_UserLogins].[UserId] AS [UserId], 
+    [v_UserLogins].[ParentId] AS [ParentId], 
+    [v_UserLogins].[FirstName] AS [FirstName], 
+    [v_UserLogins].[LastName] AS [LastName], 
+    [v_UserLogins].[Phone] AS [Phone], 
+    [v_UserLogins].[Email] AS [Email], 
+    [v_UserLogins].[UserName] AS [UserName], 
+    [v_UserLogins].[Password] AS [Password], 
+    [v_UserLogins].[UserTypeId] AS [UserTypeId], 
+    [v_UserLogins].[UserType] AS [UserType], 
+    [v_UserLogins].[UserRoleId] AS [UserRoleId], 
+    [v_UserLogins].[UserRole] AS [UserRole], 
+    [v_UserLogins].[Enabled] AS [Enabled], 
+    [v_UserLogins].[ForceLogin] AS [ForceLogin]
+    FROM [dbo].[v_UserLogins] AS [v_UserLogins]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="v_Verticals" EntityType="Self.v_Verticals" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [v_Verticals].[VerticalId] AS [VerticalId], 
+    [v_Verticals].[VerticalName] AS [VerticalName], 
+    [v_Verticals].[CreatedTime] AS [CreatedTime], 
+    [v_Verticals].[VerticalTypeId] AS [VerticalTypeId], 
+    [v_Verticals].[VerticalTypeName] AS [VerticalTypeName], 
+    [v_Verticals].[SortOrder] AS [SortOrder]
+    FROM [dbo].[v_Verticals] AS [v_Verticals]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="v_VerticalUsers" EntityType="Self.v_VerticalUsers" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [v_VerticalUsers].[UserId] AS [UserId], 
+    [v_VerticalUsers].[VerticalId] AS [VerticalId], 
+    [v_VerticalUsers].[VerticalName] AS [VerticalName], 
+    [v_VerticalUsers].[VerticalTypeId] AS [VerticalTypeId], 
+    [v_VerticalUsers].[VerticalTypeName] AS [VerticalTypeName], 
+    [v_VerticalUsers].[UserVerticalRelId] AS [UserVerticalRelId], 
+    [v_VerticalUsers].[SortOrder] AS [SortOrder], 
+    [v_VerticalUsers].[UserVerticalEnabled] AS [UserVerticalEnabled]
+    FROM [dbo].[v_VerticalUsers] AS [v_VerticalUsers]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CRM.Domain" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="CRMEntities" annotation:LazyLoadingEnabled="true" a:TypeAccess="Internal" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration">
+          <FunctionImport Name="sp_UpdateTaxonomy">
+            <Parameter Name="UserId" Mode="In" Type="Int32" />
+            <Parameter Name="TaxTypeId" Mode="In" Type="Int32" />
+            <Parameter Name="TaxType" Mode="In" Type="String" />
+            <Parameter Name="Value" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_ValidateCredentials" ReturnType="Collection(CRM.Domain.sp_ValidateCredentials_Result)">
+            <Parameter Name="VerticalId" Mode="In" Type="Int32" />
+            <Parameter Name="UserName" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_ClientSearch" ReturnType="Collection(CRM.Domain.Client)">
+            <Parameter Name="ClientId" Mode="In" Type="Int32" />
+            <Parameter Name="CompanyName" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="Phone" Mode="In" Type="String" />
+            <Parameter Name="PageNum" Mode="In" Type="Int32" />
+            <Parameter Name="MaxRows" Mode="In" Type="Int32" />
+            <Parameter Name="ShowAll" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <EntitySet Name="Insurance" EntityType="CRM.Domain.Insurance" />
+          <FunctionImport Name="sp_GetListOfProviders" ReturnType="Collection(CRM.Domain.sp_GetListOfProviders_Result)">
+            <Parameter Name="VerticalId" Mode="In" Type="Int32" />
+            <Parameter Name="UserId" Mode="In" Type="Int32" />
+            <Parameter Name="State" Mode="In" Type="String" />
+            <Parameter Name="ZipCode" Mode="In" Type="String" />
+            <Parameter Name="InsuranceId" Mode="In" Type="Int32" />
+            <Parameter Name="VCLRelId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_CredentialsExist" ReturnType="Collection(Boolean)">
+            <Parameter Name="UserName" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_UpdateClientLoginUser">
+            <Parameter Name="ClientId" Mode="In" Type="Int32" />
+            <Parameter Name="UserId" Mode="In" Type="Int32" />
+            <Parameter Name="FirstName" Mode="In" Type="String" />
+            <Parameter Name="LastName" Mode="In" Type="String" />
+            <Parameter Name="UserName" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="Phone" Mode="In" Type="String" />
+            <Parameter Name="Enabled" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <EntitySet Name="InputAttributes" EntityType="CRM.Domain.InputAttributes" />
+          <EntitySet Name="v_Questions" EntityType="CRM.Domain.v_Questions" />
+          <FunctionImport Name="sp_UpdateCustomerAnswer">
+            <Parameter Name="UserId" Mode="In" Type="Int32" />
+            <Parameter Name="ClientInputTypeRelId" Mode="In" Type="Int32" />
+            <Parameter Name="Answer" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_VerticalQuestions" ReturnType="Collection(CRM.Domain.sp_VerticalQuestions_Result)">
+            <Parameter Name="VerticalId" Mode="In" Type="Int32" />
+            <Parameter Name="ClientVerticalRelId" Mode="In" Type="Int32" />
+            <Parameter Name="OfficeLocationId" Mode="In" Type="Int32" />
+            <Parameter Name="CustomerId" Mode="In" Type="Int32" />
+            <Parameter Name="ShowAll" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="sp_UpdateClient" ReturnType="Collection(CRM.Domain.Client)">
+            <Parameter Name="ClientId" Mode="In" Type="Int32" />
+            <Parameter Name="FirstName" Mode="In" Type="String" />
+            <Parameter Name="LastName" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="Phone" Mode="In" Type="String" />
+            <Parameter Name="Address" Mode="In" Type="String" />
+            <Parameter Name="Address2" Mode="In" Type="String" />
+            <Parameter Name="City" Mode="In" Type="String" />
+            <Parameter Name="StateAbbr" Mode="In" Type="String" />
+            <Parameter Name="ZipCode" Mode="In" Type="String" />
+            <Parameter Name="Latitude" Mode="In" Type="Decimal" />
+            <Parameter Name="Longitude" Mode="In" Type="Decimal" />
+            <Parameter Name="CompanyName" Mode="In" Type="String" />
+            <Parameter Name="ForwardPhone" Mode="In" Type="String" />
+            <Parameter Name="ForwardPhone2" Mode="In" Type="String" />
+            <Parameter Name="Website" Mode="In" Type="String" />
+            <Parameter Name="Description" Mode="In" Type="String" />
+            <Parameter Name="Code" Mode="In" Type="String" />
+            <Parameter Name="UserName" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+            <Parameter Name="Notes" Mode="In" Type="String" />
+            <Parameter Name="AllowEmailTransfer" Mode="In" Type="Boolean" />
+            <Parameter Name="ConciergeModel" Mode="In" Type="Boolean" />
+            <Parameter Name="AgentNotification" Mode="In" Type="String" />
+            <Parameter Name="VerticalIds" Mode="In" Type="String" />
+            <Parameter Name="Enabled" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="sp_CallCenterSearch" ReturnType="Collection(CRM.Domain.sp_CallCenterSearch_Result)">
+            <Parameter Name="UserId" Mode="In" Type="Int32" />
+            <Parameter Name="LastName" Mode="In" Type="String" />
+            <Parameter Name="Phone" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="PageNum" Mode="In" Type="Int32" />
+            <Parameter Name="MaxRows" Mode="In" Type="Int32" />
+            <Parameter Name="ShowAll" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="sp_UpdateCallCenterUser" EntitySet="v_CallCenterUsers" ReturnType="Collection(CRM.Domain.v_CallCenterUsers)">
+            <Parameter Name="UserId" Mode="In" Type="Int32" />
+            <Parameter Name="UserTypeId" Mode="In" Type="Int32" />
+            <Parameter Name="FirstName" Mode="In" Type="String" />
+            <Parameter Name="LastName" Mode="In" Type="String" />
+            <Parameter Name="Phone" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="UserName" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+            <Parameter Name="Five9AgentId" Mode="In" Type="Int32" />
+            <Parameter Name="VerticalIds" Mode="In" Type="String" />
+            <Parameter Name="Enabled" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <EntitySet Name="v_OfficeLocations" EntityType="CRM.Domain.v_OfficeLocations" />
+          <FunctionImport Name="sp_GetDuplicates" ReturnType="Collection(CRM.Domain.Customer)">
+            <Parameter Name="UserId" Mode="In" Type="Int32" />
+            <Parameter Name="Phone" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="InsuranceException" EntityType="CRM.Domain.InsuranceException" a:GetterAccess="Internal" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
+          <FunctionImport Name="sp_CustomerSearch" ReturnType="Collection(CRM.Domain.sp_CustomerSearch_Result)">
+            <Parameter Name="UserId" Mode="In" Type="Int32" />
+            <Parameter Name="LoginUserId" Mode="In" Type="Int32" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="Phone" Mode="In" Type="String" />
+            <Parameter Name="LastName" Mode="In" Type="String" />
+            <Parameter Name="VerticalId" Mode="In" Type="Int32" />
+            <Parameter Name="Transfered" Mode="In" Type="Boolean" />
+            <Parameter Name="PageNum" Mode="In" Type="Int32" />
+            <Parameter Name="MaxRows" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="v_TargetTypeFilters" EntityType="CRM.Domain.v_TargetTypeFilters" />
+          <FunctionImport Name="sp_UpdateCustomer" ReturnType="Collection(CRM.Domain.Customer)">
+            <Parameter Name="CustomerId" Mode="In" Type="Int32" />
+            <Parameter Name="VerticalId" Mode="In" Type="Int32" />
+            <Parameter Name="FirstName" Mode="In" Type="String" />
+            <Parameter Name="LastName" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="Phone" Mode="In" Type="String" />
+            <Parameter Name="City" Mode="In" Type="String" />
+            <Parameter Name="StateAbbr" Mode="In" Type="String" />
+            <Parameter Name="ZipCode" Mode="In" Type="String" />
+            <Parameter Name="Latitude" Mode="In" Type="Decimal" />
+            <Parameter Name="Longitude" Mode="In" Type="Decimal" />
+            <Parameter Name="OfficeLocationId" Mode="In" Type="Int32" />
+            <Parameter Name="DispositionId" Mode="In" Type="Int32" />
+            <Parameter Name="Distance" Mode="In" Type="Decimal" />
+            <Parameter Name="LeadSource" Mode="In" Type="String" />
+            <Parameter Name="FireHostLeadId" Mode="In" Type="Int32" />
+            <Parameter Name="Five9AgentId" Mode="In" Type="Int32" />
+            <Parameter Name="Notes" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="v_CallCenterUsers" EntityType="CRM.Domain.v_CallCenterUsers" a:GetterAccess="Internal" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
+          <EntitySet Name="v_Clients" EntityType="CRM.Domain.v_Clients" a:GetterAccess="Public" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
+          <EntitySet Name="v_UserLogins" EntityType="CRM.Domain.UserLogins" />
+          <EntitySet Name="v_ClientLogins" EntityType="CRM.Domain.v_ClientLogins" a:GetterAccess="Internal" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
+          <FunctionImport Name="sp_TransferCustomer" ReturnType="Collection(CRM.Domain.Customer)">
+            <Parameter Name="VerticalId" Mode="In" Type="Int32" />
+            <Parameter Name="CustomerId" Mode="In" Type="Int32" />
+            <Parameter Name="Transfered" Mode="In" Type="Boolean" />
+            <Parameter Name="PatientCoordName" Mode="In" Type="String" />
+            <Parameter Name="DispositionId" Mode="In" Type="Int32" />
+            <Parameter Name="VCLRelId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="v_QuesInputRuleFilters" EntityType="CRM.Domain.v_QuesInputRuleFilters" />
+          <FunctionImport Name="sp_UpdateFoceLogin">
+          <Parameter Name="UserId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="v_QuesInputQualifyingRules" EntityType="CRM.Domain.v_QuesInputQualifyingRules" />
+          <EntitySet Name="v_QuesQualifyingRules" EntityType="CRM.Domain.v_QuesQualifyingRules" />
+          <EntitySet Name="v_QuesRulesAndFilters" EntityType="CRM.Domain.v_QuesRulesAndFilters" />
+          <EntitySet Name="v_QuestionInputs" EntityType="CRM.Domain.v_QuestionInputs" />
+          <EntitySet Name="v_Dispositions" EntityType="CRM.Domain.v_Dispositions" />
+          <EntitySet Name="v_Verticals" EntityType="CRM.Domain.v_Verticals" />
+          <EntitySet Name="v_VerticalUsers" EntityType="CRM.Domain.v_VerticalUsers" />
+          <EntitySet Name="CustomerStrollHealth" EntityType="CRM.Domain.CustomerStrollHealth" />
+          </EntityContainer>
+        <ComplexType Name="sp_ValidateCredentials_Result">
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <Property Type="Int32" Name="VerticalId" Nullable="false" />
+          <Property Type="Int32" Name="UserVerticalRelId" Nullable="false" />
+          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="LastName" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="UserName" Nullable="true" />
+          <Property Type="String" Name="Password" Nullable="true" />
+          <Property Type="Int32" Name="ForceLogin" Nullable="true" />
+          <Property Type="Int32" Name="UserTypeId" Nullable="false" />
+          <Property Type="String" Name="UserType" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="UserRoleId" Nullable="false" />
+          <Property Type="String" Name="UserRole" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="CompanyName" Nullable="true" />
+          <Property Type="Int32" Name="ClientParentId" Nullable="true" />
+          <Property Type="Int32" Name="Five9AgentId" Nullable="true" />
+          <Property Type="Boolean" Name="Enabled" Nullable="false" />
+        </ComplexType>
+        <EntityType Name="Insurance">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Validated" Type="Boolean" Nullable="false" />
+          <Property Name="Enabled" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <ComplexType Name="sp_GetListOfProviders_Result">
+          <Property Type="Int32" Name="VerticalId" Nullable="false" />
+          <Property Type="Int32" Name="ClientId" Nullable="false" />
+          <Property Type="Int32" Name="ClientVerticalRelId" Nullable="false" />
+          <Property Type="String" Name="CompanyName" Nullable="false" MaxLength="250" />
+          <Property Type="Int32" Name="MaxRadius" Nullable="false" />
+          <Property Type="Int32" Name="OfficeLocationId" Nullable="false" />
+          <Property Type="String" Name="OfficeName" Nullable="false" MaxLength="150" />
+          <Property Type="Decimal" Name="OfficeLatitude" Nullable="true" Precision="18" Scale="6" />
+          <Property Type="Decimal" Name="OfficeLongitude" Nullable="true" Precision="18" Scale="6" />
+          <Property Type="String" Name="OfficeAddress" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="OfficeAddress2" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="OfficeCity" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="OfficeState" Nullable="true" MaxLength="2" />
+          <Property Type="String" Name="OfficeZipCode" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="ForwardPhone" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="ForwardPhone2" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="Website" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Description" Nullable="false" MaxLength="4000" />
+          <Property Type="Int32" Name="CustomerId" Nullable="true" />
+          <Property Type="Boolean" Name="Transfered" Nullable="true" />
+          <Property Type="String" Name="AgentNotification" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="OfficeNotification" Nullable="true" MaxLength="200" />
+          <Property Type="Boolean" Name="AcceptsInsurance" Nullable="false" />
+          <Property Type="Boolean" Name="AllowEmailTransfer" Nullable="false" />
+          <Property Type="Int32" Name="TargetTypes" Nullable="false" />
+          <Property Type="Boolean" Name="IsPrimaryOffice" Nullable="false" />
+          <Property Type="Int32" Name="VCLRelId" Nullable="false" />
+          <Property Type="Boolean" Name="ConciergeModel" Nullable="false" />
+          </ComplexType>
+        <EntityType Name="InputAttributes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="InputTypeRelId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Value" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Enabled" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="v_Questions">
+          <Key>
+            <PropertyRef Name="VerticalId" />
+            <PropertyRef Name="ClientRelId" />
+            <PropertyRef Name="SortOrder" />
+            <PropertyRef Name="Question" />
+            <PropertyRef Name="VCLRelId" />
+          </Key>
+          <Property Name="VerticalId" Type="Int32" Nullable="false" />
+          <Property Name="ClientVerticalRelId" Type="Int32" />
+          <Property Name="OfficeLocationId" Type="Int32" />
+          <Property Name="ClientRelId" Type="Int32" Nullable="false" />
+          <Property Name="QuestionId" Type="Int32" Nullable="false" />
+          <Property Name="SortOrder" Type="Int32" Nullable="false" />
+          <Property Name="Question" Type="String" Nullable="false" MaxLength="750" FixedLength="false" Unicode="true" />
+          <Property Name="Required" Type="Boolean" Nullable="false" />
+          <Property Name="ClientId" Type="Int32" />
+          <Property Name="VCLRelId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <ComplexType Name="sp_VerticalQuestions_Result">
+          <Property Type="Int32" Name="QuestionId" Nullable="false" />
+          <Property Type="String" Name="Question" Nullable="false" MaxLength="750" />
+          <Property Type="Int32" Name="SortOrder" Nullable="false" />
+          <Property Type="Boolean" Name="Required" Nullable="false" />
+          <Property Type="Int32" Name="ClientRelId" Nullable="false" />
+          <Property Type="Int32" Name="InputTypeRelId" Nullable="false" />
+          <Property Type="Int32" Name="InputTypeId" Nullable="false" />
+          <Property Type="String" Name="InputType" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="OptionId" Nullable="true" />
+          <Property Type="String" Name="OptionValue" Nullable="true" MaxLength="150" />
+          <Property Type="Int32" Name="OptionSortOrder" Nullable="false" />
+          <Property Type="Int32" Name="VerticalId" Nullable="false" />
+          <Property Type="Int32" Name="OfficeLocationId" Nullable="true" />
+          <Property Type="String" Name="Answer" Nullable="true" MaxLength="150" />
+          <Property Type="Int32" Name="ClientId" Nullable="true" />
+          <Property Type="Int32" Name="ClientVerticalRelId" Nullable="true" />
+          <Property Type="Int32" Name="VCLRelId" Nullable="false" />
+          <Property Type="Int32" Name="ClientInputTypeRelId" Nullable="false" />
+          <Property Type="Int32" Name="ParentClientInputTypeRelId" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_CallCenterSearch_Result">
+          <Property Type="Int32" Name="PageNum" Nullable="true" />
+          <Property Type="Int32" Name="MaxRows" Nullable="true" />
+          <Property Type="Int32" Name="PageCount" Nullable="true" />
+          <Property Type="Int32" Name="TotalRecords" Nullable="true" />
+          <Property Type="Int64" Name="RowNumber" Nullable="true" />
+          <Property Type="Int32" Name="CallCenterUserId" Nullable="false" />
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="LastName" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Phone" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="UserName" Nullable="true" />
+          <Property Type="String" Name="Password" Nullable="true" />
+          <Property Type="Int32" Name="UserTypeId" Nullable="false" />
+          <Property Type="String" Name="UserType" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="UserRoleId" Nullable="false" />
+          <Property Type="String" Name="UserRole" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="Five9AgentId" Nullable="true" />
+          <Property Type="DateTime" Name="CreatedTime" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="UpdatedTime" Nullable="false" Precision="23" />
+          <Property Type="Boolean" Name="Enabled" Nullable="false" />
+        </ComplexType>
+        <EntityType Name="v_OfficeLocations">
+          <Key>
+            <PropertyRef Name="VerticalId" />
+            <PropertyRef Name="ClientVerticalRelId" />
+            <PropertyRef Name="BillingUserId" />
+            <PropertyRef Name="OfficeLocationId" />
+            <PropertyRef Name="OfficeName" />
+            <PropertyRef Name="AddressId" />
+            <PropertyRef Name="OfficeZipCode" />
+            <PropertyRef Name="OmmitFromList" />
+            <PropertyRef Name="OfficeEnabled" />
+            <PropertyRef Name="ClientId" />
+            <PropertyRef Name="VCLRelId" />
+            <PropertyRef Name="ClientEnabled" />
+          </Key>
+          <Property Name="VerticalId" Type="Int32" Nullable="false" />
+          <Property Name="ClientVerticalRelId" Type="Int32" Nullable="false" />
+          <Property Name="BillingUserId" Type="Int32" Nullable="false" />
+          <Property Name="OfficeLocationId" Type="Int32" Nullable="false" />
+          <Property Name="OfficeName" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="AddressId" Type="Int32" Nullable="false" />
+          <Property Name="OfficeAddress" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="OfficeAddress2" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="OfficeCity" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="OfficeState" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="OfficeZipCode" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="OfficeLatitude" Type="Decimal" Precision="18" Scale="6" />
+          <Property Name="OfficeLongitude" Type="Decimal" Precision="18" Scale="6" />
+          <Property Name="OmmitFromList" Type="Boolean" Nullable="false" />
+          <Property Name="AgentNotification" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="OfficeEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="ClientId" Type="Int32" Nullable="false" />
+          <Property Name="VCLRelId" Type="Int32" Nullable="false" />
+          <Property Name="ClientEnabled" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="InsuranceException">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClientId" Type="Int32" Nullable="false" />
+          <Property Name="ClientVerticalRelId" Type="Int32" />
+          <Property Name="OfficeLocationId" Type="Int32" />
+          <Property Name="InsuranceId" Type="Int32" Nullable="false" />
+          <Property Name="Allow" Type="Boolean" Nullable="false" />
+          <Property Name="Enabled" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="v_TargetTypeFilters">
+          <Key>
+            <PropertyRef Name="TargetTypeId" />
+            <PropertyRef Name="ClientId" />
+            <PropertyRef Name="ClientVerticalRelId" />
+            <PropertyRef Name="TargetTypeRelId" />
+            <PropertyRef Name="FilterRelId" />
+            <PropertyRef Name="FilterId" />
+            <PropertyRef Name="FilterTypeId" />
+            <PropertyRef Name="FilterValue" />
+            <PropertyRef Name="FilterType" />
+            <PropertyRef Name="TargetTypeFlag" />
+            <PropertyRef Name="VerticalId" />
+          </Key>
+          <Property Name="TargetTypeId" Type="Int32" Nullable="false" />
+          <Property Name="ClientId" Type="Int32" Nullable="false" />
+          <Property Name="ClientVerticalRelId" Type="Int32" Nullable="false" />
+          <Property Name="OfficeLocationId" Type="Int32" />
+          <Property Name="MaxRadius" Type="Int32" />
+          <Property Name="SortPriority" Type="Int32" />
+          <Property Name="TargetTypeRelId" Type="Int32" Nullable="false" />
+          <Property Name="FilterRelId" Type="Int32" Nullable="false" />
+          <Property Name="FilterId" Type="Int32" Nullable="false" />
+          <Property Name="FilterTypeId" Type="Int32" Nullable="false" />
+          <Property Name="FilterValue" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FilterType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TargetTypeFlag" Type="Byte" Nullable="false" />
+          <Property Name="VerticalId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="v_CallCenterUsers">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="FirstName" />
+            <PropertyRef Name="LastName" />
+            <PropertyRef Name="Phone" />
+            <PropertyRef Name="UserTypeId" />
+            <PropertyRef Name="UserType" />
+            <PropertyRef Name="UserRoleId" />
+            <PropertyRef Name="UserRole" />
+            <PropertyRef Name="AddressId" />
+            <PropertyRef Name="ZipCode" />
+            <PropertyRef Name="CreatedTime" />
+            <PropertyRef Name="UpdatedTime" />
+            <PropertyRef Name="Enabled" />
+            <PropertyRef Name="CallCenterUserId" />
+            <PropertyRef Name="UserName" />
+            <PropertyRef Name="Password" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="UserTypeId" Type="Int32" Nullable="false" />
+          <Property Name="UserType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserRoleId" Type="Int32" Nullable="false" />
+          <Property Name="UserRole" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ParentId" Type="Int32" />
+          <Property Name="AddressId" Type="Int32" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Address2" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="StateAbbr" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="ZipCode" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Latitude" Type="Decimal" Precision="18" Scale="6" />
+          <Property Name="Longitude" Type="Decimal" Precision="18" Scale="6" />
+          <Property Name="CreatedTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdatedTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Enabled" Type="Boolean" Nullable="false" />
+          <Property Name="CallCenterUserId" Type="Int32" Nullable="false" />
+          <Property Name="Five9AgentId" Type="Int32" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ForceLogin" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="v_Clients">
+          <Key>
+            <PropertyRef Name="ClientId" />
+            <PropertyRef Name="CompanyName" />
+            <PropertyRef Name="Description" />
+            <PropertyRef Name="ForwardPhone" />
+            <PropertyRef Name="ForwardPhone2" />
+            <PropertyRef Name="Website" />
+            <PropertyRef Name="OmmitFromList" />
+            <PropertyRef Name="AllowEmailTransfer" />
+            <PropertyRef Name="ByPass" />
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="FirstName" />
+            <PropertyRef Name="LastName" />
+            <PropertyRef Name="Phone" />
+            <PropertyRef Name="UserTypeId" />
+            <PropertyRef Name="UserType" />
+            <PropertyRef Name="UserRoleId" />
+            <PropertyRef Name="UserRole" />
+            <PropertyRef Name="AddressId" />
+            <PropertyRef Name="ZipCode" />
+            <PropertyRef Name="CreatedTime" />
+            <PropertyRef Name="UpdatedTime" />
+            <PropertyRef Name="Enabled" />
+            <PropertyRef Name="UserName" />
+            <PropertyRef Name="Password" />
+            <PropertyRef Name="ForceLogin" />
+            <PropertyRef Name="Code" />
+            <PropertyRef Name="ConciergeModel" />
+          </Key>
+          <Property Name="ClientId" Type="Int32" Nullable="false" />
+          <Property Name="CompanyName" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="ForwardPhone" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="ForwardPhone2" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Website" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Notes" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <Property Name="JavaScript" Type="String" MaxLength="5000" FixedLength="false" Unicode="false" />
+          <Property Name="OmmitFromList" Type="Boolean" Nullable="false" />
+          <Property Name="AllowEmailTransfer" Type="Boolean" Nullable="false" />
+          <Property Name="AgentNotification" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="ByPass" Type="Boolean" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="UserTypeId" Type="Int32" Nullable="false" />
+          <Property Name="UserType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserRoleId" Type="Int32" Nullable="false" />
+          <Property Name="UserRole" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ParentId" Type="Int32" />
+          <Property Name="AddressId" Type="Int32" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Address2" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="StateAbbr" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="ZipCode" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Latitude" Type="Decimal" Precision="18" Scale="6" />
+          <Property Name="Longitude" Type="Decimal" Precision="18" Scale="6" />
+          <Property Name="CreatedTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdatedTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Enabled" Type="Boolean" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ForceLogin" Type="Boolean" Nullable="false" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="ConciergeModel" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserLogins">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="ParentId" />
+            <PropertyRef Name="FirstName" />
+            <PropertyRef Name="LastName" />
+            <PropertyRef Name="Phone" />
+            <PropertyRef Name="UserName" />
+            <PropertyRef Name="Password" />
+            <PropertyRef Name="UserTypeId" />
+            <PropertyRef Name="UserType" />
+            <PropertyRef Name="UserRoleId" />
+            <PropertyRef Name="UserRole" />
+            <PropertyRef Name="Enabled" />
+            <PropertyRef Name="ForceLogin" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="ParentId" Type="Int32" Nullable="false" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UserTypeId" Type="Int32" Nullable="false" />
+          <Property Name="UserType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserRoleId" Type="Int32" Nullable="false" />
+          <Property Name="UserRole" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Enabled" Type="Boolean" Nullable="false" />
+          <Property Name="ForceLogin" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="v_ClientLogins">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="FirstName" />
+            <PropertyRef Name="LastName" />
+            <PropertyRef Name="Phone" />
+            <PropertyRef Name="UserTypeId" />
+            <PropertyRef Name="UserType" />
+            <PropertyRef Name="UserRoleId" />
+            <PropertyRef Name="UserRole" />
+            <PropertyRef Name="ParentClientId" />
+            <PropertyRef Name="ClientId" />
+            <PropertyRef Name="CompanyName" />
+            <PropertyRef Name="UserName" />
+            <PropertyRef Name="Password" />
+            <PropertyRef Name="ClientEnabled" />
+            <PropertyRef Name="Enabled" />
+            <PropertyRef Name="ForceLogin" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="UserTypeId" Type="Int32" Nullable="false" />
+          <Property Name="UserType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserRoleId" Type="Int32" Nullable="false" />
+          <Property Name="UserRole" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ParentClientId" Type="Int32" Nullable="false" />
+          <Property Name="ClientId" Type="Int32" Nullable="false" />
+          <Property Name="CompanyName" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ClientEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="Enabled" Type="Boolean" Nullable="false" />
+          <Property Name="ForceLogin" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="v_QuesInputRuleFilters">
+          <Key>
+            <PropertyRef Name="InputRuleRelId" />
+            <PropertyRef Name="FilterTypeId" />
+            <PropertyRef Name="FilterValue" />
+          </Key>
+          <Property Name="InputRuleRelId" Type="Int32" Nullable="false" />
+          <Property Name="FilterTypeId" Type="Int32" Nullable="false" />
+          <Property Name="FilterValue" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="v_QuesInputQualifyingRules">
+          <Key>
+            <PropertyRef Name="ClientRelId" />
+            <PropertyRef Name="VCLRelId" />
+            <PropertyRef Name="VerticalId" />
+            <PropertyRef Name="ClientInputTypeRelId" />
+            <PropertyRef Name="InputTypeRelId" />
+            <PropertyRef Name="InputTypeId" />
+            <PropertyRef Name="OptionSortOrder" />
+            <PropertyRef Name="QuestionId" />
+            <PropertyRef Name="RuleVCLRelId" />
+            <PropertyRef Name="RuleVerticalId" />
+          </Key>
+          <Property Name="ClientRelId" Type="Int32" Nullable="false" />
+          <Property Name="VCLRelId" Type="Int32" Nullable="false" />
+          <Property Name="VerticalId" Type="Int32" Nullable="false" />
+          <Property Name="ClientId" Type="Int32" />
+          <Property Name="ClientVerticalRelId" Type="Int32" />
+          <Property Name="OfficeLocationId" Type="Int32" />
+          <Property Name="ClientInputTypeRelId" Type="Int32" Nullable="false" />
+          <Property Name="InputTypeRelId" Type="Int32" Nullable="false" />
+          <Property Name="InputTypeId" Type="Int32" Nullable="false" />
+          <Property Name="InputType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="OptionId" Type="Int32" />
+          <Property Name="OptionValue" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="OptionSortOrder" Type="Int32" Nullable="false" />
+          <Property Name="ParentClientInputTypeRelId" Type="Int32" />
+          <Property Name="InputRuleRelId" Type="Int32" />
+          <Property Name="QualifyingRuleId" Type="Int32" />
+          <Property Name="QualifyingTypeId" Type="Int32" />
+          <Property Name="QualifyingType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="QualifyingRule" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="UnitTypeId" Type="Int32" />
+          <Property Name="Units" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="QuestionId" Type="Int32" Nullable="false" />
+          <Property Name="RuleVCLRelId" Type="Int32" Nullable="false" />
+          <Property Name="RuleVerticalId" Type="Int32" Nullable="false" />
+          <Property Name="RuleClientId" Type="Int32" />
+          <Property Name="RuleClientVerticalRelId" Type="Int32" />
+          <Property Name="RuleOfficeLocationId" Type="Int32" />
+        </EntityType>
+        <EntityType Name="v_QuesQualifyingRules">
+          <Key>
+            <PropertyRef Name="VCLRelId" />
+            <PropertyRef Name="ClientInputTypeRelId" />
+            <PropertyRef Name="InputTypeRelId" />
+            <PropertyRef Name="InputTypeId" />
+            <PropertyRef Name="QuestionId" />
+          </Key>
+          <Property Name="VCLRelId" Type="Int32" Nullable="false" />
+          <Property Name="VerticalId" Type="Int32" Nullable="false" />
+          <Property Name="ClientId" Type="Int32" />
+          <Property Name="ClientVerticalRelId" Type="Int32" />
+          <Property Name="OfficeLocationId" Type="Int32" />
+          <Property Name="ClientInputTypeRelId" Type="Int32" Nullable="false" />
+          <Property Name="InputTypeRelId" Type="Int32" Nullable="false" />
+          <Property Name="InputTypeId" Type="Int32" Nullable="false" />
+          <Property Name="ParentClientInputTypeRelId" Type="Int32" />
+          <Property Name="InputRuleRelId" Type="Int32" />
+          <Property Name="QualifyingRuleId" Type="Int32" />
+          <Property Name="QualifyingTypeId" Type="Int32" />
+          <Property Name="QualifyingType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="QualifyingRule" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="UnitTypeId" Type="Int32" />
+          <Property Name="Units" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="QuestionId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="v_QuesRulesAndFilters">
+          <Key>
+            <PropertyRef Name="VCLRelId" />
+            <PropertyRef Name="ClientInputTypeRelId" />
+            <PropertyRef Name="InputTypeRelId" />
+            <PropertyRef Name="InputTypeId" />
+            <PropertyRef Name="QuestionId" />
+          </Key>
+          <Property Name="VCLRelId" Type="Int32" Nullable="false" />
+          <Property Name="VerticalId" Type="Int32" Nullable="false" />
+          <Property Name="ClientId" Type="Int32" />
+          <Property Name="ClientVerticalRelId" Type="Int32" />
+          <Property Name="OfficeLocationId" Type="Int32" />
+          <Property Name="ClientInputTypeRelId" Type="Int32" Nullable="false" />
+          <Property Name="InputTypeRelId" Type="Int32" Nullable="false" />
+          <Property Name="InputTypeId" Type="Int32" Nullable="false" />
+          <Property Name="ParentClientInputTypeRelId" Type="Int32" />
+          <Property Name="InputRuleRelId" Type="Int32" />
+          <Property Name="QualifyingRuleId" Type="Int32" />
+          <Property Name="QualifyingTypeId" Type="Int32" />
+          <Property Name="QualifyingType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="QualifyingRule" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="UnitTypeId" Type="Int32" />
+          <Property Name="Units" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FilterTypeId" Type="Int32" />
+          <Property Name="FilterValue" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="QuestionId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="v_QuestionInputs">
+          <Key>
+            <PropertyRef Name="ClientRelId" />
+            <PropertyRef Name="VCLRelId" />
+            <PropertyRef Name="VerticalId" />
+            <PropertyRef Name="ClientInputTypeRelId" />
+            <PropertyRef Name="InputTypeRelId" />
+            <PropertyRef Name="InputTypeId" />
+            <PropertyRef Name="OptionSortOrder" />
+          </Key>
+          <Property Name="ClientRelId" Type="Int32" Nullable="false" />
+          <Property Name="VCLRelId" Type="Int32" Nullable="false" />
+          <Property Name="VerticalId" Type="Int32" Nullable="false" />
+          <Property Name="ClientId" Type="Int32" />
+          <Property Name="ClientVerticalRelId" Type="Int32" />
+          <Property Name="OfficeLocationId" Type="Int32" />
+          <Property Name="ClientInputTypeRelId" Type="Int32" Nullable="false" />
+          <Property Name="InputTypeRelId" Type="Int32" Nullable="false" />
+          <Property Name="InputTypeId" Type="Int32" Nullable="false" />
+          <Property Name="InputType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="OptionId" Type="Int32" />
+          <Property Name="OptionValue" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="OptionSortOrder" Type="Int32" Nullable="false" />
+          <Property Name="ParentClientInputTypeRelId" Type="Int32" />
+        </EntityType>
+        <EntityType Name="v_Dispositions">
+          <Key>
+            <PropertyRef Name="VerticalIdFlags" />
+            <PropertyRef Name="DispositionId" />
+            <PropertyRef Name="Disposition" />
+            <PropertyRef Name="DispositionTypeId" />
+            <PropertyRef Name="DispositionType" />
+          </Key>
+          <Property Name="VerticalIdFlags" Type="Int32" Nullable="false" />
+          <Property Name="DispositionId" Type="Int32" Nullable="false" />
+          <Property Name="Disposition" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="QuestionId" Type="Int32" />
+          <Property Name="DispositionTypeId" Type="Int32" Nullable="false" />
+          <Property Name="DispositionType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NotQualifiedDefault" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="v_Verticals">
+          <Key>
+            <PropertyRef Name="VerticalId" />
+            <PropertyRef Name="VerticalName" />
+            <PropertyRef Name="CreatedTime" />
+            <PropertyRef Name="VerticalTypeId" />
+            <PropertyRef Name="VerticalTypeName" />
+            <PropertyRef Name="SortOrder" />
+          </Key>
+          <Property Name="VerticalId" Type="Int32" Nullable="false" />
+          <Property Name="VerticalName" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="VerticalTypeId" Type="Int32" Nullable="false" />
+          <Property Name="VerticalTypeName" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="SortOrder" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="v_VerticalUsers">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="VerticalId" />
+            <PropertyRef Name="VerticalName" />
+            <PropertyRef Name="VerticalTypeId" />
+            <PropertyRef Name="VerticalTypeName" />
+            <PropertyRef Name="UserVerticalRelId" />
+            <PropertyRef Name="UserVerticalEnabled" />
+            <PropertyRef Name="SortOrder" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="VerticalId" Type="Int32" Nullable="false" />
+          <Property Name="VerticalName" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="VerticalTypeId" Type="Int32" Nullable="false" />
+          <Property Name="VerticalTypeName" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="UserVerticalRelId" Type="Int32" Nullable="false" />
+          <Property Name="UserVerticalEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="SortOrder" Type="Int32" Nullable="false" />
+        </EntityType>
+        <ComplexType Name="Client" >
+          <Property Type="Int32" Name="ClientId" Nullable="false" />
+          <Property Type="String" Name="CompanyName" Nullable="false" MaxLength="250" />
+          <Property Type="String" Name="Description" Nullable="false" MaxLength="4000" />
+          <Property Type="String" Name="Code" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="ForwardPhone" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="ForwardPhone2" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="Website" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Notes" Nullable="true" MaxLength="2000" />
+          <Property Type="String" Name="JavaScript" Nullable="true" MaxLength="5000" />
+          <Property Type="Boolean" Name="OmmitFromList" Nullable="false" />
+          <Property Type="Boolean" Name="AllowEmailTransfer" Nullable="false" />
+          <Property Type="String" Name="AgentNotification" Nullable="true" MaxLength="250" />
+          <Property Type="Boolean" Name="ByPass" Nullable="false" />
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="LastName" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Phone" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="200" />
+          <Property Type="Int32" Name="UserTypeId" Nullable="false" />
+          <Property Type="String" Name="UserType" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="UserRoleId" Nullable="false" />
+          <Property Type="String" Name="UserRole" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="ParentId" Nullable="true" />
+          <Property Type="Int32" Name="AddressId" Nullable="false" />
+          <Property Type="String" Name="Address" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="Address2" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="City" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="StateAbbr" Nullable="true" MaxLength="2" />
+          <Property Type="String" Name="ZipCode" Nullable="false" MaxLength="10" />
+          <Property Type="Decimal" Name="Latitude" Nullable="true" Precision="18" Scale="6" />
+          <Property Type="Decimal" Name="Longitude" Nullable="true" Precision="18" Scale="6" />
+          <Property Type="DateTime" Name="CreatedTime" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="UpdatedTime" Nullable="false" Precision="23" />
+          <Property Type="Boolean" Name="Enabled" Nullable="false" />
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Password" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="ForceLogin" Nullable="false" />
+          <Property Type="Boolean" Name="ConciergeModel" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="Customer" >
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="LastName" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="Phone" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="Address" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="City" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="StateAbbr" Nullable="true" MaxLength="2" />
+          <Property Type="String" Name="ZipCode" Nullable="false" MaxLength="10" />
+          <Property Type="Decimal" Name="Latitude" Nullable="true" Precision="18" Scale="6" />
+          <Property Type="Decimal" Name="Longitude" Nullable="true" Precision="18" Scale="6" />
+          <Property Type="DateTime" Name="CreatedTime" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="UpdatedTime" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="CustomerId" Nullable="false" />
+          <Property Type="String" Name="LeadSource" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="VCLRelId" Nullable="true" />
+          <Property Type="Int32" Name="OfficeLocationId" Nullable="true" />
+          <Property Type="String" Name="PatientCoordName" Nullable="true" MaxLength="150" />
+          <Property Type="Int32" Name="DispositionId" Nullable="true" />
+          <Property Type="Decimal" Name="Distance" Nullable="true" Precision="18" Scale="6" />
+          <Property Type="Int32" Name="FireHostLeadId" Nullable="true" />
+          <Property Type="Int32" Name="Five9PostQueueId" Nullable="true" />
+          <Property Type="String" Name="Notes" Nullable="true" MaxLength="2000" />
+          <Property Type="Boolean" Name="Transfered" Nullable="false" />
+          <Property Type="Boolean" Name="ViewedByClient" Nullable="false" />
+          <Property Type="DateTime" Name="TransferDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Disposition" Nullable="true" MaxLength="100" />
+          <Property Type="Boolean" Name="Opportunity" Nullable="true" />
+          <Property Type="Boolean" Name="NotQualified" Nullable="true" />
+          <Property Type="Int32" Name="InsuranceId" Nullable="true" />
+          <Property Type="String" Name="HealthInsurance" Nullable="true" MaxLength="250" />
+          <Property Type="Int32" Name="VerticalId" Nullable="false" />
+          <Property Type="String" Name="VerticalName" Nullable="false" MaxLength="150" />
+          <Property Type="Int32" Name="ClientId" Nullable="true" />
+          <Property Type="Int32" Name="ClientVerticalRelId" Nullable="true" />
+          <Property Type="Boolean" Name="ClientByPass" Nullable="true" />
+          <Property Type="String" Name="CompanyName" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="Code" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="ForwardPhone" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="ForwardPhone2" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Website" Nullable="true" MaxLength="200" />
+          <Property Type="Boolean" Name="ClientEnabled" Nullable="true" />
+          <Property Type="Boolean" Name="OfficeEnabled" Nullable="true" />
+          <Property Type="String" Name="OfficeName" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="OfficeAddress" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="OfficeAddress2" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="OfficeCity" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="OfficeState" Nullable="true" MaxLength="2" />
+          <Property Type="String" Name="OfficeZipCode" Nullable="true" MaxLength="10" />
+          <Property Type="Decimal" Name="OfficeLatitude" Nullable="true" Precision="18" Scale="6" />
+          <Property Type="Decimal" Name="OfficeLongitude" Nullable="true" Precision="18" Scale="6" />
+          <Property Type="String" Name="AgentNotification" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="4000" />
+          <Property Type="Boolean" Name="StrollHealthComplete" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_CustomerSearch_Result">
+          <Property Type="Int32" Name="PageNum" Nullable="true" />
+          <Property Type="Int32" Name="MaxRows" Nullable="true" />
+          <Property Type="Int32" Name="PageCount" Nullable="true" />
+          <Property Type="Int32" Name="TotalRecords" Nullable="true" />
+          <Property Type="Int64" Name="RowNumber" Nullable="true" />
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="LastName" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="Phone" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="Address" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="City" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="StateAbbr" Nullable="true" MaxLength="2" />
+          <Property Type="String" Name="ZipCode" Nullable="false" MaxLength="10" />
+          <Property Type="Decimal" Name="Latitude" Nullable="true" Precision="18" Scale="6" />
+          <Property Type="Decimal" Name="Longitude" Nullable="true" Precision="18" Scale="6" />
+          <Property Type="DateTime" Name="CreatedTime" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="UpdatedTime" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="CustomerId" Nullable="false" />
+          <Property Type="String" Name="LeadSource" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="VCLRelId" Nullable="true" />
+          <Property Type="Int32" Name="OfficeLocationId" Nullable="true" />
+          <Property Type="String" Name="PatientCoordName" Nullable="true" MaxLength="150" />
+          <Property Type="Int32" Name="DispositionId" Nullable="true" />
+          <Property Type="Decimal" Name="Distance" Nullable="true" Precision="18" Scale="6" />
+          <Property Type="Int32" Name="FireHostLeadId" Nullable="true" />
+          <Property Type="Int32" Name="Five9PostQueueId" Nullable="true" />
+          <Property Type="String" Name="Notes" Nullable="true" MaxLength="2000" />
+          <Property Type="Boolean" Name="Transfered" Nullable="false" />
+          <Property Type="Boolean" Name="ViewedByClient" Nullable="false" />
+          <Property Type="DateTime" Name="TransferDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Disposition" Nullable="true" MaxLength="100" />
+          <Property Type="Boolean" Name="Opportunity" Nullable="true" />
+          <Property Type="Boolean" Name="NotQualified" Nullable="true" />
+          <Property Type="Int32" Name="InsuranceId" Nullable="true" />
+          <Property Type="String" Name="HealthInsurance" Nullable="true" MaxLength="250" />
+          <Property Type="Int32" Name="VerticalId" Nullable="false" />
+          <Property Type="String" Name="VerticalName" Nullable="false" MaxLength="150" />
+          <Property Type="Int32" Name="ClientId" Nullable="true" />
+          <Property Type="Int32" Name="ClientVerticalRelId" Nullable="true" />
+          <Property Type="Boolean" Name="ClientByPass" Nullable="true" />
+          <Property Type="String" Name="CompanyName" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="Code" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="ForwardPhone" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="ForwardPhone2" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Website" Nullable="true" MaxLength="200" />
+          <Property Type="Boolean" Name="ClientEnabled" Nullable="true" />
+          <Property Type="Boolean" Name="OfficeEnabled" Nullable="true" />
+          <Property Type="String" Name="OfficeName" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="OfficeAddress" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="OfficeAddress2" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="OfficeCity" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="OfficeState" Nullable="true" MaxLength="2" />
+          <Property Type="String" Name="OfficeZipCode" Nullable="true" MaxLength="10" />
+          <Property Type="Decimal" Name="OfficeLatitude" Nullable="true" Precision="18" Scale="6" />
+          <Property Type="Decimal" Name="OfficeLongitude" Nullable="true" Precision="18" Scale="6" />
+          <Property Type="String" Name="AgentNotification" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="4000" />
+          <Property Type="Boolean" Name="StrollHealthComplete" Nullable="true" />
+        </ComplexType>
+        <EntityType Name="CustomerStrollHealth">
+          <Key>
+            <PropertyRef Name="CustomerId" />
+          </Key>
+          <Property Name="CustomerId" Type="Int32" Nullable="false" />
+          <Property Name="Status" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="exCreatedTime" Type="DateTime" Precision="3" />
+          <Property Name="exUpdatedTime" Type="DateTime" Precision="3" />
+          <Property Name="CreatedTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdatedTime" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CRMModelStoreContainer" CdmEntityContainer="CRMEntities">
+          <FunctionImportMapping FunctionImportName="sp_UpdateTaxonomy" FunctionName="CRMModel.Store.sp_UpdateTaxonomy" />
+          <FunctionImportMapping FunctionImportName="sp_ValidateCredentials" FunctionName="CRMModel.Store.sp_ValidateCredentials">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CRM.Domain.sp_ValidateCredentials_Result">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="VerticalId" ColumnName="VerticalId" />
+                <ScalarProperty Name="UserVerticalRelId" ColumnName="UserVerticalRelId" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="ForceLogin" ColumnName="ForceLogin" />
+                <ScalarProperty Name="UserTypeId" ColumnName="UserTypeId" />
+                <ScalarProperty Name="UserType" ColumnName="UserType" />
+                <ScalarProperty Name="UserRoleId" ColumnName="UserRoleId" />
+                <ScalarProperty Name="UserRole" ColumnName="UserRole" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="ClientParentId" ColumnName="ClientParentId" />
+                <ScalarProperty Name="Five9AgentId" ColumnName="Five9AgentId" />
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_ClientSearch" FunctionName="CRMModel.Store.sp_ClientSearch">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CRM.Domain.Client">
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="ForwardPhone" ColumnName="ForwardPhone" />
+                <ScalarProperty Name="ForwardPhone2" ColumnName="ForwardPhone2" />
+                <ScalarProperty Name="Website" ColumnName="Website" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="JavaScript" ColumnName="JavaScript" />
+                <ScalarProperty Name="OmmitFromList" ColumnName="OmmitFromList" />
+                <ScalarProperty Name="AllowEmailTransfer" ColumnName="AllowEmailTransfer" />
+                <ScalarProperty Name="AgentNotification" ColumnName="AgentNotification" />
+                <ScalarProperty Name="ByPass" ColumnName="ByPass" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="UserTypeId" ColumnName="UserTypeId" />
+                <ScalarProperty Name="UserType" ColumnName="UserType" />
+                <ScalarProperty Name="UserRoleId" ColumnName="UserRoleId" />
+                <ScalarProperty Name="UserRole" ColumnName="UserRole" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="AddressId" ColumnName="AddressId" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Address2" ColumnName="Address2" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="StateAbbr" ColumnName="StateAbbr" />
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="CreatedTime" ColumnName="CreatedTime" />
+                <ScalarProperty Name="UpdatedTime" ColumnName="UpdatedTime" />
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="ForceLogin" ColumnName="ForceLogin" />
+                <ScalarProperty Name="ConciergeModel" ColumnName="ConciergeModel" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="Insurance">
+            <EntityTypeMapping TypeName="CRM.Domain.Insurance">
+              <MappingFragment StoreEntitySet="Insurance">
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+                <ScalarProperty Name="Validated" ColumnName="Validated" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetListOfProviders" FunctionName="CRMModel.Store.sp_GetListOfProviders">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CRM.Domain.sp_GetListOfProviders_Result">
+                <ScalarProperty Name="VerticalId" ColumnName="VerticalId" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="ClientVerticalRelId" ColumnName="ClientVerticalRelId" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="MaxRadius" ColumnName="MaxRadius" />
+                <ScalarProperty Name="OfficeLocationId" ColumnName="OfficeLocationId" />
+                <ScalarProperty Name="OfficeName" ColumnName="OfficeName" />
+                <ScalarProperty Name="OfficeLatitude" ColumnName="OfficeLatitude" />
+                <ScalarProperty Name="OfficeLongitude" ColumnName="OfficeLongitude" />
+                <ScalarProperty Name="OfficeAddress" ColumnName="OfficeAddress" />
+                <ScalarProperty Name="OfficeAddress2" ColumnName="OfficeAddress2" />
+                <ScalarProperty Name="OfficeCity" ColumnName="OfficeCity" />
+                <ScalarProperty Name="OfficeState" ColumnName="OfficeState" />
+                <ScalarProperty Name="OfficeZipCode" ColumnName="OfficeZipCode" />
+                <ScalarProperty Name="ForwardPhone" ColumnName="ForwardPhone" />
+                <ScalarProperty Name="ForwardPhone2" ColumnName="ForwardPhone2" />
+                <ScalarProperty Name="Website" ColumnName="Website" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="Transfered" ColumnName="Transfered" />
+                <ScalarProperty Name="AgentNotification" ColumnName="AgentNotification" />
+                <ScalarProperty Name="OfficeNotification" ColumnName="OfficeNotification" />
+                <ScalarProperty Name="AcceptsInsurance" ColumnName="AcceptsInsurance" />
+                <ScalarProperty Name="AllowEmailTransfer" ColumnName="AllowEmailTransfer" />
+                <ScalarProperty Name="TargetTypes" ColumnName="TargetTypes" />
+                <ScalarProperty Name="IsPrimaryOffice" ColumnName="IsPrimaryOffice" />
+                <ScalarProperty Name="VCLRelId" ColumnName="VCLRelId" />
+                <ScalarProperty Name="ConciergeModel" ColumnName="ConciergeModel" />
+                </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_CredentialsExist" FunctionName="CRMModel.Store.sp_CredentialsExist" />
+          <FunctionImportMapping FunctionImportName="sp_UpdateClientLoginUser" FunctionName="CRMModel.Store.sp_UpdateClientLoginUser">
+          </FunctionImportMapping>
+          <EntitySetMapping Name="InputAttributes">
+            <EntityTypeMapping TypeName="CRM.Domain.InputAttributes">
+              <MappingFragment StoreEntitySet="InputAttributes">
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="InputTypeRelId" ColumnName="InputTypeRelId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="v_Questions">
+            <EntityTypeMapping TypeName="CRM.Domain.v_Questions">
+              <MappingFragment StoreEntitySet="v_Questions">
+                <ScalarProperty Name="VCLRelId" ColumnName="VCLRelId" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="Required" ColumnName="Required" />
+                <ScalarProperty Name="Question" ColumnName="Question" />
+                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+                <ScalarProperty Name="QuestionId" ColumnName="QuestionId" />
+                <ScalarProperty Name="ClientRelId" ColumnName="ClientRelId" />
+                <ScalarProperty Name="OfficeLocationId" ColumnName="OfficeLocationId" />
+                <ScalarProperty Name="ClientVerticalRelId" ColumnName="ClientVerticalRelId" />
+                <ScalarProperty Name="VerticalId" ColumnName="VerticalId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_UpdateCustomerAnswer" FunctionName="CRMModel.Store.sp_UpdateCustomerAnswer" />
+          <FunctionImportMapping FunctionImportName="sp_VerticalQuestions" FunctionName="CRMModel.Store.sp_VerticalQuestions">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CRM.Domain.sp_VerticalQuestions_Result">
+                <ScalarProperty Name="QuestionId" ColumnName="QuestionId" />
+                <ScalarProperty Name="Question" ColumnName="Question" />
+                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+                <ScalarProperty Name="Required" ColumnName="Required" />
+                <ScalarProperty Name="ClientRelId" ColumnName="ClientRelId" />
+                <ScalarProperty Name="InputTypeRelId" ColumnName="InputTypeRelId" />
+                <ScalarProperty Name="InputTypeId" ColumnName="InputTypeId" />
+                <ScalarProperty Name="InputType" ColumnName="InputType" />
+                <ScalarProperty Name="OptionId" ColumnName="OptionId" />
+                <ScalarProperty Name="OptionValue" ColumnName="OptionValue" />
+                <ScalarProperty Name="OptionSortOrder" ColumnName="OptionSortOrder" />
+                <ScalarProperty Name="VerticalId" ColumnName="VerticalId" />
+                <ScalarProperty Name="OfficeLocationId" ColumnName="OfficeLocationId" />
+                <ScalarProperty Name="Answer" ColumnName="Answer" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="ClientVerticalRelId" ColumnName="ClientVerticalRelId" />
+                <ScalarProperty Name="VCLRelId" ColumnName="VCLRelId" />
+                <ScalarProperty Name="ClientInputTypeRelId" ColumnName="ClientInputTypeRelId" />
+                <ScalarProperty Name="ParentClientInputTypeRelId" ColumnName="ParentClientInputTypeRelId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_UpdateClient" FunctionName="CRMModel.Store.sp_UpdateClient" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CRM.Domain.Client">
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="ForwardPhone" ColumnName="ForwardPhone" />
+                <ScalarProperty Name="ForwardPhone2" ColumnName="ForwardPhone2" />
+                <ScalarProperty Name="Website" ColumnName="Website" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="JavaScript" ColumnName="JavaScript" />
+                <ScalarProperty Name="OmmitFromList" ColumnName="OmmitFromList" />
+                <ScalarProperty Name="AllowEmailTransfer" ColumnName="AllowEmailTransfer" />
+                <ScalarProperty Name="AgentNotification" ColumnName="AgentNotification" />
+                <ScalarProperty Name="ByPass" ColumnName="ByPass" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="UserTypeId" ColumnName="UserTypeId" />
+                <ScalarProperty Name="UserType" ColumnName="UserType" />
+                <ScalarProperty Name="UserRoleId" ColumnName="UserRoleId" />
+                <ScalarProperty Name="UserRole" ColumnName="UserRole" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="AddressId" ColumnName="AddressId" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Address2" ColumnName="Address2" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="StateAbbr" ColumnName="StateAbbr" />
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="CreatedTime" ColumnName="CreatedTime" />
+                <ScalarProperty Name="UpdatedTime" ColumnName="UpdatedTime" />
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="ForceLogin" ColumnName="ForceLogin" />
+                <ScalarProperty Name="ConciergeModel" ColumnName="ConciergeModel" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_CallCenterSearch" FunctionName="CRMModel.Store.sp_CallCenterSearch">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CRM.Domain.sp_CallCenterSearch_Result">
+                <ScalarProperty Name="PageNum" ColumnName="PageNum" />
+                <ScalarProperty Name="MaxRows" ColumnName="MaxRows" />
+                <ScalarProperty Name="PageCount" ColumnName="PageCount" />
+                <ScalarProperty Name="TotalRecords" ColumnName="TotalRecords" />
+                <ScalarProperty Name="RowNumber" ColumnName="RowNumber" />
+                <ScalarProperty Name="CallCenterUserId" ColumnName="CallCenterUserId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserTypeId" ColumnName="UserTypeId" />
+                <ScalarProperty Name="UserType" ColumnName="UserType" />
+                <ScalarProperty Name="UserRoleId" ColumnName="UserRoleId" />
+                <ScalarProperty Name="UserRole" ColumnName="UserRole" />
+                <ScalarProperty Name="Five9AgentId" ColumnName="Five9AgentId" />
+                <ScalarProperty Name="CreatedTime" ColumnName="CreatedTime" />
+                <ScalarProperty Name="UpdatedTime" ColumnName="UpdatedTime" />
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_UpdateCallCenterUser" FunctionName="CRMModel.Store.sp_UpdateCallCenterUser">
+          </FunctionImportMapping>
+          <EntitySetMapping Name="v_OfficeLocations">
+            <EntityTypeMapping TypeName="CRM.Domain.v_OfficeLocations">
+              <MappingFragment StoreEntitySet="v_OfficeLocations">
+                <ScalarProperty Name="ClientEnabled" ColumnName="ClientEnabled" />
+                <ScalarProperty Name="VCLRelId" ColumnName="VCLRelId" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="OfficeEnabled" ColumnName="OfficeEnabled" />
+                <ScalarProperty Name="AgentNotification" ColumnName="AgentNotification" />
+                <ScalarProperty Name="OmmitFromList" ColumnName="OmmitFromList" />
+                <ScalarProperty Name="OfficeLongitude" ColumnName="OfficeLongitude" />
+                <ScalarProperty Name="OfficeLatitude" ColumnName="OfficeLatitude" />
+                <ScalarProperty Name="OfficeZipCode" ColumnName="OfficeZipCode" />
+                <ScalarProperty Name="OfficeState" ColumnName="OfficeState" />
+                <ScalarProperty Name="OfficeCity" ColumnName="OfficeCity" />
+                <ScalarProperty Name="OfficeAddress2" ColumnName="OfficeAddress2" />
+                <ScalarProperty Name="OfficeAddress" ColumnName="OfficeAddress" />
+                <ScalarProperty Name="AddressId" ColumnName="AddressId" />
+                <ScalarProperty Name="OfficeName" ColumnName="OfficeName" />
+                <ScalarProperty Name="OfficeLocationId" ColumnName="OfficeLocationId" />
+                <ScalarProperty Name="BillingUserId" ColumnName="BillingUserId" />
+                <ScalarProperty Name="ClientVerticalRelId" ColumnName="ClientVerticalRelId" />
+                <ScalarProperty Name="VerticalId" ColumnName="VerticalId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetDuplicates" FunctionName="CRMModel.Store.sp_GetDuplicates">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CRM.Domain.Customer">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="StateAbbr" ColumnName="StateAbbr" />
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="CreatedTime" ColumnName="CreatedTime" />
+                <ScalarProperty Name="UpdatedTime" ColumnName="UpdatedTime" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="LeadSource" ColumnName="LeadSource" />
+                <ScalarProperty Name="VCLRelId" ColumnName="VCLRelId" />
+                <ScalarProperty Name="OfficeLocationId" ColumnName="OfficeLocationId" />
+                <ScalarProperty Name="PatientCoordName" ColumnName="PatientCoordName" />
+                <ScalarProperty Name="DispositionId" ColumnName="DispositionId" />
+                <ScalarProperty Name="Distance" ColumnName="Distance" />
+                <ScalarProperty Name="FireHostLeadId" ColumnName="FireHostLeadId" />
+                <ScalarProperty Name="Five9PostQueueId" ColumnName="Five9PostQueueId" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="Transfered" ColumnName="Transfered" />
+                <ScalarProperty Name="ViewedByClient" ColumnName="ViewedByClient" />
+                <ScalarProperty Name="TransferDate" ColumnName="TransferDate" />
+                <ScalarProperty Name="Disposition" ColumnName="Disposition" />
+                <ScalarProperty Name="Opportunity" ColumnName="Opportunity" />
+                <ScalarProperty Name="NotQualified" ColumnName="NotQualified" />
+                <ScalarProperty Name="InsuranceId" ColumnName="InsuranceId" />
+                <ScalarProperty Name="HealthInsurance" ColumnName="HealthInsurance" />
+                <ScalarProperty Name="VerticalId" ColumnName="VerticalId" />
+                <ScalarProperty Name="VerticalName" ColumnName="VerticalName" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="ClientVerticalRelId" ColumnName="ClientVerticalRelId" />
+                <ScalarProperty Name="ClientByPass" ColumnName="ClientByPass" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="ForwardPhone" ColumnName="ForwardPhone" />
+                <ScalarProperty Name="ForwardPhone2" ColumnName="ForwardPhone2" />
+                <ScalarProperty Name="Website" ColumnName="Website" />
+                <ScalarProperty Name="ClientEnabled" ColumnName="ClientEnabled" />
+                <ScalarProperty Name="OfficeEnabled" ColumnName="OfficeEnabled" />
+                <ScalarProperty Name="OfficeName" ColumnName="OfficeName" />
+                <ScalarProperty Name="OfficeAddress" ColumnName="OfficeAddress" />
+                <ScalarProperty Name="OfficeAddress2" ColumnName="OfficeAddress2" />
+                <ScalarProperty Name="OfficeCity" ColumnName="OfficeCity" />
+                <ScalarProperty Name="OfficeState" ColumnName="OfficeState" />
+                <ScalarProperty Name="OfficeZipCode" ColumnName="OfficeZipCode" />
+                <ScalarProperty Name="OfficeLatitude" ColumnName="OfficeLatitude" />
+                <ScalarProperty Name="OfficeLongitude" ColumnName="OfficeLongitude" />
+                <ScalarProperty Name="AgentNotification" ColumnName="AgentNotification" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="StrollHealthComplete" ColumnName="StrollHealthComplete" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="InsuranceException">
+            <EntityTypeMapping TypeName="CRM.Domain.InsuranceException">
+              <MappingFragment StoreEntitySet="InsuranceException">
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+                <ScalarProperty Name="Allow" ColumnName="Allow" />
+                <ScalarProperty Name="InsuranceId" ColumnName="InsuranceId" />
+                <ScalarProperty Name="OfficeLocationId" ColumnName="OfficeLocationId" />
+                <ScalarProperty Name="ClientVerticalRelId" ColumnName="ClientVerticalRelId" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_CustomerSearch" FunctionName="CRMModel.Store.sp_CustomerSearch" >
+          <ResultMapping>
+              <ComplexTypeMapping TypeName="CRM.Domain.sp_CustomerSearch_Result">
+                <ScalarProperty Name="PageNum" ColumnName="PageNum" />
+                <ScalarProperty Name="MaxRows" ColumnName="MaxRows" />
+                <ScalarProperty Name="PageCount" ColumnName="PageCount" />
+                <ScalarProperty Name="TotalRecords" ColumnName="TotalRecords" />
+                <ScalarProperty Name="RowNumber" ColumnName="RowNumber" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="StateAbbr" ColumnName="StateAbbr" />
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="CreatedTime" ColumnName="CreatedTime" />
+                <ScalarProperty Name="UpdatedTime" ColumnName="UpdatedTime" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="LeadSource" ColumnName="LeadSource" />
+                <ScalarProperty Name="VCLRelId" ColumnName="VCLRelId" />
+                <ScalarProperty Name="OfficeLocationId" ColumnName="OfficeLocationId" />
+                <ScalarProperty Name="PatientCoordName" ColumnName="PatientCoordName" />
+                <ScalarProperty Name="DispositionId" ColumnName="DispositionId" />
+                <ScalarProperty Name="Distance" ColumnName="Distance" />
+                <ScalarProperty Name="FireHostLeadId" ColumnName="FireHostLeadId" />
+                <ScalarProperty Name="Five9PostQueueId" ColumnName="Five9PostQueueId" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="Transfered" ColumnName="Transfered" />
+                <ScalarProperty Name="ViewedByClient" ColumnName="ViewedByClient" />
+                <ScalarProperty Name="TransferDate" ColumnName="TransferDate" />
+                <ScalarProperty Name="Disposition" ColumnName="Disposition" />
+                <ScalarProperty Name="Opportunity" ColumnName="Opportunity" />
+                <ScalarProperty Name="NotQualified" ColumnName="NotQualified" />
+                <ScalarProperty Name="InsuranceId" ColumnName="InsuranceId" />
+                <ScalarProperty Name="HealthInsurance" ColumnName="HealthInsurance" />
+                <ScalarProperty Name="VerticalId" ColumnName="VerticalId" />
+                <ScalarProperty Name="VerticalName" ColumnName="VerticalName" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="ClientVerticalRelId" ColumnName="ClientVerticalRelId" />
+                <ScalarProperty Name="ClientByPass" ColumnName="ClientByPass" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="ForwardPhone" ColumnName="ForwardPhone" />
+                <ScalarProperty Name="ForwardPhone2" ColumnName="ForwardPhone2" />
+                <ScalarProperty Name="Website" ColumnName="Website" />
+                <ScalarProperty Name="ClientEnabled" ColumnName="ClientEnabled" />
+                <ScalarProperty Name="OfficeEnabled" ColumnName="OfficeEnabled" />
+                <ScalarProperty Name="OfficeName" ColumnName="OfficeName" />
+                <ScalarProperty Name="OfficeAddress" ColumnName="OfficeAddress" />
+                <ScalarProperty Name="OfficeAddress2" ColumnName="OfficeAddress2" />
+                <ScalarProperty Name="OfficeCity" ColumnName="OfficeCity" />
+                <ScalarProperty Name="OfficeState" ColumnName="OfficeState" />
+                <ScalarProperty Name="OfficeZipCode" ColumnName="OfficeZipCode" />
+                <ScalarProperty Name="OfficeLatitude" ColumnName="OfficeLatitude" />
+                <ScalarProperty Name="OfficeLongitude" ColumnName="OfficeLongitude" />
+                <ScalarProperty Name="AgentNotification" ColumnName="AgentNotification" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="StrollHealthComplete" ColumnName="StrollHealthComplete" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="v_TargetTypeFilters">
+            <EntityTypeMapping TypeName="CRM.Domain.v_TargetTypeFilters">
+              <MappingFragment StoreEntitySet="v_TargetTypeFilters">
+                <ScalarProperty Name="VerticalId" ColumnName="VerticalId" />
+                <ScalarProperty Name="TargetTypeFlag" ColumnName="TargetTypeFlag" />
+                <ScalarProperty Name="FilterType" ColumnName="FilterType" />
+                <ScalarProperty Name="FilterValue" ColumnName="FilterValue" />
+                <ScalarProperty Name="FilterTypeId" ColumnName="FilterTypeId" />
+                <ScalarProperty Name="FilterId" ColumnName="FilterId" />
+                <ScalarProperty Name="FilterRelId" ColumnName="FilterRelId" />
+                <ScalarProperty Name="TargetTypeRelId" ColumnName="TargetTypeRelId" />
+                <ScalarProperty Name="SortPriority" ColumnName="SortPriority" />
+                <ScalarProperty Name="MaxRadius" ColumnName="MaxRadius" />
+                <ScalarProperty Name="OfficeLocationId" ColumnName="OfficeLocationId" />
+                <ScalarProperty Name="ClientVerticalRelId" ColumnName="ClientVerticalRelId" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="TargetTypeId" ColumnName="TargetTypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_UpdateCustomer" FunctionName="CRMModel.Store.sp_UpdateCustomer" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CRM.Domain.Customer">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="StateAbbr" ColumnName="StateAbbr" />
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="CreatedTime" ColumnName="CreatedTime" />
+                <ScalarProperty Name="UpdatedTime" ColumnName="UpdatedTime" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="LeadSource" ColumnName="LeadSource" />
+                <ScalarProperty Name="VCLRelId" ColumnName="VCLRelId" />
+                <ScalarProperty Name="OfficeLocationId" ColumnName="OfficeLocationId" />
+                <ScalarProperty Name="PatientCoordName" ColumnName="PatientCoordName" />
+                <ScalarProperty Name="DispositionId" ColumnName="DispositionId" />
+                <ScalarProperty Name="Distance" ColumnName="Distance" />
+                <ScalarProperty Name="FireHostLeadId" ColumnName="FireHostLeadId" />
+                <ScalarProperty Name="Five9PostQueueId" ColumnName="Five9PostQueueId" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="Transfered" ColumnName="Transfered" />
+                <ScalarProperty Name="ViewedByClient" ColumnName="ViewedByClient" />
+                <ScalarProperty Name="TransferDate" ColumnName="TransferDate" />
+                <ScalarProperty Name="Disposition" ColumnName="Disposition" />
+                <ScalarProperty Name="Opportunity" ColumnName="Opportunity" />
+                <ScalarProperty Name="NotQualified" ColumnName="NotQualified" />
+                <ScalarProperty Name="InsuranceId" ColumnName="InsuranceId" />
+                <ScalarProperty Name="HealthInsurance" ColumnName="HealthInsurance" />
+                <ScalarProperty Name="VerticalId" ColumnName="VerticalId" />
+                <ScalarProperty Name="VerticalName" ColumnName="VerticalName" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="ClientVerticalRelId" ColumnName="ClientVerticalRelId" />
+                <ScalarProperty Name="ClientByPass" ColumnName="ClientByPass" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="ForwardPhone" ColumnName="ForwardPhone" />
+                <ScalarProperty Name="ForwardPhone2" ColumnName="ForwardPhone2" />
+                <ScalarProperty Name="Website" ColumnName="Website" />
+                <ScalarProperty Name="ClientEnabled" ColumnName="ClientEnabled" />
+                <ScalarProperty Name="OfficeEnabled" ColumnName="OfficeEnabled" />
+                <ScalarProperty Name="OfficeName" ColumnName="OfficeName" />
+                <ScalarProperty Name="OfficeAddress" ColumnName="OfficeAddress" />
+                <ScalarProperty Name="OfficeAddress2" ColumnName="OfficeAddress2" />
+                <ScalarProperty Name="OfficeCity" ColumnName="OfficeCity" />
+                <ScalarProperty Name="OfficeState" ColumnName="OfficeState" />
+                <ScalarProperty Name="OfficeZipCode" ColumnName="OfficeZipCode" />
+                <ScalarProperty Name="OfficeLatitude" ColumnName="OfficeLatitude" />
+                <ScalarProperty Name="OfficeLongitude" ColumnName="OfficeLongitude" />
+                <ScalarProperty Name="AgentNotification" ColumnName="AgentNotification" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="StrollHealthComplete" ColumnName="StrollHealthComplete" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="v_CallCenterUsers">
+            <EntityTypeMapping TypeName="CRM.Domain.v_CallCenterUsers">
+              <MappingFragment StoreEntitySet="v_CallCenterUsers">
+                <ScalarProperty Name="ForceLogin" ColumnName="ForceLogin" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Five9AgentId" ColumnName="Five9AgentId" />
+                <ScalarProperty Name="CallCenterUserId" ColumnName="CallCenterUserId" />
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+                <ScalarProperty Name="UpdatedTime" ColumnName="UpdatedTime" />
+                <ScalarProperty Name="CreatedTime" ColumnName="CreatedTime" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+                <ScalarProperty Name="StateAbbr" ColumnName="StateAbbr" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Address2" ColumnName="Address2" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="AddressId" ColumnName="AddressId" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="UserRole" ColumnName="UserRole" />
+                <ScalarProperty Name="UserRoleId" ColumnName="UserRoleId" />
+                <ScalarProperty Name="UserType" ColumnName="UserType" />
+                <ScalarProperty Name="UserTypeId" ColumnName="UserTypeId" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="v_Clients">
+            <EntityTypeMapping TypeName="CRM.Domain.v_Clients">
+              <MappingFragment StoreEntitySet="v_Clients">
+                <ScalarProperty Name="ConciergeModel" ColumnName="ConciergeModel" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="ForceLogin" ColumnName="ForceLogin" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+                <ScalarProperty Name="UpdatedTime" ColumnName="UpdatedTime" />
+                <ScalarProperty Name="CreatedTime" ColumnName="CreatedTime" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+                <ScalarProperty Name="StateAbbr" ColumnName="StateAbbr" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Address2" ColumnName="Address2" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="AddressId" ColumnName="AddressId" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="UserRole" ColumnName="UserRole" />
+                <ScalarProperty Name="UserRoleId" ColumnName="UserRoleId" />
+                <ScalarProperty Name="UserType" ColumnName="UserType" />
+                <ScalarProperty Name="UserTypeId" ColumnName="UserTypeId" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ByPass" ColumnName="ByPass" />
+                <ScalarProperty Name="AgentNotification" ColumnName="AgentNotification" />
+                <ScalarProperty Name="AllowEmailTransfer" ColumnName="AllowEmailTransfer" />
+                <ScalarProperty Name="OmmitFromList" ColumnName="OmmitFromList" />
+                <ScalarProperty Name="JavaScript" ColumnName="JavaScript" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="Website" ColumnName="Website" />
+                <ScalarProperty Name="ForwardPhone2" ColumnName="ForwardPhone2" />
+                <ScalarProperty Name="ForwardPhone" ColumnName="ForwardPhone" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="v_UserLogins">
+            <EntityTypeMapping TypeName="CRM.Domain.UserLogins">
+              <MappingFragment StoreEntitySet="v_UserLogins">
+                <ScalarProperty Name="ForceLogin" ColumnName="ForceLogin" />
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+                <ScalarProperty Name="UserRole" ColumnName="UserRole" />
+                <ScalarProperty Name="UserRoleId" ColumnName="UserRoleId" />
+                <ScalarProperty Name="UserType" ColumnName="UserType" />
+                <ScalarProperty Name="UserTypeId" ColumnName="UserTypeId" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="v_ClientLogins">
+            <EntityTypeMapping TypeName="CRM.Domain.v_ClientLogins">
+              <MappingFragment StoreEntitySet="v_ClientLogins">
+                <ScalarProperty Name="ForceLogin" ColumnName="ForceLogin" />
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+                <ScalarProperty Name="ClientEnabled" ColumnName="ClientEnabled" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="ParentClientId" ColumnName="ParentClientId" />
+                <ScalarProperty Name="UserRole" ColumnName="UserRole" />
+                <ScalarProperty Name="UserRoleId" ColumnName="UserRoleId" />
+                <ScalarProperty Name="UserType" ColumnName="UserType" />
+                <ScalarProperty Name="UserTypeId" ColumnName="UserTypeId" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_TransferCustomer" FunctionName="CRMModel.Store.sp_TransferCustomer" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CRM.Domain.Customer">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="StateAbbr" ColumnName="StateAbbr" />
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="CreatedTime" ColumnName="CreatedTime" />
+                <ScalarProperty Name="UpdatedTime" ColumnName="UpdatedTime" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="LeadSource" ColumnName="LeadSource" />
+                <ScalarProperty Name="VCLRelId" ColumnName="VCLRelId" />
+                <ScalarProperty Name="OfficeLocationId" ColumnName="OfficeLocationId" />
+                <ScalarProperty Name="PatientCoordName" ColumnName="PatientCoordName" />
+                <ScalarProperty Name="DispositionId" ColumnName="DispositionId" />
+                <ScalarProperty Name="Distance" ColumnName="Distance" />
+                <ScalarProperty Name="FireHostLeadId" ColumnName="FireHostLeadId" />
+                <ScalarProperty Name="Five9PostQueueId" ColumnName="Five9PostQueueId" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="Transfered" ColumnName="Transfered" />
+                <ScalarProperty Name="ViewedByClient" ColumnName="ViewedByClient" />
+                <ScalarProperty Name="TransferDate" ColumnName="TransferDate" />
+                <ScalarProperty Name="Disposition" ColumnName="Disposition" />
+                <ScalarProperty Name="Opportunity" ColumnName="Opportunity" />
+                <ScalarProperty Name="NotQualified" ColumnName="NotQualified" />
+                <ScalarProperty Name="InsuranceId" ColumnName="InsuranceId" />
+                <ScalarProperty Name="HealthInsurance" ColumnName="HealthInsurance" />
+                <ScalarProperty Name="VerticalId" ColumnName="VerticalId" />
+                <ScalarProperty Name="VerticalName" ColumnName="VerticalName" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="ClientVerticalRelId" ColumnName="ClientVerticalRelId" />
+                <ScalarProperty Name="ClientByPass" ColumnName="ClientByPass" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="ForwardPhone" ColumnName="ForwardPhone" />
+                <ScalarProperty Name="ForwardPhone2" ColumnName="ForwardPhone2" />
+                <ScalarProperty Name="Website" ColumnName="Website" />
+                <ScalarProperty Name="ClientEnabled" ColumnName="ClientEnabled" />
+                <ScalarProperty Name="OfficeEnabled" ColumnName="OfficeEnabled" />
+                <ScalarProperty Name="OfficeName" ColumnName="OfficeName" />
+                <ScalarProperty Name="OfficeAddress" ColumnName="OfficeAddress" />
+                <ScalarProperty Name="OfficeAddress2" ColumnName="OfficeAddress2" />
+                <ScalarProperty Name="OfficeCity" ColumnName="OfficeCity" />
+                <ScalarProperty Name="OfficeState" ColumnName="OfficeState" />
+                <ScalarProperty Name="OfficeZipCode" ColumnName="OfficeZipCode" />
+                <ScalarProperty Name="OfficeLatitude" ColumnName="OfficeLatitude" />
+                <ScalarProperty Name="OfficeLongitude" ColumnName="OfficeLongitude" />
+                <ScalarProperty Name="AgentNotification" ColumnName="AgentNotification" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="StrollHealthComplete" ColumnName="StrollHealthComplete" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="v_QuesInputRuleFilters">
+            <EntityTypeMapping TypeName="CRM.Domain.v_QuesInputRuleFilters">
+              <MappingFragment StoreEntitySet="v_QuesInputRuleFilters">
+                <ScalarProperty Name="FilterValue" ColumnName="FilterValue" />
+                <ScalarProperty Name="FilterTypeId" ColumnName="FilterTypeId" />
+                <ScalarProperty Name="InputRuleRelId" ColumnName="InputRuleRelId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_UpdateFoceLogin" FunctionName="CRMModel.Store.sp_UpdateFoceLogin" />
+          <EntitySetMapping Name="v_QuesInputQualifyingRules">
+            <EntityTypeMapping TypeName="CRM.Domain.v_QuesInputQualifyingRules">
+              <MappingFragment StoreEntitySet="v_QuesInputQualifyingRules">
+                <ScalarProperty Name="RuleOfficeLocationId" ColumnName="RuleOfficeLocationId" />
+                <ScalarProperty Name="RuleClientVerticalRelId" ColumnName="RuleClientVerticalRelId" />
+                <ScalarProperty Name="RuleClientId" ColumnName="RuleClientId" />
+                <ScalarProperty Name="RuleVerticalId" ColumnName="RuleVerticalId" />
+                <ScalarProperty Name="RuleVCLRelId" ColumnName="RuleVCLRelId" />
+                <ScalarProperty Name="QuestionId" ColumnName="QuestionId" />
+                <ScalarProperty Name="Units" ColumnName="Units" />
+                <ScalarProperty Name="UnitTypeId" ColumnName="UnitTypeId" />
+                <ScalarProperty Name="QualifyingRule" ColumnName="QualifyingRule" />
+                <ScalarProperty Name="QualifyingType" ColumnName="QualifyingType" />
+                <ScalarProperty Name="QualifyingTypeId" ColumnName="QualifyingTypeId" />
+                <ScalarProperty Name="QualifyingRuleId" ColumnName="QualifyingRuleId" />
+                <ScalarProperty Name="InputRuleRelId" ColumnName="InputRuleRelId" />
+                <ScalarProperty Name="ParentClientInputTypeRelId" ColumnName="ParentClientInputTypeRelId" />
+                <ScalarProperty Name="OptionSortOrder" ColumnName="OptionSortOrder" />
+                <ScalarProperty Name="OptionValue" ColumnName="OptionValue" />
+                <ScalarProperty Name="OptionId" ColumnName="OptionId" />
+                <ScalarProperty Name="InputType" ColumnName="InputType" />
+                <ScalarProperty Name="InputTypeId" ColumnName="InputTypeId" />
+                <ScalarProperty Name="InputTypeRelId" ColumnName="InputTypeRelId" />
+                <ScalarProperty Name="ClientInputTypeRelId" ColumnName="ClientInputTypeRelId" />
+                <ScalarProperty Name="OfficeLocationId" ColumnName="OfficeLocationId" />
+                <ScalarProperty Name="ClientVerticalRelId" ColumnName="ClientVerticalRelId" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="VerticalId" ColumnName="VerticalId" />
+                <ScalarProperty Name="VCLRelId" ColumnName="VCLRelId" />
+                <ScalarProperty Name="ClientRelId" ColumnName="ClientRelId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="v_QuesQualifyingRules">
+            <EntityTypeMapping TypeName="CRM.Domain.v_QuesQualifyingRules">
+              <MappingFragment StoreEntitySet="v_QuesQualifyingRules">
+                <ScalarProperty Name="QuestionId" ColumnName="QuestionId" />
+                <ScalarProperty Name="Units" ColumnName="Units" />
+                <ScalarProperty Name="UnitTypeId" ColumnName="UnitTypeId" />
+                <ScalarProperty Name="QualifyingRule" ColumnName="QualifyingRule" />
+                <ScalarProperty Name="QualifyingType" ColumnName="QualifyingType" />
+                <ScalarProperty Name="QualifyingTypeId" ColumnName="QualifyingTypeId" />
+                <ScalarProperty Name="QualifyingRuleId" ColumnName="QualifyingRuleId" />
+                <ScalarProperty Name="InputRuleRelId" ColumnName="InputRuleRelId" />
+                <ScalarProperty Name="ParentClientInputTypeRelId" ColumnName="ParentClientInputTypeRelId" />
+                <ScalarProperty Name="InputTypeId" ColumnName="InputTypeId" />
+                <ScalarProperty Name="InputTypeRelId" ColumnName="InputTypeRelId" />
+                <ScalarProperty Name="ClientInputTypeRelId" ColumnName="ClientInputTypeRelId" />
+                <ScalarProperty Name="OfficeLocationId" ColumnName="OfficeLocationId" />
+                <ScalarProperty Name="ClientVerticalRelId" ColumnName="ClientVerticalRelId" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="VerticalId" ColumnName="VerticalId" />
+                <ScalarProperty Name="VCLRelId" ColumnName="VCLRelId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="v_QuesRulesAndFilters">
+            <EntityTypeMapping TypeName="CRM.Domain.v_QuesRulesAndFilters">
+              <MappingFragment StoreEntitySet="v_QuesRulesAndFilters">
+                <ScalarProperty Name="QuestionId" ColumnName="QuestionId" />
+                <ScalarProperty Name="FilterValue" ColumnName="FilterValue" />
+                <ScalarProperty Name="FilterTypeId" ColumnName="FilterTypeId" />
+                <ScalarProperty Name="Units" ColumnName="Units" />
+                <ScalarProperty Name="UnitTypeId" ColumnName="UnitTypeId" />
+                <ScalarProperty Name="QualifyingRule" ColumnName="QualifyingRule" />
+                <ScalarProperty Name="QualifyingType" ColumnName="QualifyingType" />
+                <ScalarProperty Name="QualifyingTypeId" ColumnName="QualifyingTypeId" />
+                <ScalarProperty Name="QualifyingRuleId" ColumnName="QualifyingRuleId" />
+                <ScalarProperty Name="InputRuleRelId" ColumnName="InputRuleRelId" />
+                <ScalarProperty Name="ParentClientInputTypeRelId" ColumnName="ParentClientInputTypeRelId" />
+                <ScalarProperty Name="InputTypeId" ColumnName="InputTypeId" />
+                <ScalarProperty Name="InputTypeRelId" ColumnName="InputTypeRelId" />
+                <ScalarProperty Name="ClientInputTypeRelId" ColumnName="ClientInputTypeRelId" />
+                <ScalarProperty Name="OfficeLocationId" ColumnName="OfficeLocationId" />
+                <ScalarProperty Name="ClientVerticalRelId" ColumnName="ClientVerticalRelId" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="VerticalId" ColumnName="VerticalId" />
+                <ScalarProperty Name="VCLRelId" ColumnName="VCLRelId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="v_QuestionInputs">
+            <EntityTypeMapping TypeName="CRM.Domain.v_QuestionInputs">
+              <MappingFragment StoreEntitySet="v_QuestionInputs">
+                <ScalarProperty Name="ParentClientInputTypeRelId" ColumnName="ParentClientInputTypeRelId" />
+                <ScalarProperty Name="OptionSortOrder" ColumnName="OptionSortOrder" />
+                <ScalarProperty Name="OptionValue" ColumnName="OptionValue" />
+                <ScalarProperty Name="OptionId" ColumnName="OptionId" />
+                <ScalarProperty Name="InputType" ColumnName="InputType" />
+                <ScalarProperty Name="InputTypeId" ColumnName="InputTypeId" />
+                <ScalarProperty Name="InputTypeRelId" ColumnName="InputTypeRelId" />
+                <ScalarProperty Name="ClientInputTypeRelId" ColumnName="ClientInputTypeRelId" />
+                <ScalarProperty Name="OfficeLocationId" ColumnName="OfficeLocationId" />
+                <ScalarProperty Name="ClientVerticalRelId" ColumnName="ClientVerticalRelId" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="VerticalId" ColumnName="VerticalId" />
+                <ScalarProperty Name="VCLRelId" ColumnName="VCLRelId" />
+                <ScalarProperty Name="ClientRelId" ColumnName="ClientRelId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="v_Dispositions">
+            <EntityTypeMapping TypeName="CRM.Domain.v_Dispositions">
+              <MappingFragment StoreEntitySet="v_Dispositions">
+                <ScalarProperty Name="NotQualifiedDefault" ColumnName="NotQualifiedDefault" />
+                <ScalarProperty Name="DispositionType" ColumnName="DispositionType" />
+                <ScalarProperty Name="DispositionTypeId" ColumnName="DispositionTypeId" />
+                <ScalarProperty Name="QuestionId" ColumnName="QuestionId" />
+                <ScalarProperty Name="Disposition" ColumnName="Disposition" />
+                <ScalarProperty Name="DispositionId" ColumnName="DispositionId" />
+                <ScalarProperty Name="VerticalIdFlags" ColumnName="VerticalIdFlags" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="v_Verticals">
+            <EntityTypeMapping TypeName="CRM.Domain.v_Verticals">
+              <MappingFragment StoreEntitySet="v_Verticals">
+                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+                <ScalarProperty Name="VerticalTypeName" ColumnName="VerticalTypeName" />
+                <ScalarProperty Name="VerticalTypeId" ColumnName="VerticalTypeId" />
+                <ScalarProperty Name="CreatedTime" ColumnName="CreatedTime" />
+                <ScalarProperty Name="VerticalName" ColumnName="VerticalName" />
+                <ScalarProperty Name="VerticalId" ColumnName="VerticalId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="v_VerticalUsers">
+            <EntityTypeMapping TypeName="CRM.Domain.v_VerticalUsers">
+              <MappingFragment StoreEntitySet="v_VerticalUsers">
+                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+                <ScalarProperty Name="UserVerticalEnabled" ColumnName="UserVerticalEnabled" />
+                <ScalarProperty Name="UserVerticalRelId" ColumnName="UserVerticalRelId" />
+                <ScalarProperty Name="VerticalTypeName" ColumnName="VerticalTypeName" />
+                <ScalarProperty Name="VerticalTypeId" ColumnName="VerticalTypeId" />
+                <ScalarProperty Name="VerticalName" ColumnName="VerticalName" />
+                <ScalarProperty Name="VerticalId" ColumnName="VerticalId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CustomerStrollHealth">
+            <EntityTypeMapping TypeName="CRM.Domain.CustomerStrollHealth">
+              <MappingFragment StoreEntitySet="CustomerStrollHealth">
+                <ScalarProperty Name="UpdatedTime" ColumnName="UpdatedTime" />
+                <ScalarProperty Name="CreatedTime" ColumnName="CreatedTime" />
+                <ScalarProperty Name="exUpdatedTime" ColumnName="exUpdatedTime" />
+                <ScalarProperty Name="exCreatedTime" ColumnName="exCreatedTime" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="false" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

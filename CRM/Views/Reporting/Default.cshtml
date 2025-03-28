@@ -1,0 +1,50 @@
+﻿@{
+    string report = ViewBag.Report;
+    int forceNoCache = Guid.NewGuid().GetHashCode();
+    ViewBag.Title = "Reporting";
+    @section ReportingCSS {  
+        <link rel="stylesheet" href="~/Scripts/jqGrid-4.6.0/css/ui.jqgrid.css" />
+    }
+    
+    @section ReportingJS {
+        <script type="text/javascript" src="~/Scripts/jqGrid-4.6.0/js/jquery.jqGrid.min.js"></script>    
+        <script type="text/javascript" src="~/Scripts/jqGrid-4.6.0/js/i18n/grid.locale-en.js"></script>
+        <script type="text/javascript" src="~/Scripts/reporting.js?@forceNoCache"></script>
+    }
+}
+<div class="jumbotron">
+    <div class="container reporting">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Reporting</h2>
+                <div class="row filter">
+                    <div class="col-md-3">
+                        <div class="input-daterange">
+                            <input type="text" class="input-small" readonly="">
+                            <label class="add-on"> - to - </label>
+                            <input type="text" class="input-small" readonly="">
+                        </div>
+                        
+                    </div>
+                    <div class="col-md-2">
+                        <label>
+                            Lead Type
+                            <select id="leadType">
+                                <option value="0">Any</option>
+                                <option value="1">Form Leads</option>
+                                <option value="2">Calls Leads</option>
+                                <option value="3">Facebook</option>
+                                <option value="4">Unknown</option>
+                            </select>
+                            
+                        </label>
+                    </div>
+                </div>
+                <div id="jqgrid" data-report="@report">
+                    <table id="reportingGrid"></table>
+                    <div id="gridpager"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,32 @@
+﻿@using CRM.Domain
+@model Customer
+<div class="modal fade modal-five9" tabindex="-1" role="dialog" aria-labelledby="" data-backdrop="static" data-redirect="/user/path/thankyou/customerupdate">
+    <div class="vertical-align">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header bg-primary">
+					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+					<h4 class="modal-title">Please remember to enter the following information into Five9</h4>
+				</div>
+				<div class="modal-body text-primary bg-info">
+					<div class="row">
+						<ul class="none">
+							<li class="Primary"><strong>Primary</strong> : @Model.Phone.FormatPhone()</li>
+							<li class="FirstName"><strong>First Name</strong> : @Model.FirstName</li>
+							<li class="LastName"><strong>Last Name</strong> : @Model.LastName</li>
+							<li class="CompanyName"><strong>Company Name</strong> : @Model.CompanyName</li>
+							<li class="City"><strong>City</strong> : @Model.City</li>
+							<li class="State"><strong>State</strong> : @Model.StateAbbr</li>
+							<li class="Zip"><strong>Zip</strong> : @Model.ZipCode</li>
+							<li class="Email"><strong>Email</strong> : @Model.Email</li>
+							<li class="InsuranceType"><strong>Insurance Type</strong> : @Model.HealthInsurance</li>
+						</ul>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

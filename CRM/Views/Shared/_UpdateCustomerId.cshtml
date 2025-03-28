@@ -1,0 +1,11 @@
+﻿@{ 
+    int? customerId = ViewBag.CustomerId;
+}
+
+@if(customerId != null) {
+<script type="text/javascript">
+    (function ($) {
+        $('#UserId').val('@customerId');
+    })(jQuery);
+</script>
+}

@@ -1,0 +1,84 @@
+﻿@model CRM.Models.LoginModel
+@{
+    string actionUrl = String.Format("/ajax/validatelogin/" + Request.Url.Query);
+    AjaxOptions options = new AjaxOptions { HttpMethod = "POST", OnSuccess = "successRedirect", OnFailure = "PostFailure", Url = actionUrl };
+}
+<script type="text/javascript">
+    $(document).ready(function () {
+        var currentpage = $(location).attr('pathname');
+        $(".video-background").remove();
+        $('.default-container').addClass('hover');
+        $('dl').toggle();
+        $('h2').bind('click', function (event) {
+            event.preventDefault();
+            $(this).next('dl').slideToggle(500, function () {
+                $('.video-background').videobackground('resize');
+            });
+        });
+
+        if (currentpage == "/") {   
+            $('body').prepend('<div class="video-background"></div>');
+            $('.video-background').videobackground({
+                videoSource: [['/Content/video/bck_home.mp4', 'video/mp4']],
+                controlPosition: '#main',
+                loop: true,
+                poster: '/content/images/bck_home.png',
+                loadedCallback: function () {
+                    $(this).videobackground('mute');
+                }
+            });
+        }
+    });
+</script>
+<div class="modal fade modal-login" tabindex="-1" role="dialog" aria-labelledby="Contact Information" aria-hidden="true">
+    <div class="vertical-align">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+					<h4 class="modal-title">@Html.Raw(ViewBag.ModalTitleCopy)</h4>
+				</div>
+				<div class="modal-body">
+					@Html.Raw(ViewBag.ModalCopy)
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="jumbotron">
+    <div class="container">
+        <p class="logo">
+            @*<img src="~/Content/Images/hme_spine_logo.png" />*@
+            <div class="login jumboImage"></div>
+        </p>
+    </div>
+</div>
+
+<div class="container">
+    <div id="login" class="row">
+        @using (Ajax.BeginForm(null, null, options, new { @class = "form-horizontal" })) {
+            <fieldset>
+            <legend>Network Portal Login:<span>&nbsp;</span><button type="button" data-toggle="modal" data-target=".modal-login" class="info-button">?</button> <span class="requieredCopy">"*" Denotes a required field.</span></legend> 
+                <div class="form-group">
+                    <div class="col-md-6">
+                        @Html.TextBoxFor(model => model.UserName, new {@class = "form-control", @placeholder = "UserName *", @Name = "username"})
+                    </div>
+                    <div class="col-md-6">
+                        @Html.PasswordFor(model => model.Password, new {@class = "form-control", @placeholder = "Password *", @Name = "password"})
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-12">
+                       <button id="btn-fbsignup" type="submit" class="btn btn-primary pull-right btn-lg"><span class="glyphicon glyphicon-user"></span> Login Into MedicalNetworkPortal.com</button>
+                    </div>
+                </div>
+            </fieldset>
+        }
+    </div>
+</div> 
+
+

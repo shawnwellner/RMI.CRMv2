@@ -1,0 +1,10 @@
+﻿@using CRM.Models
+@using CRM.Domain
+@model List<Question<InputModel>>
+@{
+    foreach (Question<InputModel> ques in Model) {
+        @Html.Partial("_Question", ques)
+    }
+}
+
+

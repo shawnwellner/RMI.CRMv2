@@ -1,0 +1,45 @@
+﻿@using CRM;
+@using CRM.Domain;
+
+@{ 
+    LoginUser user = ViewBag.CurrentUser ?? LoginUser.CurrentUser;
+    int forceNoCache = Guid.NewGuid().GetHashCode();
+}
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?@forceNoCache" />
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/css/bootstrap.min.css" />
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/css/bootstrap-theme.min.css" />
+<link href="~/Content/Styles/datepicker3.css" rel="stylesheet" />
+<link href="~/Content/Styles/jquery-timepicker.css" rel="stylesheet" />
+<link href="~/Content/Styles/datepicker3.less" rel="stylesheet/less" />
+<link rel="stylesheet" href="~/Content/Styles/site.css?@forceNoCache" />
+
+
+@if(user != null && user.VerticalSelected) {
+<link id="vertCSS" rel="stylesheet" href="~/Content/Styles/@user.VerticalTheme" />
+}
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/webfont/1.5.3/webfont.js"></script>
+
+<script type="text/javascript" src="~/Scripts/moment.js"></script>
+<script type="text/javascript" src="~/Scripts/bootstrap-datepicker.js"></script>
+<script type="text/javascript" src="~/Scripts/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript" src="~/Scripts/bootstrap3-typeahead.min.js"></script>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.1/jquery.validate.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.3/jquery.validate.unobtrusive.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.3.1/jquery.maskedinput.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/signalr.js/2.2.0/jquery.signalR.min.js"></script>
+<script src="/signalr/hubs"></script>
+<script src="~/Scripts/websockets.js?@forceNoCache"></script>
+<script src="~/Scripts/exmethods.js?@forceNoCache"></script>
+<script src="~/Scripts/script.js?@forceNoCache"></script>
+<script src="~/Scripts/jquery.videobackground.js"></script>

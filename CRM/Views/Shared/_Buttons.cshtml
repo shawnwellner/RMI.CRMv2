@@ -1,0 +1,56 @@
+﻿@using CRM.Domain;
+@model LoginUser
+<div id="options" class="row">
+    @if(Model.UserType == CRM.Domain.UserTypes.Administrator){
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h2>Client Records</h2>
+                    <p>-Click “create” to enter a new client record.<br/>
+                        -Click “Search” to search for existing clients.</p>
+                    <p class="text-center">
+                        <a class="btn btn-primary btn-lg" href="~/user/create/client" role="button"><span class="glyphicon glyphicon-user"></span> Create &raquo;</a> | 
+                        <a class="btn btn-info btn-lg" href="~/user/search/client" role="button"><span class="glyphicon glyphicon-search"></span> Search &raquo;</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    } 
+    @if (Model.IsRmiUser) {
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h2>Patient Records</h2>
+                    <p>-Click “create” to enter a new record, typically a inbound call.<br/>
+                        -Click “Search” to search for an existing record for an outbound call and callback.</p>
+                    <p class="text-center">
+                        <a class="btn btn-primary btn-lg" href="~/user/create/customer" role="button"><span class="glyphicon glyphicon-user"></span> Create &raquo;</a> | 
+                        <a class="btn btn-info btn-lg" href="~/user/search/customer" role="button"><span class="glyphicon glyphicon-search"></span> Search &raquo;</a>
+                    </p>
+                    @if (Model.UserRole == UserRoles.Administrator) {
+                        <p class="text-center">
+                            <a class="btn btn-danger btn-lg" href="http://cpareports.rmiatl.info" target="_blank" role="button">
+                                <span class="glyphicon glyphicon-book"></span> Reporting &raquo;
+                            </a>
+                        </p>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+    @if (Model.UserRole == UserRoles.Administrator || Model.UserRole == UserRoles.AuthLevel1) {
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h2>Call Center Records</h2>
+                    <p>-Click “create” to enter a new call center account.<br/>
+                        -Click “Search” to search for existing call center accounts.</p>
+                    <p class="text-center">
+                        <a class="btn btn-primary btn-lg" href="~/user/create/callcenteruser" role="button"><span class="glyphicon glyphicon-user"></span> Create &raquo;</a> | 
+                        <a class="btn btn-info btn-lg" href="~/user/search/callcenteruser" role="button"><span class="glyphicon glyphicon-search"></span> Search &raquo;</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    }
+</div>

@@ -1,0 +1,23 @@
+﻿@using CRM.Domain;
+@model CRM.Domain.LoginUser
+@{
+    string actionUrl = String.Format("/ajax/customercreate/" + ViewBag.Querystring);
+    AjaxOptions options = new AjaxOptions { HttpMethod = "POST", OnSuccess = "onFormSubmitSuccess", OnFailure = "PostFailure", Url = actionUrl };
+    LoginUser user = ViewBag.CurrentUser ?? LoginUser.CurrentUser;
+}
+<!-- Main jumbotron for a primary marketing message or call to action -->
+<div class="jumbotron">
+    <div class="container-fluid">
+        <h2>Congratulations! </h2>
+        <h1>@ViewBag.ThankYouCopy</h1>
+        <h2> To continue creating users please choose from the user types below.</h2>
+    </div>
+</div>
+
+<div class="container-fluid">
+    @Html.Partial("_Buttons", user)
+</div>
+
+
+
+

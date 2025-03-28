@@ -1,0 +1,122 @@
+﻿/*--- Theme Bootstrap override -----*/
+body {
+    background-color: #fff2dd;
+}
+.jumbotron {
+    background-color: #fff2dd;
+    padding-bottom: 0px;
+    margin-bottom: 25px;
+}
+
+.dropdown {
+    margin-top: -5px;
+    position: relative;
+}
+
+/*--- top bar navagation ---*/
+.navbar-inverse {
+    background-image: linear-gradient(to bottom, #3478bd 0px, #007fff 100%);
+    background-repeat: repeat-x;
+}
+
+.navbar-inverse {
+    background-color: #007fff;
+    border-color: #183274;
+}
+
+.navbar-inverse .navbar-brand {
+    color: #B1DAEE;
+}
+
+/*--- footer ---*/
+.footer {
+    background-color: #fad8a0;
+    color: #b7701d;
+}
+
+legend {
+    color: #c1a77b;
+}
+
+.btn-primary {
+    background-image: linear-gradient(to bottom, #004e85 0px, #0384de 100%);
+    background-repeat: repeat-x;
+    border-color: #0384de;
+    color: #B1DAEE;
+}
+
+.btn-primary:hover, .btn-primary:focus {
+    background-image: linear-gradient(to bottom, #B1DAEE 0px, #0384de 100%);
+    background-repeat: repeat-x;
+    border-color: #004e85; 
+    color: #004e85;
+    background-position: 0 0;
+}
+
+
+.btn-info {
+    background-image: linear-gradient(to bottom, #fff2dd 0px, #ecae76 100%);
+    background-repeat: repeat-x;
+    border-color: #a16f42;
+    color: #a16f42;
+    background-position: 0 0;
+}
+
+.btn-info:hover, .btn-info:focus {
+    background-image: linear-gradient(to bottom, #a16f42 0px, #ecae76 100%);
+    background-repeat: repeat-x;
+    border-color: #a16f42;
+    color: #fff2dd;
+    background-position: 0 0;
+}
+
+.btn-warning {
+    background-image: linear-gradient(to bottom, #d2df95 0px, #8ea71b 100%);
+    background-repeat: repeat-x;
+    border-color: #47530e;
+    color: #47530e;
+}
+
+.btn-warning:hover, btn-warning:focus  {
+    background-image: linear-gradient(to bottom, #758819  0px, #d2df95 100%);
+    background-repeat: repeat-x;
+    border-color: #444f10;
+    color: #444f10;
+    background-position: 0 0;
+}
+
+
+
+/*-- Panels tops ----*/
+.panel-info > .panel-heading {
+    background-image: linear-gradient(to bottom, #fad8a0  0px, #fad8a0 100%);
+    background-repeat: repeat-x;
+}
+
+.panel-info > .panel-heading {
+    background-color: #fad8a0;
+    border-color: #a47a54;
+    color: #a47a54;
+}
+
+.panel-default {
+    border-color: #fff;
+}
+
+.panel-info {
+    border-color: #dfccb7;
+}
+
+.panel-body
+
+
+
+
+/*--- Pop Up colors --*/
+.bg-info {
+    background-color: #FFDFBA;
+}
+
+.text-primary {
+    color: #764814;
+}

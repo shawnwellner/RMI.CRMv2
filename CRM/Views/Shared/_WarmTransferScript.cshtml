@@ -1,0 +1,77 @@
+﻿@using CRM.Domain
+@using CRM.Models
+@model CustomerTransferModel
+@{
+    AjaxOptions options = new AjaxOptions { HttpMethod = "POST", OnSuccess = "handleResponse", OnFailure = "PostFailure", Url = "transferCustomer" };
+    LoginUser user = LoginUser.CurrentUser;
+    string custInfo = string.Format("{0} {1} {2}", Model.Customer.FirstName, Model.Customer.LastName, Model.Customer.Phone.FormatPhone());
+}
+<br />
+<div class="transfer-script col-md-12">
+    <div class="form-group">
+        @Html.TextBoxFor(model => model.Customer.PatientCoordName, new { @class = "form-control required", placeholder = "Patient Coordinator Name" })
+    </div>
+    <div class="form-group">
+        @Html.TextAreaFor(model => model.Customer.Notes, new { @class = "form-control", placeholder = "Customer Notes" })
+    </div>
+    <p>
+        Hi, this is <strong>@user.FullName</strong> with Back Pain Centers of America.  I have <strong>@Model.Customer.FirstName</strong> on the other line who is suffering from chronic back pain and
+        would like to talk to you about the procedures you offer.<br />
+        <br />
+        Do I have permission to transfer him/her to you?<br />
+    </p>
+    <div class='btn-group col-md-6' data-toggle='buttons'>
+        <div class='col-md-2'>
+            <button type='button' class='btn btn-primary warm-transfer yes' value='true'>
+                <i>Yes</i>
+            </button>
+        </div>
+        <div class='col-md-4'>
+            <button type='button' class='btn btn-primary warm-transfer no'>
+                <i>No</i>
+            </button>
+        </div>
+        @if(Model.AllowEmailTransfer) {
+        <div class='pull-right'>
+            <button type='button' class='btn btn-info warm-transfer email' value="email">
+                <i>Send Email</i>
+            </button>
+        </div>
+        }
+    </div>
+    <div class="col-md-12">
+        <br />
+        <div class='warm-transfer-yes hidden'>
+            <p>
+                &nbsp;&nbsp;&nbsp;Great.  Before I do that you should find his/her name in your [system].  I can wait a moment while you access the patient's information.<br />
+                <i>[Give First Name, Last Name, and/or Phone Number]</i><br /><strong>@custInfo</strong><br />
+                <br />
+                &nbsp;&nbsp;&nbsp;Great, you should find all his/her information in by logging into backportal.com/client.  I can wait while you access that. If you don't have the username and password, I can give it to you.
+                <i>[Give username and password]</i><br />
+                <i>[Give First Name, Last Name, and/or Phone Number]</i><br /><strong>@custInfo</strong><br />
+                <br />
+                &nbsp;&nbsp;&nbsp;Okay, let me go ahead and transfer Mr./Mrs. <strong>@Model.Customer.LastName</strong> over to you.  Just a second.<br />
+                <br />
+                &nbsp;&nbsp;&nbsp;Mr./Mrs. <strong>@Model.Customer.LastName</strong>, I have <i>[client associate name]</i> at <strong>@Model.CompanyName</strong> who can further assistance you with your back pain.
+                If there are no other questions for me, <i>[client associate name]</i> will take it from here.<br />
+                <br />
+                &nbsp;&nbsp;&nbsp;Thank you.<br />
+            </p>
+        </div>
+        <p class='hidden'>
+            If No:<br />
+            <br />
+            &nbsp;&nbsp;&nbsp;Well <strong>@Model.Customer.FirstName</strong> has already been qualified and meet your internal requirements for possible surgery.  Let me go ahead and connect him/her with you.<br />
+        </p>
+        <div class='warm-transfer-no hidden'>
+            <p>&nbsp;&nbsp;&nbsp;No problem.  I understand you do not want to accept this qualified patient. Thank you for your time.</p>
+            <br />
+            <div class="form-group">
+                <div class="typeahead dropup">
+                    @Html.TextBoxFor(model => model.Customer.Disposition, new { @class = "form-control", data_provide = "typeahead", autocomplete = "off", source = "Dispositions", placeholder = "- Select Disposition -" })
+                </div>
+                @*Html.DropDownListFor(model => model.Customer.DispositionId, CustomerFormModel.GetListofDispositions(1), new { @class = "form-control required" })*@
+            </div>
+        </div>
+    </div>
+</div>

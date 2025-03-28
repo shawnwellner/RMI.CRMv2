@@ -1,0 +1,23 @@
+﻿<div class="modal fade modal-dispositions" tabindex="-1" role="dialog" aria-labelledby="Dispositions" aria-hidden="true" data-keyboard="false" data-backdrop="static" append-form="true">
+    <div class="vertical-align">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+					<h4 class="modal-title">Please Select Disposition</h4>
+				</div>
+				<div class="modal-body text-primary bg-info">
+					<div class="typeahead">
+						@Html.TextBox("Disposition", null, new { @class = "form-control", data_provide="typeahead", autocomplete = "off", source="Dispositions", placeholder="- Select Disposition -" })
+					</div>
+
+					@*Html.DropDownList("DispositionId", CustomerFormModel.GetListofDispositions(dispositionTypeId), new { @class = "form-control" })*@
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary submit" data-ajax-url="CustomerUpdate" data-ajax-success="successRedirect">Save</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

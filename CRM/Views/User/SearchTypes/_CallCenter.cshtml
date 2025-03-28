@@ -1,0 +1,37 @@
+﻿<div id="callacenterSearchResults" class="panel panel-info" ng-app="callcenter" ng-controller="search">
+    <div class="panel-heading">
+        <div class="panel-title"> @ViewBag.VerticalName Network : Call Center Search Results <button type="button" class="btn exportcsv btn-success pull-right btn-lg" ng-disabled="!ListOfUsers"><span class="excelicon"></span> Export</button></div>
+    </div>
+    <div class="panel-group" id="table">
+        <div>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>UserId</th>
+                        <th>Agent Name</th>
+                        <th>Phone</th>
+                        <th>User Type</th>
+                        <th>Five9AgentId</th>
+                        <th>Create Date</th>
+                        <th>Enabled</th>
+                        <th>Update</th>
+                    </tr>
+                </thead>
+                <tbody id="callcenterResults">
+                    <tr ng-if="!ListOfUsers" class="bg-danger no-records"><td colspan="12">No Records Found</td></tr>
+                    <tr id="{{ user.UserId }}" ng-if="ListOfUsers" ng-repeat="user in ListOfUsers">
+                        <td>{{ user.UserId }}</td>
+                        <td><a href="mailto:{{ user.Email }}">{{ user.LastName }}, {{ user.FirstName  }}</a></td>
+                        <td>{{ user.Phone.formatPhoneNumber() }}</td>
+                        <td>{{ user.UserType }}</td>
+                        <td>{{ user.Five9AgentId }}</td>
+                        <td>{{ user.CreatedTime.format('M/d/yyyy h:mm:ss tt') }}</td>
+                        <td><input type="checkbox" ng-checked="user.Enabled" disabled /></td>
+                        <td><a href='/user/update/callcenteruser/{{ user.UserId }}' class='btn btn-primary btn-sm' type='button'><span class='glyphicon glyphicon-edit'></span> Modify Manager / Associate</a></td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

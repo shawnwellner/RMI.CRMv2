@@ -1,0 +1,44 @@
+﻿@using CRM.Domain
+@using CRM.Models
+@model ClientAnswerModel 
+@{ AjaxOptions options = new AjaxOptions { HttpMethod = "POST", OnSuccess = "handleResponse", OnFailure = "PostFailure", Url = "UpdateClientAnswers" }; }
+<div class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="vertical-align">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+					<h4 class="modal-title">@Model.CompanyName Specific Questions</h4>
+				</div>
+				<div class="modal-body">
+					@using (Ajax.BeginForm(null, null, options, new { @class = "form-horizontal form-client-questions" })) {
+						<div class="question-container">
+						@foreach (Question<InputModel> ques in Model.ListOfQuestions) {
+							@Html.Partial("_Question", ques)
+						}
+						</div>
+						@Html.HiddenFor(model => model.Customer.CustomerId)
+						@Html.HiddenFor(model => model.Customer.FirstName)
+						@Html.HiddenFor(model => model.Customer.LastName)
+						@Html.HiddenFor(model => model.Customer.Phone)
+						@Html.HiddenFor(model => model.Customer.Email)
+						@Html.HiddenFor(model => model.Customer.City)
+						@Html.HiddenFor(model => model.Customer.StateAbbr)
+						@Html.HiddenFor(model => model.Customer.ZipCode)
+						@Html.HiddenFor(model => model.Customer.Notes)
+						@Html.HiddenFor(model => model.Customer.DispositionId)
+						@Html.HiddenFor(model => model.Customer.HealthInsurance)
+						@Html.HiddenFor(model => model.CompanyName)
+						@Html.HiddenFor(model => model.ClientId)
+						@Html.HiddenFor(model => model.ClientVerticalRelId)
+						@Html.HiddenFor(model => model.OfficeLocationId)
+					}
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary submit">Validate</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

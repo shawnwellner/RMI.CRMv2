@@ -1,0 +1,42 @@
+﻿@model CRM.Models.ClientFormModel
+@{
+    int startIndex = ViewBag.StartIndex ?? 0;   
+}
+
+@for (var i = startIndex; i < Model.LoginUsers.Count; i++) {
+    @Html.HiddenFor(model => model.LoginUsers[i].UserId);
+<div class="form-group">
+    <div class="col-md-6">
+        @Html.TextBoxFor(model => model.LoginUsers[i].FirstName, new { @class = "form-control", @placeholder = "First Name *" })
+    </div>
+    <div class="col-md-6">
+        @Html.TextBoxFor(model => model.LoginUsers[i].LastName, new { @class = "form-control", @placeholder = "Last Name *" })
+    </div>
+</div> 
+<div class="form-group">
+    <div class="col-md-6">
+        @Html.TextBoxFor(model => model.LoginUsers[i].Email, new { @class = "form-control", @placeholder = "Email Address *" })
+    </div>
+    <div class="col-md-6">
+        @Html.TextBoxFor(model => model.LoginUsers[i].Phone, new { @class = "form-control", @placeholder = "Phone Number" })
+    </div>
+</div> 
+<div class="form-group">
+    <div class="col-md-6">
+        @Html.TextBoxFor(model => model.LoginUsers[i].UserName, new { @class = "form-control", @placeholder = "UserName *" })
+    </div>
+    <div class="col-md-6 checkbox pad-left-42">
+        <label>Enabled @Html.CheckBoxFor(model => model.LoginUsers[i].Enabled, new { @tabindex = "-1" })</label>
+    </div>
+</div>
+<div class="form-group">
+    <div class="col-md-6">
+        @Html.PasswordFor(model => model.LoginUsers[i].Password, new { @class = "form-control", @placeholder = "Password *", @Value = Model.LoginUsers[i].Password })
+        <button class="btn togglePassword" tabindex="-1" title="Show Password"><span class="glyphicon glyphicon-eye-open"></span></button>
+    </div>
+    <div class="col-md-6">
+        @Html.PasswordFor(model => model.LoginUsers[i].ConfirmPassword, new { @class = "form-control", @placeholder = "Confirm Password *", @Value = Model.LoginUsers[i].Password })
+    </div>
+</div>
+<hr />
+}

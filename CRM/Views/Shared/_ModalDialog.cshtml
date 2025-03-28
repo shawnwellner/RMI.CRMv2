@@ -1,0 +1,94 @@
+﻿@using CRM;
+@using CRM.Models;
+@using CRM.Domain;
+@using CRM.Domain.CustomExceptions;
+
+@model DialogTypes
+@{
+	LoginUser user = LoginUser.CurrentUser;
+	string id = "generic-dialog";
+	string title = "Oops...";
+	string headerClass = "bg-danger";
+	string dialogClass = "";
+	string logo = "";
+	string redirect = "";
+	string scrollable = "";
+	Exception ex = null;
+	switch (Model) {
+		case DialogTypes.Validation:
+			//new { id="validationDialog", , body="" }
+			id = "validationDialog";
+			dialogClass = "modal-lg";
+			break;
+		case DialogTypes.PrescriptionRefills:
+			headerClass = "bg-primary";
+			title = "Prescription Refills";
+			break;
+		case DialogTypes.StrollHealth:
+			headerClass = "";
+			logo = "/Content/Images/StrollHealthLogo.png";
+			title = "";
+			redirect = "/user/path/thankyou/customerupdate";
+			break;
+		case CRM.Models.DialogTypes.Error:
+			id = "errorDialog";
+			title = "Oops....";
+			headerClass = "bg-error";
+			dialogClass = user.DevAdmin ? "modal-lg" : "modal -md";
+			ex = ViewBag.Exception;
+			scrollable = "scrollable";
+			break;
+	}
+}
+
+<div id="@id" class="modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" data-redirect="@redirect">
+    <div class="vertical-align">
+		<div class="modal-dialog @dialogClass">
+			<div class="modal-content">
+				<div class="modal-header @headerClass">
+					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+					@if(logo.HasValue()) {
+					<img src="@logo" width="100" />
+					}
+					<h2 class="modal-title">@title</h2>
+				</div>
+				<div class="modal-body text-primary @scrollable">
+					@switch (Model) {
+						case DialogTypes.StrollHealth:
+							<h4>
+								This patient's information was sent to Stroll Health because they did not hava a current MRI.
+							</h4>
+							break;
+							case DialogTypes.PrescriptionRefills:
+							<h4>
+								If you are seeking prescription drug refills, please note our physicians strive to treat the
+								condition and do not prescribe drugs to correct conditions that may need surgical intervention
+								or a minimally invasive procedure.
+							</h4>
+							break;
+							case DialogTypes.Error:
+							<div class="jumbotron">
+								<div class="container bg-error">
+									<div class="error-contact">
+										@if (user.DevAdmin && !(ex is ControlledException)) {
+											<h2>An unexpected error has occured</h2>
+										}
+										<p class="error-message">
+										<p>@Html.Raw(ex.ToDetailedString(user))</p>
+										</p>
+									</div>
+								</div>
+							</div>
+							break;
+							}
+</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+@if (Model == DialogTypes.Error) {
+	@Html.Partial("_UpdateCustomerId")
+}

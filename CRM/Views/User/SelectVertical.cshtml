@@ -1,0 +1,27 @@
+﻿@using CRM;
+@using CRM.Domain;
+@{ 
+    LoginUser user = ViewBag.CurrentUser ?? LoginUser.CurrentUser;
+    IReadOnlyList<Vertical> verticals = ViewBag.VerticalList ?? user.Verticals; 
+}
+
+<!-- Main jumbotron for a primary marketing message or call to action -->
+<div class="jumbotron">
+    <div class="container">
+        <h1>Welcome @user.FirstName</h1>
+        <h2> This panel allows you to select what portal you wish to navigate to.</h2>
+    </div>
+</div>
+
+<div class="container">
+    <div class="panel">
+        <div class="panel-body">
+            <h2>Available Portals</h2>
+            <div class="btn">
+                @foreach(var vert in verticals) {
+                    <a class="btn btn-success btn-lg" href="@vert.Url" role="button"><span class="glyphicon glyphicon-globe"></span> @vert.VerticalName Network Portal</a>
+                }
+            </div>
+        </div>
+    </div>
+</div> 

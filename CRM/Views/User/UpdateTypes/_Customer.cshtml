@@ -1,0 +1,167 @@
+﻿@using CRM.Domain
+@using CRM.Models
+@model CustomerFormModel
+@{
+    AjaxOptions options = new AjaxOptions { HttpMethod = "POST", OnSuccess = "onCustFormSubmitSuccess", OnFailure = "PostFailure", Url = "/ajax/getlistofproviders/" };
+    LoginUser user = LoginUser.CurrentUser;
+    List<Vertical> verticals = user.Verticals;
+    bool canEdit = Model.Transfered != true || user.IsAdmin || user.UserType == UserTypes.CallCenterManager;
+    string saveBtnText = user.IsAdmin && Model.Transfered.ToBool() ? "Update" : "Quick Save";
+    string btnClass = user.IsAdmin && Model.Transfered.ToBool() ? "btn-quick-save btn-update" :  "btn-quick-save";
+}
+@if (!canEdit) {
+    <div id="readonly"></div>
+}
+@using (Ajax.BeginForm(null, null, options, new { @class = "form-horizontal form-customer" })) {
+    <div class="panel-body">
+		@Html.Partial("_ModalDialog", DialogTypes.Validation)
+        <div class="col-md-7">
+            <fieldset>
+                <legend class="ignore-inputcontrols">Basic Patient Information:<span class="requieredCopy">"*" Denotes a required field.</span></legend>
+                <div class="form-group">
+                    <div class="col-md-6">
+                        @Html.TextBoxFor(model => model.FirstName, new { @class = "form-control required", @placeholder = "First Name *", @OrgValue = Model.FirstName })
+                    </div>
+                    <div class="col-md-6">
+                        @Html.TextBoxFor(model => model.LastName, new { @class = "form-control required", @placeholder = "Last Name *", @OrgValue = Model.LastName })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-6">
+                        @Html.TextBoxFor(model => model.Phone, new { @class = "form-control required check-duplicate", @placeholder = "Phone Number *", @OrgValue = Model.Phone })
+                    </div>
+                    @*@<div class="col-md-6">
+                            @Html.TextBoxFor(model => model.Phone2, new { @class = "form-control", @placeholder = "Alternate Phone Number *", @Name = "phone2", @Value = Model.Phone2, @OrgValue = Model.Phone2 })
+                       </div>*@
+                </div>
+                @*
+                    <div class="form-group">
+                        <div class="col-md-6">
+                            @Html.TextBoxFor(model => model.Address, new { @class = "form-control required", @placeholder = "Address *", @Name = "address", @Value = Model.Address, @OrgValue = Model.Address })
+                        </div>
+                        <div class="col-md-6">
+                            @Html.TextBoxFor(model => model.Address2, new { @class = "form-control", @placeholder = "Address2", @Name = "address2", @Value = Model.Address2, @OrgValue = Model.Address2 })
+                        </div>
+                    </div>
+                *@
+                <div class="form-group">
+                    <div class="col-md-6">
+                        @Html.TextBoxFor(model => model.City, new { @class = "form-control required provider-lookup", @placeholder = "City *", @readonly="true", @tabindex = "-1" })
+                    </div>
+                    <div class="col-md-6">
+                        @Html.TextBoxFor(model => model.State, new { @class = "form-control required provider-lookup", @placeholder = "State *", @readonly="true", @tabindex="-1" })
+                        @*@Html.DropDownListFor(model => model.State, DetailedUser.StateDropdownList, new { @class = "form-control required  provider-lookup matchgeo", @readonly = "true" })*@
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-6">
+                        @Html.TextBoxFor(model => model.Zip, new { @class = "form-control required provider-lookup validzipcode matchgeo", @placeholder = "Zip *" })
+                    </div>
+                    <div class="col-md-6">
+                        @Html.TextBoxFor(model => model.Email, new { @class = "form-control", @placeholder = "Email Address" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-12">
+                        @Html.TextAreaFor(model => model.Notes, new { @class = "form-control", @placeholder = "User Notes" })
+                    </div>
+                </div>
+                <div class="btn-group pull-right" role="group">
+                    <button type="button" class="btn btn-info @btnClass">@saveBtnText</button>
+                </div>
+            </fieldset>
+            @if (Model.Transfered != true && verticals.Count > 1) {
+                <div class="col-md-12">
+                    <ul class="nav nav-tabs" role="tablist">
+                        @{
+                            string active = Model.VerticalId == null ? "active" : null;
+                            foreach (Vertical v in verticals) {
+                                if (active == null) {
+                                    active = v.VerticalId == Model.VerticalId ? "active" : "";
+                                }
+                                @Html.Raw(string.Format("<li verticalId='{0}' class='{2}'><a href='#Vertical{0}' role='presentation' aria-controls='Vertical{0}' role='tab' data-toggle='tab'>{1}</a></li>", v.VerticalId, v.VerticalName, active))
+                                active = Model.VerticalId == null ? "" : null;
+                            }
+                        }
+                    </ul>
+                </div>
+            }
+            <fieldset class="vertical-questions @Model.VerticalName.TryToLower()">
+                <legend>
+                    Patient Questionnaire:
+                    <span class="legend">
+                        <span class="qualified">* Qualified</span>
+                        <span class="notQualified">* Not Qualified</span>
+                    </span>
+                </legend>
+                <div class="question-container"></div>
+                @*
+                    Using an input type="hidden" does not reset on form reset, so
+                    using an input type="text" with the hidden class(display:none)
+                    will go back to the origianl value when resetting the form.
+                    These inputs get changed in javascript.
+                *@
+                @Html.TextBoxFor(model => model.ClientVerticalRelId, new { @class = "hidden" })
+                @Html.TextBoxFor(model => model.OfficeLocationId, new { @class = "hidden" })
+                @Html.TextBoxFor(model => model.VCLRelId, new { @class = "hidden" })
+                @Html.TextBoxFor(model => model.AllowEmailTransfer, new { @class = "hidden" })
+                @Html.TextBoxFor(model => model.Distance, new { @class = "hidden" })
+                @Html.TextBoxFor(model => model.NotQualified, new { @class = "hidden" })
+
+                @Html.HiddenFor(model => model.VerticalId)
+                @Html.HiddenFor(model => model.Transfered)
+                @Html.HiddenFor(model => model.UserId)
+                @Html.HiddenFor(model => model.Latitude)
+                @Html.HiddenFor(model => model.Longitude)
+                @Html.HiddenFor(model => model.FireHostLeadId)
+                @Html.HiddenFor(model => model.Five9PostQueueId)
+                @Html.HiddenFor(model => model.LeadSource)
+
+                <div style="border-top: 1px solid #ddd; padding-top: 20px" class="form-group">
+                    <div class="col-md-12">
+                        <button id="btn-fbgetProviderList" type="submit" class="btn btn-primary pull-right btn-lg"><span class="glyphicon glyphicon-th-list"></span> Get List of Providers</button>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+        <div class="col-md-5" ng-controller="listofproviders">
+            <div id="scriptText" class="hidden">
+                <div class="not-qualified">
+                    <fieldset>
+                        <legend>Customer Script:</legend>
+                        <div class="col-md-12">
+                            @Html.Raw(ContentCopy.NotQualified)
+                        </div>
+                        <div class="col-md-12">
+                            <button type="button" class="btn btn-sm btn-info pull-right not-qualified"
+                                    ng-click="updateCustomer(null, $event)">
+                                <span class="glyphicon glyphicon-thumbs-down"></span>
+                                Not Qualified
+                            </button>
+                        </div>
+                        <div class="clear"></div>
+                    </fieldset>
+                </div>
+                <div class="form-change hidden">
+                    <fieldset>
+                        <legend>Form Changed:</legend>
+                        <div class="form-group">
+                            <h3>The form changed which may result in a differant list of providers.</h3>
+                            <div class="col-md-12">
+                                <button type="button" onclick="document.getElementById('btn-fbgetProviderList').click()" class="btn btn-primary pull-right btn-lg"><span class="glyphicon glyphicon-th-list"></span> Get List of Providers</button>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+            <div id="providers" class="hidden">
+                <fieldset>
+                    <legend class="ignore-inputcontrols">
+                        List of Qualified Providers:
+                    </legend>
+                    @Html.Partial("_ProviderList")
+                </fieldset>
+            </div>
+        </div>
+    </div>
+}

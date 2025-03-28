@@ -1,0 +1,95 @@
+﻿@using CRM.Domain
+@using CRM.Models
+@model Customer
+@{
+	LoginUser user = LoginUser.CurrentUser;
+	string companyLabel = Model != null && Model.Transfered == true ? "Transfered To" : "Qualified For";
+}
+<div class="modal fade modal-customerdetails" tabindex="-1" role="dialog" aria-labelledby="CustomerData" aria-hidden="true">
+	<div class="vertical-align">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header bg-primary">
+					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+					<h4 class="modal-title">
+						@if (Model != null) {
+							<span>Customer Information for: </span><strong>@string.Format("{0} {1}", Model.FirstName, Model.LastName)</strong>
+						} else {
+							<span>Customer Not Found</span>
+						}
+					</h4>
+				</div>
+				<div class="modal-body text-primary bg-info col-md-12">
+					@if (Model != null) {
+						<div class="col-md-6">
+							<ul class="none">
+								<li><strong>First Name</strong> : @Model.FirstName</li>
+								<li><strong>City</strong> : @Model.City</li>
+								<li><strong>Zip</strong> : @Model.ZipCode</li>
+								<li><strong>Phone</strong> : @Model.Phone.FormatPhone()</li>
+								<li><strong>Created Time</strong> : @Model.CreatedTime</li>
+								<li><strong>@companyLabel</strong> : @Model.CompanyName</li>
+								<li><strong>Office Name</strong> : @Model.OfficeName</li>
+								<li><strong>Disposition</strong> : @Model.Disposition</li>
+							</ul>
+						</div>
+						<div class="col-md-6">
+							<ul class="none">
+								<li><strong>Last Name</strong> : @Model.LastName</li>
+								<li><strong>State</strong> : @Model.StateAbbr</li>
+								<li><strong>Email</strong> : @Model.Email</li>
+								<li><strong>Health Insurance</strong> : @Model.HealthInsurance</li>
+								<li><strong>Last Updated</strong> : @Model.UpdatedTime</li>
+								<li><strong>Coordinator Name</strong> : @Model.PatientCoordName</li>
+								<li><strong>Distance</strong> : @Model.Distance.Format()</li>
+								<li><strong>Transfered On</strong> : @Model.TransferDate</li>
+							</ul>
+						</div>
+						<ul class="none">
+							<li><strong>Notes</strong> : <pre class="pre-scrollable">@Model.Notes</pre></li>
+						</ul>	
+						@*if (Model.Polyline.HasValue()) {
+							<div class="col-md-4">
+								<div class="googleMap" data-polyline="@Model.Polyline"></div>
+							</div>
+						}*@
+						if (Model.ListOfQuestions != null) {
+							<div class="row">
+								@foreach (Question<QuestionInput> q in Model.ListOfQuestions) {
+									string className = Model.Transfered != true && !q.IsQualified(Model.ClientVerticalRelId, Model.OfficeLocationId) ? "bg-danger" : "";
+									<div class="col-md-12 question @className">
+										<div class="col-md-6">
+											<strong>Question @q.QuestionText</strong>
+										</div>
+										<div class="col-md-6">
+											@q.ListOfInputs.ToCommaDelimited()
+										</div>
+									</div>
+								}
+							</div>
+						}
+					} else {
+						<div>The customer you are looking was not found.</div>
+					}
+				</div>
+				<div class="modal-footer">
+					@if (user.IsRmiUser && Model != null) {
+						string disabled = Model.ClientByPass.ToBool() ? "disabled" : "";
+						if(ViewData.ContainsKey("IsDuplicate")) { 
+							<div class="text-larger">
+								<div>Another patient was found with the same information.</div>
+								<div>Do you wish to update this record instead of creating a new one?</div>
+							</div>
+						}
+						<div class="btn-group" role="group">
+							<button class="btn btn-primary btn-sm redirect @disabled" data-redirect="/user/update/customer/@Model.UserId">Update</button>
+							<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+						</div>
+					} else {
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

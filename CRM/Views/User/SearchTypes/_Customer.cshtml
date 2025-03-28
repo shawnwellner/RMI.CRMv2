@@ -1,0 +1,78 @@
+﻿@using CRM.Domain
+@{
+    //string actionUrl = String.Format("/ajax/validatelogin/" + ViewBag.Querystring);
+    //AjaxOptions options = new AjaxOptions { HttpMethod = "POST", OnSuccess = "successRedirect", OnFailure = "PostFailure", OnBegin = "beforeAjaxSend" };
+    LoginUser user = LoginUser.CurrentUser;
+}
+
+<div id="customerSearchResults" class="panel panel-info" ng-app="customer" ng-controller="search">
+    <div class="panel-heading col-md-12">
+        <div class="panel-title col-md-6">Patient Search Results</div>
+        @if (user.UserRole != UserRoles.AuthLevel2) {
+            <div class="export-controls">
+                <div class="checkbox col-md-6">
+                    <label><input type="checkbox" />Export Page Only</label>
+                </div>
+                <button type="button" class="btn exportcsv btn-success btn-lg" ng-disabled="!ListofCustomers" property="ListofCustomers"><span class="excelicon"></span> Export</button>
+            </div>
+        }
+    </div>
+    <div class="panel-group" id="table">
+        <div>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        @if(user.IsAdminOrManager || user.VerticalCount > 1 || user.UserType == UserTypes.StandardUser) { <th></th> }
+                        <th>Patient Id</th>
+                        <th>Full Name</th>
+                        <th>Phone</th>
+                        <th>Address</th>
+                        <th>Submission Date</th>
+                        <th>Last Updated Date</th>
+                        <th>Health Insurance</th>
+                        @if (user.IsRmiUser) {
+                            <th>Company</th>
+                            <th>&nbsp;</th>
+                        } else {
+                            <th>Office Location</th>
+                            <th>Distance</th>
+                        }
+                    </tr>
+                </thead>
+                <tbody id="customerResults">
+                    <tr ng-if="!ListofCustomers" class="bg-danger no-records"><td colspan="12">No Records Found</td></tr>
+                    <tr id="{{ user.UserId }}" ng-class="user.ClientByPass ? 'info' : user.Transfered ? 'success' : 'danger'" ng-if="ListofCustomers" ng-repeat="user in ListofCustomers">
+                        @if (user.IsAdminOrManager || user.VerticalCount > 1 || user.UserType == UserTypes.StandardUser) {
+                            <td class="img-vertical">{{ getVerticalLetter(user) }}</td>
+                        }
+                        <td>{{ user.UserId }}</td>
+                        <td>{{ user.FirstName }} {{ user.LastName }}</td>
+                        <td>{{ user.Phone.formatPhoneNumber() }}</td>
+                        <td>{{ user.Address }}</td>
+                        <td>{{ user.CreatedTime.format('M/d/yyyy h:mm:ss tt') }}</td>
+                        <td>{{ user.UpdatedTime.format('M/d/yyyy h:mm:ss tt') }}</td>
+                        <td>{{ user.HealthInsurance }}</td>
+                        @if (user.IsRmiUser) {
+                            <td>{{ user.CompanyName }}</td>
+                        } else {
+                            <td>{{ user.OfficeName }}</td>
+                            <td>{{ user.Distance }} Miles</td>
+                        }
+                        <td>
+                            <button type="button" class="btn btn-primary btn-sm" ng-click="getCustomerDetails(user)"><span class="glyphicon glyphicon-user"></span> More Info</button>
+                        </td>
+                        <td>
+                            @if (user.IsRmiUser) {
+                                <a href='/user/update/customer/{{ user.UserId }}' class='btn btn-primary btn-sm' type='button' ng-class="{disabled:user.ClientByPass}"><span class='glyphicon glyphicon-edit'></span> Update</a>
+                            } else {
+                                <button userid="{{ user.UserId }}" type="button" class="btn exportcsv btn-success btn-sm"><span class="excelicon"></span> Export</button>
+                            }
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <hr />
+            @Html.Partial("_Pagination")
+        </div>
+    </div>
+</div>

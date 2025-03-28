@@ -1,0 +1,40 @@
+﻿@using CRM;
+@using CRM.Domain;
+@{ LoginUser user = ViewBag.CurrentUser ?? LoginUser.CurrentUser; }
+
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            @if(user.IsRmiUser) {
+                <a class="navbar-brand" href="/"><span class="glyphicon glyphicon-home"></span> Home</a>
+            }
+            <a class="navbar-brand" href="/ajax/logout" type="button"><span class="glyphicon glyphicon-off"></span> Logout</a>
+        </div>
+        <ul class="nav navbar-nav navbar-brand navbar-right">
+            @if (user.LoggedIn) {
+                <li><span style="padding-right:10px;">Welcome @user.FirstName</span></li>
+                @*if (user.VerticalSelected) {
+    IReadOnlyList<Vertical> verticals = ViewBag.VerticalList ?? user.Verticals;
+    if (verticals.Count > 1) {
+        <li style="padding:0px 15px 0px 10px;"> | </li>
+        <li>
+            <div class="dropdown">
+                <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="false">
+                    @user.VerticalName Network
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                    @foreach(Vertical vert in verticals) {
+                        <li role="presentation">
+                            <a role="menuitem" tabindex="-1" href="@vert.Url"><span class="glyphicon glyphicon-globe"></span> @vert.VerticalName Portal</a>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </li>
+    }
+    }*@
+            }
+        </ul>
+    </div>
+</div>

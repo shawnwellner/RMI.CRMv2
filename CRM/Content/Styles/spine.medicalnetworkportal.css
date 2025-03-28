@@ -1,0 +1,78 @@
+﻿/*--- Theme Bootstrap override -----*/
+
+body {
+    background-color: #eee;
+}
+.jumbotron {
+    background-color: #eee;
+}
+
+.dropdown {
+    margin-top: -5px;
+    position: relative;
+}
+
+/*-- Commented out because uses the default site.css color scheme -----*/
+
+/*.navbar-inverse {
+    background-image: linear-gradient(to bottom, #3680A4 0px, #1D6D93 100%);
+    background-repeat: repeat-x;
+}
+
+.navbar-inverse {
+    background-color: #1D6D93;
+    border-color: #183274;
+}
+
+.navbar-inverse .navbar-brand {
+    color: #B1DAEE;
+}
+
+
+legend {
+    color: #b7701d;
+}
+
+.btn-primary {
+    background-image: linear-gradient(to bottom, #a1d6ef 0px, #165a7a 100%);
+    background-repeat: repeat-x;
+    border-color: #165a7a;
+    color: #08212d;
+}
+
+.btn-info {
+    background-image: linear-gradient(to bottom, #FFDFBA 0px, #E98E25 100%);
+    background-repeat: repeat-x;
+    border-color: #764814;
+    color: #764814;
+}
+
+.btn-warning {
+    background-image: linear-gradient(to bottom, #d2df95 0px, #8ea71b 100%);
+    background-repeat: repeat-x;
+    border-color: #47530e;
+    color: #47530e;
+}
+
+
+/-- Panels tops ----/
+.panel-info > .panel-heading {
+    background-image: linear-gradient(to bottom, #3680A4 0px, #1D6D93 100%);
+    background-repeat: repeat-x;
+}
+.panel-info > .panel-heading {
+    background-color: #1D6D93;
+    border-color: #3680A4;
+    color: #b1ddf2;
+}
+
+
+
+/--- Pop Up colors --/
+.bg-info {
+    background-color: #FFDFBA;
+}
+
+.text-primary {
+    color: #764814;
+}*/

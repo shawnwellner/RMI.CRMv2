@@ -1,0 +1,85 @@
+﻿@using CRM.Domain
+<div class="form-group" ng-show="location">
+    <div class="col-md-12">
+        <div id="listofproviders">
+            <div class="panel" ng-class="location.Transfered ? 'panel-primary' : 'panel-info'">
+                <div class="col-md-12 bg-danger private-message" ng-show="location.Provider.AgentNotification">
+                    <h3>
+                        {{ location.Provider.AgentNotification }}
+                    </h3>
+                </div>
+                <div class="panel-heading" ng-if="location">
+                    <h2>
+                        <span>{{ location.Provider.CompanyName }}</span>
+                        <br />
+                        <span class="locationmiles">
+                            <span>{{ location.LocationText }}</span>
+                        </span>
+                    </h2>
+                </div>
+                <div class="panel-body">
+                    <div class="description toggle-hidden">
+                        {{ location.Provider.Description }}
+                    </div>
+                    <div class="bg-danger notQualified toggle-hidden hidden">
+                        @Html.Raw(ContentCopy.NotQualified)
+                    </div>
+                    <div class="col-md-12 bg-danger private-message" ng-show="location.AgentNotification">
+                        <h3>
+                            {{ location.Provider.AgentNotification }}
+                        </h3>
+                    </div>
+                    <div class="details">
+                        <div><strong>Address</strong>: <span>{{ location.OfficeAddress }} <span ng-if="location.OfficeAddress2">, {{ location.OfficeAddress2 }}</span></span></div>
+                        <div><strong>City</strong>: <span>{{ location.OfficeCity }}</span></div>
+                        <div><strong>State</strong>: <span>{{ location.OfficeState }}</span></div>
+                        <div><strong>Zip</strong>: <span>{{ location.OfficeZipCode }}</span></div>
+                        <div><strong>Website</strong>: <span><a href="{{ location.Provider.Website }}" target="__blank">{{ location.Provider.Website }}</a></span></div>
+                    </div>
+                </div>
+                <div class="panel-footer text-center">
+                    <div class="col-md-12">
+                        <div class="col-md-3">
+                            <div class="provider-dropdown text-left">
+                                <button id="providerMenu" aria-expanded="false" data-toggle="dropdown" type="button"
+                                        class="btn btn-sm btn-primary dropdown-toggle" ng-disabled="!listOfProviders">
+                                    Providers
+                                    <span class="caret"></span>
+                                </button>
+                                <ul aria-labelledby="providerMenu" role="menu" class="dropdown-menu">
+                                    <li role="presentation" ng-repeat="l in listOfProviders">
+                                        <a tabindex="-1" role="menuitem" ng-click="selectProvider(l, $event)">
+                                            <span class="glyphicon" ng-class="l == location ? 'glyphicon-ok' : 'glyphicon-home'"></span>
+                                            <strong>{{ l.Provider.CompanyName }}</strong> - {{ l.LocationText }}
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <button type="button" class="btn btn-sm btn-danger"
+                                    provider="location" data-dispositionid="31"
+                                    ng-click="updateCustomer(location, $event)"
+                                    ng-if="!location.Transfered">
+                                <span class="glyphicon glyphicon-remove"></span> 
+                                <span> Unwilling to Travel</span>
+                            </button>
+                        </div>
+                        <div class="col-md-3">
+                            <button type="button" class="btn btn-sm btn-success"
+                                    transfer-button provider="location"
+                                    ng-click="updateCustomer(location, $event)">
+                                <span class="glyphicon glyphicon-floppy-saved"></span> 
+                                <span> Transfer</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12" ng-show="location">
+        <div class="googleMap"></div>
+    </div>
+</div>

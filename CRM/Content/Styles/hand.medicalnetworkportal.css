@@ -1,0 +1,99 @@
+﻿/*--- Theme Bootstrap override -----*/
+body {
+    background-color: #d8eff8;
+}
+.jumbotron {
+    background-color: #d8eff8;
+}
+
+.dropdown {
+    margin-top: -5px;
+    position: relative;
+}
+
+/*--- top bar navagation ---*/
+.navbar-inverse {
+    background-image: linear-gradient(to bottom, #ff4600 0px, #fe895d 100%);
+    background-repeat: repeat-x;
+}
+
+.navbar-inverse {
+    background-color: #FFDEBB;
+    border-color: #FFCE98;
+}
+
+.navbar-inverse .navbar-brand {
+    color: #fce2d8;
+}
+
+
+/*--- footer ---*/
+.footer {
+    background-color: #075777; 
+    color: #4fc6f5;
+}
+
+legend {
+    color: #b7701d;
+}
+
+.btn-primary {
+    background-image: linear-gradient(to bottom, #fe895d 0px, #ff4600 100%);
+    background-repeat: repeat-x;
+    border-color: #cd3902;
+    color: #fcded2;
+}
+
+.btn-primary:hover, .btn-primary:focus {
+    background-image: linear-gradient(to bottom, #ff4600 0px, #fe895d 100%);
+    background-repeat: repeat-x;
+    border-color: #ff4600; 
+    color: #fcded2;
+    background-position: 0 0;
+}
+
+.btn-info {
+    background-image: linear-gradient(to bottom, #5ecffb 0px, #0994cb 100%);
+    background-repeat: repeat-x;
+    border-color: #075777;
+    color: #075777;
+}
+
+.btn-info:hover, .btn-info:focus {
+    background-image: linear-gradient(to bottom, #0994cb 0px, #5ecffb 100%);
+    background-repeat: repeat-x;
+    border-color: #0994cb;
+    color: #c4ecfb;
+    background-position: 0 0;
+}
+
+
+.btn-warning {
+    background-image: linear-gradient(to bottom, #d2df95 0px, #8ea71b 100%);
+    background-repeat: repeat-x;
+    border-color: #47530e;
+    color: #47530e;
+}
+
+
+/*-- Panels tops ----*/
+.panel-info > .panel-heading {
+    background-image: linear-gradient(to bottom, #3680A4 0px, #1D6D93 100%);
+    background-repeat: repeat-x;
+}
+.panel-info > .panel-heading {
+    background-color: #1D6D93;
+    border-color: #3680A4;
+    color: #b1ddf2;
+}
+
+
+
+/*--- Pop Up colors --*/
+.bg-info {
+    background-color: #d8eff8;
+}
+
+.text-primary {
+    color: #3680A4;
+}

@@ -1,0 +1,50 @@
+﻿@model CRM.Domain.Customer
+@{
+    Uri url = Request.Url;
+    string link = string.Format("{0}://{1}/user/search/customer/?UserId={2}", url.Scheme, url.Authority, Model.UserId);
+}
+<div style="font-size:small">
+    <p>
+        Back Pain Centers of America
+    </p>
+    <p>
+        Patient Candidate For @Model.CompanyName
+    </p>
+    <p>
+        Please click here for full candidate information: <a href="@link">Medical Network Portal</a>
+    </p>
+    <table>
+		<tr>
+            <td>PatientId: </td>
+            <td>@Model.UserId</td>
+        </tr>
+        <tr>
+            <td>First Name: </td>
+            <td>@Model.FirstName</td>
+        </tr>
+        <tr>
+            <td>Last Name: </td>
+            <td>@Model.LastName</td>
+        </tr>
+        <tr>
+            <td>Entry Date/Time: </td>
+            <td>@Model.UpdatedTime.ToString("M/d/yyyy h:mm tt")</td>
+        </tr>
+    </table>
+    <p style="color:red">
+        <b>
+            Please confirm receiving this candidate by replying to this message.
+            <br /><br />
+            Thank you.
+        </b>
+    </p>
+    <p style="font-size:smaller">
+        CONFIDENTIALITY NOTE :<br />
+        This electronic message transmission contains confidential information, some or all of which may be protected health information as defined by the Federal Health 
+        Insurance Portability & Accountability Act (HIPAA) Privacy Rule. This transmission is intended for the exclusive use of the individual or entity to whom it is 
+        addressed and may contain information that is proprietary, privileged, confidential and/or exempt from disclosure under applicable law. If you are not the intended 
+        recipient you are hereby notified that any disclosure, dissemination, distribution or copying of this information is strictly prohibited and may be subject to legal 
+        restrictions or sanctions including criminal penalties and imprisonment and civil monetary penalties. Please notify the sender by immediately replying to the address 
+        listed in the “From” field and delete/remove the original e-mail transmission immediately. Thank you.
+    </p>
+</div>

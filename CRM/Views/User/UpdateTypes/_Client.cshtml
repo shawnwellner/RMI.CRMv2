@@ -1,0 +1,149 @@
+﻿@using CRM.Domain;
+@using CRM.Models
+@model ClientFormModel
+@{
+    string actionUrl = String.Format("/ajax/clientupdate/" + ViewBag.Querystring);
+    AjaxOptions options = new AjaxOptions { HttpMethod = "POST", OnSuccess = "onFormSubmitSuccess", OnFailure = "PostFailure", Url = actionUrl };
+    List<Vertical> verticals = Vertical.GetVerticalList();
+    string checkedAttr;
+}
+
+@using (Ajax.BeginForm(null, null, options, new { @class = "form-horizontal form-client", @autocomplete = "off" }))
+{
+    <div class="panel-body">
+        @Html.Partial("_ModalDialog", DialogTypes.Validation)
+        <fieldset>
+            <legend>Company Information: <button type="button" data-toggle="modal" data-target=".modal-modalInformation" class="info-button">?</button> <span class="requieredCopy">"*" Denotes a required field.</span></legend> 
+            <div class="form-group">
+                <div class="col-md-6">
+                    @Html.TextBoxFor(model => model.CompanyName, null, new {@class = "form-control", @placeholder = "Company Name *" })
+                </div>
+                <div class="col-md-6">
+                    <div class="col-md-3 checkbox">
+                        <label>Enabled @Html.CheckBoxFor(model => model.Enabled)</label>
+                    </div>
+                    <div class="col-md-3 checkbox">
+                        <label>AllowEmailTransfer @Html.CheckBoxFor(model => model.AllowEmailTransfer)</label>
+                    </div>
+					<div class="col-md-3 checkbox">
+                        <label>Concierge Model @Html.CheckBoxFor(model => model.ConciergeModel)</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-6">
+                    @Html.TextBoxFor(model => model.ForwardPhone, new {@class = "form-control", @placeholder = "Forward Number *"})
+                </div>
+                <div class="col-md-6">
+                    @Html.TextBoxFor(model => model.ForwardPhone2, new {@class = "form-control",  @placeholder = "2nd Forward Number *"})
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-12">
+                    @Html.TextBoxFor(model => model.Website, new {@class = "form-control", @placeholder = "Website Address"})
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-12">
+                    @Html.TextAreaFor(model => model.Description, new { @class = "form-control", @placeholder = "Use this text area to write a brief description of the client you are creating." })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-12">
+                    @Html.TextBoxFor(model => model.AgentNotification, new { @class = "form-control", @placeholder = "Notification message for the Call Center agents about this Client." })
+                </div>
+            </div>
+            <div class="form-group vertical-list question-group" data-message="You must select at least one vertical.">
+                <label>Verticals:</label>
+                <div class="col-md-12 checkbox-group">
+                    @foreach(Vertical vertical in verticals) {
+                        checkedAttr = Model.VerticalIds.Any(v => vertical.VerticalId == v) ? "checked" : "";
+                        <div class="checkbox-inline">
+                            <label>
+                                <input type="checkbox" name="VerticalIds" value="@vertical.VerticalId" @checkedAttr class="requiredQuestion" />
+                                @vertical.VerticalName
+                            </label>
+                        </div>
+                    }
+                </div>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>Contact Information: <span class="requieredCopy">"*" Denotes a required field.</span></legend>   
+            <div class="form-group">
+                <div class="col-md-6">
+                    @Html.TextBoxFor(model => model.FirstName, new { @class = "form-control", @placeholder = "First Name *" })
+                </div>
+                <div class="col-md-6">
+                    @Html.TextBoxFor(model => model.LastName, new { @class = "form-control", @placeholder = "Last Name *" })
+                </div>
+            </div> 
+            <div class="form-group">
+                <div class="col-md-6">
+                    @Html.TextBoxFor(model => model.Phone, new { @class = "form-control", @placeholder = "Phone Number *" })
+                </div>
+                <div class="col-md-6">
+                    @Html.TextBoxFor(model => model.Email, new { @class = "form-control", @placeholder = "Email Address *" })
+                </div>
+            </div> 
+            <div class="form-group">
+                <div class="col-md-6">
+                    @Html.TextBoxFor(model => model.Address, new { @class = "form-control", @placeholder = "Address *" })
+                </div>
+                <div class="col-md-6">
+                    @Html.TextBoxFor(model => model.Address2, new { @class = "form-control", @placeholder = "Address2" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-6">
+                    @Html.TextBoxFor(model => model.City, new { @class = "form-control", @placeholder = "City *" })
+                </div>
+                <div class="col-md-6">
+                    @Html.DropDownListFor(model => model.State, DetailedUser.StateDropdownList , new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-6">
+                    @Html.TextBoxFor(model => model.Zip, new { @class = "form-control", @placeholder = "Zip *" })
+                </div>
+                <div class="col-md-6">
+                   
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-12">
+                    @Html.TextBoxFor(model => model.Notes, new { @class = "form-control", @placeholder = "Use this text area to jot down any notes you would like to keep about the client contact information." })
+                </div>
+            </div>
+            <hr/>
+            <div class="form-group">
+                <div class="col-md-6">
+                    @Html.TextBoxFor(model => model.UserName, new { @class = "form-control", @placeholder = "UserName *", @autocomplete = "off", @readonly="" })
+                </div>
+                <div class="col-md-6"></div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-6">
+                    @Html.PasswordFor(model => model.Password, new { @class = "form-control", @placeholder = "Password *", @Value = Model.Password })
+                    <button class="btn togglePassword" tabindex="-1" title="Show Password"><span class="glyphicon glyphicon-eye-open"></span></button>
+                </div>
+                <div class="col-md-6">
+                    @Html.PasswordFor(model => model.ConfirmPassword, new { @class = "form-control", @placeholder = "Confirm Password *", @autocomplete = "off", @Value = Model.Password ?? "" })
+                </div>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>Additional User Logins: <button id="addUserLogin" type="button" class="glyphicon glyphicon-plus"></button></legend>
+            <div id="clientLogins">
+                @Html.Partial("_ClientUserLogin", Model)
+            </div>
+        </fieldset>
+        <div style="border-top: 1px solid #999; padding-top: 20px"  class="form-group">
+            <div class="col-md-12">
+                @Html.HiddenFor(model => model.ClientId)
+                @Html.Hidden("PrevStateJson", Model.ToString())
+                <button id="btn-fbsignup" type="submit" class="btn btn-primary pull-right btn-lg"><span class="glyphicon glyphicon-user"></span> Update Client/Provider</button>
+            </div>
+        </div>
+    </div>
+}

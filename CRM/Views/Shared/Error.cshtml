@@ -1,0 +1,41 @@
+﻿@using CRM;
+@using CRM.Domain;
+@using CRM.Domain.CustomExceptions;
+
+@model System.Web.Mvc.HandleErrorInfo
+@{
+    Layout = "~/Views/Shared/DefaultView.cshtml";
+    ViewBag.Title = "Error";
+    Exception ex = Model != null ? Model.Exception : null;
+    bool isAjaxRequest = Request.Path.Matches(@"\/ajax\/");
+	LoginUser user = LoginUser.CurrentUser;
+    if (ex != null) {
+        Utility.LogError(Request, ex);
+        if(isAjaxRequest) {
+            Response.Clear();
+            if (ex is ControlledException) {
+                Response.Write(ex.Message);
+            } else {
+                Response.Write("<strong>Application Error</strong>");
+            }
+            Response.End();       
+        }
+    }
+}
+
+<div class="jumbotron">
+    <div class="container bg-error">
+        <h1>Oops...</h1>
+        <div class="error-contact">
+            <div>
+                <p><strong>Application Error</strong></p>
+                @if(Request.Url.IsLoopback && ex != null) {
+                   <p>@Html.Raw(ex.ToDetailedString(user))</p>
+                } else {
+                <p>If you are having trouble or this error persists, please contact your account representative.</p>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+@Html.Partial("_UpdateCustomerId")

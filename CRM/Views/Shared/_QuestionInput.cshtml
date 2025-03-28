@@ -1,0 +1,87 @@
+﻿@using CRM.Domain
+@using CRM.Models
+@model CRM.Models.InputModel
+@{
+    string namePrefix = ViewBag.ListOfAnswersName ?? "ListOfAnswers";
+    string name = string.Format("{0}[{1}].QuestionId", namePrefix, Model.AnswerIndex);
+    string required = Model.Required ? "requiredQuestion" : "";
+    @Html.Hidden(name, Model.QuestionId)
+    @Html.Hidden(name.Replace(".QuestionId", ".ClientRelId"), Model.ClientRelId)
+    @Html.Hidden(name.Replace(".QuestionId", ".ClientInputTypeRelId"), Model.ClientInputTypeRelId)
+    @Html.Hidden(name.Replace(".QuestionId", ".ParentClientInputTypeRelId"), Model.ParentClientInputTypeRelId)
+    @Html.Hidden(name.Replace(".QuestionId", ".InputTypeRelId"), Model.InputTypeRelId)
+    @Html.Hidden(name.Replace(".QuestionId", ".InputTypeId"), Model.InputTypeId)
+    @Html.Hidden(name.Replace(".QuestionId", ".Required"), Model.Required)
+    @Html.Hidden(name.Replace(".QuestionId", ".Qualified"), Model.Qualified, new { @class="input-qualified" })
+
+	name = name.Replace(".QuestionId", ".Answer");
+	if (Model.Attributes.ContainsKey("placeholder")) {
+		@Html.Label(name, Model.Attributes["placeholder"] as string)
+	}
+	switch (Model.InputType) {
+		case InputTypes.text:
+            @Html.TextBox(name, Model.Answer, Model.Attributes)
+            break;
+        case InputTypes.textarea:
+            @Html.TextArea(name, Model.Answer, Model.Attributes)
+                    break;
+        case InputTypes.radio:
+            <div class="radio-group">
+            @foreach (string option in Model.ListOfOptions) {
+                <label class="radio-group">
+                    @Html.RadioButton(name, option, Model.Answer == option, Model.Attributes)
+                    @option
+                </label>
+            }
+            </div>
+            break;
+        case InputTypes.yesno:
+            <div class="btn-group radio-group" data-toggle="buttons">
+                <label class="btn btn-primary">
+                    @Html.RadioButton(name, "Yes", Model.Answer.ToBool(), Model.Attributes)
+                    Yes
+                </label>
+                <label class="btn btn-primary">
+                    @Html.RadioButton(name, "No", Model.Answer.HasValue() && !Model.Answer.ToBool(), Model.Attributes)
+                    No
+                </label>
+            </div>
+            break;
+        case InputTypes.checkbox:
+            string checkedAttr = Model.Answer == Model.OptionValue ? "checked" : "";
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" name="@name" value="@Model.OptionValue" @checkedAttr class="@required"
+                           questionid="@Model.QuestionId" clientInputTypeRelId="@Model.ClientInputTypeRelId" inputtypeid="@Model.InputTypeId" parentid="@Model.ParentClientInputTypeRelId" />
+ 
+                    @Model.OptionValue
+                </label>
+            </div>
+            break;
+        case InputTypes.dropdown:
+            <div class="dropdown">
+                @Html.DropDownList(name, Model.DropDownList, Model.Attributes)
+            </div>
+            break;
+        case InputTypes.datetime:
+        case InputTypes.date:
+            string classType = Model.InputType.ToString().ToLower();
+            <div class="@classType-group">
+                <div class="col-md-4">
+                    <div class="input-group @classType">
+                        @Html.TextBox(name, Model.Answer, Model.Attributes)
+                        <span class="input-group-addon">
+                            <i class="glyphicon glyphicon-calendar"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            break;
+        case InputTypes.typeahead:
+            <div class="typeahead">
+                @Html.Raw(Model.GetInputControl(name))
+                @*Html.Hidden(name, Model.Answer)*@
+            </div>
+            break;
+        }
+    }

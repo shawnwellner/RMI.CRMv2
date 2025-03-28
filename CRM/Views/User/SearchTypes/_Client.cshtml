@@ -1,0 +1,44 @@
+﻿<div id="clientSearchResults" class="panel panel-info" ng-app="client" ng-controller="search">
+    <div class="panel-heading">
+        <div class="panel-title">
+            @ViewBag.VerticalName Network : Client Search Results
+            <button type="button" class="btn exportcsv btn-success pull-right btn-lg"
+                    ng-disabled="!ListOfClients">
+                <span class="excelicon"></span> Export
+            </button>
+        </div>
+    </div>
+    <div>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>ClientId</th>
+                    <th>Company Name</th>
+                    <th>Full Name</th>
+                    <th>Phone</th>
+                    <th>Address</th>
+                    <th>Create Date</th>
+                    <th>Website</th>
+                    <th>Enabled</th>
+                </tr>
+            </thead>
+            <tbody id="clientResults">
+                <tr ng-if="!ListOfClients" class="bg-danger no-records"><td colspan="12">No Records Found</td></tr>
+                <tr id="{{ client.ClientId }}" ng-if="ListOfClients" ng-repeat="client in ListOfClients" ng-class="{'danger':client.OmmitFromList }">
+                    <td>{{ client.ClientId }}</td>
+                    <td>
+                        {{ client.CompanyName  }}
+                        &nbsp;<span class="expand glyphicon glyphicon-plus" ng-if="client.LoginUsers.length > 0" ng-click="toggleLogins(client, $event)"></span>
+                    </td>
+                    <td><a href="mailto:{{ client.Email }}">{{ client.FirstName  }} {{ client.LastName }}</a></td>
+                    <td>{{ client.Phone.formatPhoneNumber() }}</td>
+                    <td>{{ formatAddress(client) }}</td>
+                    <td>{{ client.CreatedTime.format('M/d/yyyy h:mm:ss tt') }}</td>
+                    <td><a href="{{ client.Website }}" target="_blank">{{ client.Website }}</a> </td>
+                    <td><input type="checkbox" ng-checked="client.Enabled" disabled /></td>
+                    <td><a href='/user/update/client/{{ client.ClientId }}' id='btn-custview' class='btn btn-primary btn-sm' type='button'><span class='glyphicon glyphicon-edit'></span> Update</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

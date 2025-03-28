@@ -1,0 +1,47 @@
+﻿@{
+    Layout = "~/Views/Shared/_SiteMaster.cshtml";
+}
+
+@section Head{
+    @RenderSection("ReportingCSS", required: false)
+    @Html.Partial("head/_head")
+    @RenderSection("ReportingJS", required: false)
+    @RenderSection("UserJS", required: false)
+}
+
+@*@section Header{
+    @Html.Partial("header/_header")
+}*@
+
+@section Navigation{
+    @Html.Partial("navigation/_navigation")
+}
+
+@section MainBodyContent{
+    <div class="default-container">
+		@RenderBody()
+		<div class="container-fluid">
+			<div class="modal" id="pleaseWaitDialog" role="dialog" data-backdrop="static" data-keyboard="false" aria-hidden="false">
+				<div class="vertical-align">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h1>Processing...</h1>
+							</div>
+							<div class="modal-body">
+								<div class="progress progress-striped active">
+									<div class="progress-bar" style="width: 100%;"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+        <div style="clear:both;">&nbsp;</div>
+    </div>
+}
+
+@section Footer{
+    @Html.Partial("Footer/_Footer")
+}

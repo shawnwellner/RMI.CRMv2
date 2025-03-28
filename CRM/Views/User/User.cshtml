@@ -1,0 +1,21 @@
+﻿@using CRM;
+@using CRM.Domain;
+@{
+    string actionUrl = String.Format("/ajax/customercreate/" + ViewBag.Querystring);
+    LoginUser user = ViewBag.CurrentUser ?? LoginUser.CurrentUser;
+}
+<!-- Main jumbotron for a primary marketing message or call to action -->
+<div class="jumbotron">
+    <div class="container-fluid">
+        @*<img src="~/Content/Images/HealthIntel.svg" class="jumboImage" />*@
+        <div class="jumboImage"></div>
+        <h1>Welcome @user.FullName</h1>
+        <h2> This panel allows you to create an inbound call record or search <br/> and complete an existing record.</h2>
+        <p>Click on “Create” or “Search” to get started.</p>
+    </div>
+    <div class="clear"></div>
+</div>
+
+<div class="container-fluid">
+    @Html.Partial("_Buttons", user)
+</div> 

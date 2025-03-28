@@ -1,0 +1,66 @@
+﻿@using CRM.Models
+@using CRM.Domain
+@model Question<InputModel>
+@{
+    string className = Model.Required ? "requiredQuestion" : "";
+}
+<div class="form-group">
+    <div class="col-md-12 question-group" questionid="@Model.QuestionId">
+        <span class="parentquestion @className">@Model.QuestionText</span>
+        <div class="optionsContainer">
+            @{
+                int chkCount = 0;
+                bool parentContainer = false;
+                int openDivs = 0;
+                int checkboxRows = 3;
+                string checkboxColumn;
+                int checkboxCount = Model.ListOfInputs.Where(i => i.InputType == InputTypes.checkbox).Count();
+
+                if (checkboxCount <= 9) {
+                    checkboxRows = 3;
+                    checkboxColumn = "<div class=\"col-md-4\">";
+                }  else if (checkboxCount <= 12) {
+                    checkboxRows = 3;
+                    checkboxColumn = "<div class=\"col-md-3\">";
+                } else {
+                    checkboxRows = 4;
+                    checkboxColumn = "<div class=\"col-md-3\">";
+                }
+                foreach (InputModel opt in Model.ListOfInputs) {
+                    switch (opt.InputType) {
+                        case InputTypes.checkbox:
+                            if (!parentContainer) {
+                                @Html.Raw("<div class=\"checkbox-group col-md-12\">")
+                                openDivs++;
+                                parentContainer = true;
+                            }
+                            if (chkCount % checkboxRows == 0) {
+                                @Html.Raw(checkboxColumn)
+                                openDivs++;
+                            }
+                            break;
+                        case InputTypes.text:
+                        case InputTypes.textarea:
+                            @Html.Raw("<br/>")
+                            chkCount = 0;
+                            break;
+                        default:
+                            chkCount = 0;
+                            break;
+                    }
+                    @Html.Partial("_QuestionInput", opt)
+                    if (opt.InputType == InputTypes.checkbox) {
+                        chkCount++;
+                        if (chkCount % checkboxRows == 0) {
+                            @Html.Raw("</div>")
+                            openDivs--;
+                        }
+                    }
+                }
+                for (int i = 0; i < openDivs; i++) {
+                    @Html.Raw("</div>")
+                }
+            }
+        </div>
+    </div>
+</div>

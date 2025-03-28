@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="966783894e6c44d3be401fc4c1395ade" Name="Diagram1" ZoomLevel="80">
+        <EntityTypeShape EntityType="CRM.Domain.Insurance" Width="1.5" PointX="7.125" PointY="1.75" />
+        <EntityTypeShape EntityType="CRM.Domain.InputAttributes" Width="1.5" PointX="11.125" PointY="10.75" />
+        <EntityTypeShape EntityType="CRM.Domain.v_Questions" Width="1.5" PointX="11.375" PointY="4.75" />
+        <EntityTypeShape EntityType="CRM.Domain.v_OfficeLocations" Width="2.125" PointX="4.375" PointY="5.75" />
+        <EntityTypeShape EntityType="CRM.Domain.InsuranceException" Width="1.5" PointX="7.125" PointY="4" />
+        <EntityTypeShape EntityType="CRM.Domain.v_TargetTypeFilters" Width="1.5" PointX="7.375" PointY="13.75" />
+        <EntityTypeShape EntityType="CRM.Domain.v_CallCenterUsers" Width="1.5" PointX="15.375" PointY="11.75" />
+        <EntityTypeShape EntityType="CRM.Domain.v_Clients" Width="1.5" PointX="0.75" PointY="9.75" />
+        <EntityTypeShape EntityType="CRM.Domain.UserLogins" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="CRM.Domain.v_ClientLogins" Width="1.5" PointX="3.375" PointY="14.75" />
+        <EntityTypeShape EntityType="CRM.Domain.v_QuesInputRuleFilters" Width="1.5" PointX="3.375" PointY="11.75" />
+        <EntityTypeShape EntityType="CRM.Domain.v_QuesInputQualifyingRules" Width="1.5" PointX="13.375" PointY="0.75" />
+        <EntityTypeShape EntityType="CRM.Domain.v_QuesQualifyingRules" Width="2.5" PointX="9.375" PointY="13.75" />
+        <EntityTypeShape EntityType="CRM.Domain.v_QuesRulesAndFilters" Width="1.5" PointX="12.375" PointY="13.75" />
+        <EntityTypeShape EntityType="CRM.Domain.v_QuestionInputs" Width="1.5" PointX="15.875" PointY="5" />
+        <EntityTypeShape EntityType="CRM.Domain.v_Dispositions" Width="1.5" PointX="0.75" PointY="5.75" />
+        <EntityTypeShape EntityType="CRM.Domain.v_Verticals" Width="1.5" PointX="3.375" PointY="0.75" />
+        <EntityTypeShape EntityType="CRM.Domain.v_VerticalUsers" Width="1.5" PointX="15.375" PointY="0.75" />
+        <EntityTypeShape EntityType="CRM.Domain.CustomerStrollHealth" Width="1.5" PointX="7.375" PointY="7.75" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

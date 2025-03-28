@@ -1,0 +1,189 @@
+﻿@using CRM
+@using CRM.Models
+@using CRM.Domain
+@model SearchParams
+@{
+    LoginUser user = LoginUser.CurrentUser;
+    string partialView = ViewBag.ParialView;
+    PageViews pageView = ViewBag.PageView;
+    int forceNoCache = Guid.NewGuid().GetHashCode();
+    string searchParamsColClass = user.IsAdminOrManager || user.IsClient ? "col-md-3" : "col-md-4";
+    string formClass = string.Format("form-horizontal {0}-search", pageView.ToString().ToLower());
+    List<SelectListItem> verticalList = pageView == PageViews.Customer ? DetailedUser.VerticalDropDownList(user) : null;
+    AjaxOptions ajaxOptions = new AjaxOptions { HttpMethod = "POST", OnSuccess = ViewBag.OnSuccess, OnFailure = "PostFailure", Url = ViewBag.PostUrl };
+
+        @section UserJS {
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.2/angular.min.js"></script>
+        <script type="text/javascript" src="~/Scripts/user.js?@forceNoCache"></script>
+        @switch (pageView) {
+			case CRM.Models.PageViews.Customer:
+				<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=geometry&key=@Settings.GoogleApiKey"></script>
+				<script type="text/javascript" src="~/Scripts/pagination.js?@forceNoCache"></script>
+				<script type="text/javascript" src="~/Scripts/customer.js?@forceNoCache"></script>
+				<script type="text/javascript" src="~/Scripts/googlemaps.js?@forceNoCache"></script>
+				break;
+			case CRM.Models.PageViews.Client:
+                <script type="text/javascript" src="~/Scripts/client.js?@forceNoCache"></script>
+                break;
+            case CRM.Models.PageViews.CallCenter:
+                <script type="text/javascript" src="~/Scripts/callcenter.js?@forceNoCache"></script>
+                break;
+            }
+        }
+    }
+<div class="modal fade modal-searchinformation" tabindex="-1" role="dialog" aria-labelledby="Contact Information" aria-hidden="true">
+	<div class="vertical-align">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+					<h4 class="modal-title">@Html.Raw(ViewBag.ModalTitleCopy)</h4>
+				</div>
+				<div class="modal-body">
+					@Html.Raw(ViewBag.ModalCopy)
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Main jumbotron for a primary marketing message or call to action -->
+<div class="jumbotron" id="parentJumbotron">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+            @*<img src="~/Content/Images/HealthIntel.svg" class="jumboImage" />*@
+            <div class="jumboImage"></div>
+            <h1>@ViewBag.FormTitle</h1>
+            <h2>@ViewBag.FormDescription</h2>
+            </div>
+            <div class="col-md-12">
+                <div id="signupbox" class="mainbox">
+                    <div class="panel panel-info">
+                        <div class="panel-heading collapsible">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-target="#collapsepanel">
+                                    @ViewBag.UserType Search
+                                </a>
+                                @if (user.IsRmiUser) {
+                                    switch (pageView) {
+                                        case PageViews.Customer:
+                                            <a id="btnCreate" class="btn btn-primary btn-lg pull-right" href="~/user/create/customer" role="button"><span class="glyphicon glyphicon-user"></span> Create Patient</a>
+                                            break;
+                                        case PageViews.Client:
+                                            <a id="btnCreate" class="btn btn-primary btn-lg pull-right" href="~/user/create/client" role="button"><span class="glyphicon glyphicon-user"></span> Create Client</a>
+                                            break;
+                                    }
+                                }
+                            </h4>
+                        </div>
+                        <div id="accordion" class="panel-group">
+                            <div class="panel panel-default">
+                                <div id="collapsepanel" class="panel-collapse collapse in">
+                                    @using (Ajax.BeginForm(null, null, ajaxOptions, new { @class = formClass })) {
+                                        <div class="panel-body">
+                                            @switch (pageView) {
+                                            case PageViews.Customer:
+                                            @Html.ValidationSummary(false, "The following fields were found to have errors", new { @class = "alert alert-danger alert-dismissible", @id = "signupalert" })
+                                            <fieldset>
+                                                <legend>Patient Search Parameters: <button type="button" data-toggle="modal" data-target=".modal-searchinformation" class="info-button">?</button></legend>
+                                                <div class="form-group">
+                                                    <div class="col-md-12">
+                                                        @if (user.IsAdminOrManager || user.IsClient) {
+                                                            <div class="@searchParamsColClass">@Html.TextBoxFor(model => model.UserId, new { @class = "form-control", @placeholder = "UserId" })</div>
+                                                        }
+                                                        <div class="@searchParamsColClass">@Html.TextBoxFor(model => model.LastName, new { @class = "form-control", @placeholder = "Last Name" })</div>
+                                                        <div class="@searchParamsColClass">@Html.TextBoxFor(model => model.Phone, new { @class = "form-control", @placeholder = "Phone Number" })</div>
+                                                        <div class="@searchParamsColClass">@Html.TextBoxFor(model => model.Email, new { @class = "form-control", @placeholder = "Email Address" })</div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-md-12">
+                                                        @if (verticalList != null) {
+                                                        <div class="@searchParamsColClass">
+                                                            @Html.DropDownListFor(model => model.VerticalId, verticalList, new { @class = "form-control" })
+                                                        </div>
+                                                        }
+                                                        @if (user.IsRmiUser) {
+                                                        <div class="checkbox fa pull-right">
+                                                            <input id="checkbox" type="checkbox" name="Transfered" value="true">
+                                                            <label for="checkbox">Transfers Only</label>
+                                                        </div>
+                                                        }
+                                                    </div>
+                                                </div>
+                                            </fieldset>
+                                            <div style="border-top: 1px solid #999; padding-top: 20px" class="form-group">
+                                                <div class="col-md-12">
+                                                    @Html.Hidden("MaxRows", 10)
+                                                    @Html.Hidden("PageNum", 1)
+                                                    <button id="btn-fbsignup" type="submit" class="btn btn-primary pull-right btn-lg"><span class="glyphicon glyphicon-search"></span> Search for Patient</button>
+                                                </div>
+                                            </div>
+                                                break;
+                                        case PageViews.Client:
+                                            @Html.ValidationSummary(false, "The following fields were found to have errors", new { @class = "alert alert-danger alert-dismissible", @id = "signupalert" })
+                                            <fieldset>
+                                                <legend>Client Search Parameters: <button type="button" data-toggle="modal" data-target=".modal-searchinformation" class="info-button">?</button></legend>
+                                                <div class="form-group">
+                                                    <div class="col-md-12">
+                                                        <div class="col-md-3">@Html.TextBoxFor(model => model.CompanyName, new { @class = "form-control", @placeholder = "Company Name", @Name = "companyname" })</div>
+                                                        <div class="col-md-3">@Html.TextBoxFor(model => model.Phone, new { @class = "form-control", @placeholder = "Phone", @Name = "phone" })</div>
+                                                        <div class="col-md-3">@Html.TextBoxFor(model => model.Email, new { @class = "form-control", @placeholder = "Email Address", @Name = "email" })</div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-md-12 pull-right">
+                                                        <div class="col-md-3">
+                                                            <label>@Html.CheckBoxFor(model => model.ShowAll, new { @Name = "showall" }) Show Disabled Clients</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </fieldset>
+                                            <div style="border-top: 1px solid #999; padding-top: 20px" class="form-group">
+                                                <div class="col-md-12">
+                                                    <button id="btn-fbsignup" type="submit" class="btn btn-primary pull-right btn-lg"><span class="glyphicon glyphicon-road"></span> Search for Client</button>
+                                                </div>
+                                            </div>
+                                            break;
+                                        case PageViews.CallCenter:
+                                            @Html.ValidationSummary(false, "The following fields were found to have errors", new { @class = "alert alert-danger alert-dismissible", @id = "signupalert" })
+                                            <fieldset>
+                                                <legend>Call Center Search Parameters: <button type="button" data-toggle="modal" data-target=".modal-searchinformation" class="info-button">?</button></legend>
+                                                <div class="form-group">
+                                                    <div class="col-md-12">
+                                                        <div class="col-md-4">@Html.TextBoxFor(model => model.LastName, new { @class = "form-control", @placeholder = "Last Name", @Name = "lastname" })</div>
+                                                        <div class="col-md-4">@Html.TextBoxFor(model => model.Phone, new { @class = "form-control", @placeholder = "Phone Number", @Name = "phone" })</div>
+                                                        <div class="col-md-4">@Html.TextBoxFor(model => model.Email, new { @class = "form-control", @placeholder = "Email Address", @Name = "email" })</div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-md-12 pull-right">
+                                                        <div class="col-md-3">
+                                                            <label>@Html.CheckBoxFor(model => model.ShowAll, new { @Name = "showall" }) Show Disabled Agents</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </fieldset>
+                                            <div style="border-top: 1px solid #999; padding-top: 20px" class="form-group">
+                                                <div class="col-md-12">
+                                                    <button id="btn-fbsignup" type="submit" class="btn btn-primary pull-right btn-lg"><span class="glyphicon glyphicon-road"></span> Search for Call Center</button>
+                                                </div>
+                                            </div>
+                                            break;
+                                    }
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Search results --->
+                    @Html.Partial(partialView)
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
